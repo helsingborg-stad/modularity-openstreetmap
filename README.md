@@ -5,9 +5,9 @@
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 
-<h3>Modularity Open Street Map</h3>
+<h3>Modularity OpenStreetMap</h3>
 <p>
-  A boilerplate repo for WordPress plugins.
+  Uses OpenStreetMap create an interactive map.
   <br />
   <a href="https://github.com/NiclasNorin/modularity-open-street-map/issues">Report Bug</a>
   ·
@@ -70,16 +70,6 @@ npm install && npm run build
 ```sh
 composer install
 ```
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-## Deploy
-
-Instructions for deploys.
 
 ## Roadmap
 
