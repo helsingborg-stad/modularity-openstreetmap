@@ -1,0 +1,141 @@
+[{
+    "key": "group_64219abb0caec",
+    "title": "OpenStreetMap",
+    "fields": [
+        {
+            "key": "field_64219abc28c6c",
+            "label": "Height",
+            "name": "height",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "full": "Full height",
+                "half": "Half height"
+            },
+            "default_value": "full",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_6422b15cf1b12",
+            "label": "Select place categories to show",
+            "name": "mod_osm_terms_to_show",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "757": "Boende",
+                "774": "Kultur &amp; n\u00f6je",
+                "767": "Mat &amp; dryck",
+                "771": "Uppleva &amp; g\u00f6ra",
+                "760": "Regn",
+                "761": "Sol",
+                "762": "F\u00f6r barn",
+                "763": "Hundv\u00e4nligt",
+                "765": "Asiatiskt",
+                "766": "Italienskt",
+                "764": "Veganskt"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_6424301cc4fd8",
+            "label": "Full width",
+            "name": "mod_osm_full_width",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_642434d17fdaa",
+            "label": "Post columns",
+            "name": "mod_osm_post_columns",
+            "type": "select",
+            "instructions": "This does not affect inner blocks",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "grid-md-12": "1",
+                "grid-md-6": "2",
+                "grid-md-4": "3"
+            },
+            "default_value": "grid-md-12",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "mod-open-street-map"
+            }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/open-street-map"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
+}]
+
