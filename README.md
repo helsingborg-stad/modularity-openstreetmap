@@ -7,7 +7,7 @@
 
 <h3>Modularity OpenStreetMap</h3>
 <p>
-  Uses OpenStreetMap create an interactive map.
+  Uses OpenStreetMap to create an interactive map.
   <br />
   <a href="https://github.com/NiclasNorin/modularity-open-street-map/issues">Report Bug</a>
   ·
