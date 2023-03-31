@@ -1,22 +1,25 @@
 class Map {
     constructor(components) {
         this.components = components;
-        document.querySelector('#openstreetmap') && this.init();
+        this.container = document.querySelector('#openstreetmap');
+        this.container && this.init();
     }
 
     init() {
-        const container = document.querySelector('#openstreetmap');
-        if (!container.hasAttribute('js-map-locations') || !container.hasAttribute('js-map-start-position')) {
+        if (!this.container.hasAttribute('js-map-locations') || !this.container.hasAttribute('js-map-start-position')) {
             return;
         }
 
-        let startPosition = JSON.parse(container.getAttribute('js-map-start-position'));
-        let locations = JSON.parse(container.getAttribute('js-map-locations'));
-        this.setMapView(locations, startPosition);
+        let startPosition = JSON.parse(this.container.getAttribute('js-map-start-position'));
+        let locations = JSON.parse(this.container.getAttribute('js-map-locations'));
+        let tiles = this.getTilesStyle(this.container);
+        this.setMapView(locations, startPosition, tiles);
     }
 
-    setMapView(locations, startPosition) {
-        let map = L.map('openstreetmap_map');
+    setMapView(locations, startPosition, tiles) {
+        let map = L.map('openstreetmap__map');
+        let expand = this.container.querySelector('.openstreetmap__expand-icon');
+
         map.setView([startPosition.lat, startPosition.lng], startPosition.zoom);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -24,14 +27,20 @@ class Map {
         }).addTo(map);
 
         locations.forEach(location => {
-            if (location?.lat && location?.lng && location?.title) {
+            if (location?.lat && location?.lng && location?.tooltip) {
                 let customIcon = false;
                 if (location?.icon) {
                     customIcon = location.icon;
                 }
-                this.setMarkers(map, location.lat, location.lng, location.title, customIcon);
+                this.setMarker(map, location.lat, location.lng, location.tooltip, customIcon);
             }
         });
+
+        if (expand) {
+            expand.addEventListener('click', () => {
+                map.invalidateSize();
+            });
+        }
     }
 
     getPrimaryColor() {
@@ -54,17 +63,21 @@ class Map {
         return marker;
     }
 
-    setMarkers(map, lat, lng, tooltip, customIcon = false) {
-        let marker = L.marker([lat, lng], { icon: this.createMarker(customIcon) }).addTo(map);
-        marker.bindPopup(tooltip);
+    createTooltip(tooltip) {
+        let html = this.components.tooltip.html;
+        html = html.replace('{TOOLTIP_HEADING}', tooltip.title).replace('{TOOLTIP_DIRECTIONS_URL}', tooltip.direction.url).replace('{TOOLTIP_DIRECTIONS_LABEL}', tooltip.direction.label);
+        return html;
     }
 
-    icon() {
-        const icon = L.icon({
-            iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Map_pin_icon.svg',
-            iconSize: [28, 39]
+    setMarker(map, lat, lng, tooltip, customIcon = false) {
+        let marker = L.marker([lat, lng], { icon: this.createMarker(customIcon) }).addTo(map);
+        marker.bindPopup(this.createTooltip(tooltip));
+        
+        marker.on('click', (e) => {
+            // if (!this.container.classList.contains('is-expanded')) {
+                map.setView(e.latlng, 15);
+            // }
         });
-        return icon;
     }
 }
 
