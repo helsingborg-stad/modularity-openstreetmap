@@ -46,7 +46,17 @@ class OpenStreetMap extends \Modularity\Module
         $data['isFullWidth'] = $fields['mod_osm_full_width'];
         $data['places'] = $placesData['places'];
         $data['coords'] = json_encode($placesData['coords']);
-        
+
+        if (!empty($fields['start_zoom_value'])) {
+            $zoom = $fields['start_zoom_value'];
+            $zoom = $zoom < 5 ? 5 : ($zoom > 20 ? 20 : $zoom);
+        }
+
+        $data['startPosition'] = json_encode([
+            'lat' => $fields['latitude_start'] ? $fields['latitude_start'] : '56.044383', 
+            'lng' =>  $fields['longitude_start'] ?  $fields['longitude_start'] : '12.759173',
+            'zoom' => !empty($zoom) ? $zoom : 14,
+        ]);
         return $data;
     }
 
@@ -71,13 +81,12 @@ class OpenStreetMap extends \Modularity\Module
     private function buildPlacePosts($posts) {
         $coords = [];
         foreach ($posts as &$post) {
+
             $post = \Municipio\Helper\Post::preparePostObject($post);
             $post->postExcerpt = $this->createExcerpt($post);
             $post->termMarker = TaxonomiesHelper::getTermIcon($post->id);
             $post->location = get_field('location', $post->id);
             $coords[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'title' => $post->postTitle, 'icon' => $post->termMarker];
-            echo('<br><br>');
-            var_dump($post->termMarker);
         }
         return [
             'places' => $posts,

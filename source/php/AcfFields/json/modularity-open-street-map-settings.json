@@ -105,6 +105,69 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": ""
+        },
+        {
+            "key": "field_6426a19f8c575",
+            "label": "Latitude start",
+            "name": "latitude_start",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6426a1dd8c576",
+            "label": "Longitude start",
+            "name": "longitude_start",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6426a973f0745",
+            "label": "Start zoom value",
+            "name": "start_zoom_value",
+            "type": "number",
+            "instructions": "A value between 5-20 that sets the zoom value. Default value is 14.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 14,
+            "min": 5,
+            "max": 20,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [

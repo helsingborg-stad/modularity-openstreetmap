@@ -1,4 +1,4 @@
-<div id="openstreetmap" js-map-locations="{{$coords}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}}">
+<div id="openstreetmap" js-map-locations="{{$coords}}" js-map-start-position="{{$startPosition}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}}">
     <div style="height:1000px" id="openstreetmap_map"></div>
     @if($places)
     <div class="openstreetmap-sidebar" data-js-toggle-item="expand" data-js-toggle-class="is-expanded">

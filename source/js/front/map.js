@@ -6,17 +6,18 @@ class Map {
 
     init() {
         const container = document.querySelector('#openstreetmap');
-        if (!container.hasAttribute('js-map-locations')) {
+        if (!container.hasAttribute('js-map-locations') || !container.hasAttribute('js-map-start-position')) {
             return;
         }
 
+        let startPosition = JSON.parse(container.getAttribute('js-map-start-position'));
         let locations = JSON.parse(container.getAttribute('js-map-locations'));
-        this.setMapView(locations);
+        this.setMapView(locations, startPosition);
     }
 
-    setMapView(locations) {
+    setMapView(locations, startPosition) {
         let map = L.map('openstreetmap_map');
-        map.setView([56.042678, 12.727967], 14);
+        map.setView([startPosition.lat, startPosition.lng], startPosition.zoom);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

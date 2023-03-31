@@ -33,8 +33,9 @@
                 {{-- TODO: Add icon --}}
             @endgroup
                 @tags([
-                    'tags' => $place->terms,
-                    'classList' => ['u-padding__y--2']
+                    'tags' => $place->termsUnlinked,
+                    'classList' => ['u-padding__y--2'],
+                    'format' => true,
                 ])
                 @endtags
                 @typography([])
