@@ -46,6 +46,7 @@ class OpenStreetMap extends \Modularity\Module
         $data['isFullWidth'] = $fields['mod_osm_full_width'];
         $data['places'] = $placesData['places'];
         $data['coords'] = json_encode($placesData['coords']);
+        $data['mapStyle'] = $this->getMapStyle();
 
         if (!empty($fields['start_zoom_value'])) {
             $zoom = $fields['start_zoom_value'];
@@ -58,6 +59,15 @@ class OpenStreetMap extends \Modularity\Module
             'zoom' => !empty($zoom) ? $zoom : 14,
         ]);
         return $data;
+    }
+
+    private function getMapStyle() {
+        if (function_exists('get_theme_mod')) {
+            return get_theme_mod('osm_map_style', 'default');
+        }
+        else {
+            return 'default';
+        }
     }
 
     private function getPlacePosts($termToShow, $taxonomyToShow) {
