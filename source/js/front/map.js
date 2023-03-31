@@ -1,7 +1,7 @@
 class Map {
     constructor(components) {
         this.components = components;
-        document.querySelector('#openstreetmap') && this.init(L);
+        document.querySelector('#openstreetmap') && this.init();
     }
 
     init() {
