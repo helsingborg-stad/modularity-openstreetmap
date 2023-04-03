@@ -4,8 +4,8 @@ namespace ModularityOpenStreetMap\Helper;
 
 class Taxonomies
 {
-    public function getTaxonomies() {
-        $taxonomies = get_object_taxonomies('place');
+    public function getTerms($postType) {
+        $taxonomies = get_object_taxonomies($postType);
         
         $arr = [];
         foreach ($taxonomies as $taxonomy) {
@@ -20,6 +20,7 @@ class Taxonomies
                 }
             }
         }
+
         return $arr;
     }
 

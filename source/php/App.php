@@ -18,11 +18,13 @@ class App
         $this->cacheBust = new \ModularityOpenStreetMap\Helper\CacheBust();
     }
 
+
     public function termsToShow($field) {
-        $arr = TaxonomiesHelper::getTaxonomies();
+        $postType = get_field('mod_osm_post_type');
+        $arr = TaxonomiesHelper::getTerms($postType);
 
         if(empty($arr)) {
-            $arr = ['all' => 'All'];
+            $arr = ['none' => 'No post found'];
         }
         
         $field['choices'] = $arr;
