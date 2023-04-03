@@ -3,6 +3,7 @@
 namespace ModularityLikePosts\Module;
 
 use ModularityOpenStreetMap\Helper\Taxonomies as TaxonomiesHelper;
+use Municipio\Helper\Purpose as PurposeHelper;
 
 class OpenStreetMap extends \Modularity\Module
 {

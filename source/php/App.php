@@ -3,6 +3,7 @@
 namespace ModularityOpenStreetMap;
 
 use ModularityOpenStreetMap\Helper\Taxonomies as TaxonomiesHelper;
+use Municipio\Helper\Purpose as PurposeHelper;
 use Municipio\Customizer as Customizer;
 use Kirki as Kirki;
 
@@ -15,14 +16,53 @@ class App
         add_action('plugins_loaded', array($this, 'registerModule'));
         add_action('municipio_customizer_section_registered', array($this, 'addKirkiPanel'), 11);
 
+        add_filter('acf/load_field/name=mod_osm_post_type', array($this, 'postTypes'));
         add_filter('acf/prepare_field/name=mod_osm_terms_to_show', array($this, 'termsToShow'));
         add_filter( 'acf/prepare_field/name=mod_osm_full_width', array($this, 'handleFullWidthField'), 10, 2 );
 
         
         $this->cacheBust = new \ModularityOpenStreetMap\Helper\CacheBust();
     }
-    
-    public function addKirkiPanel() {
+
+    public function postTypes($field) {
+            $postTypes = get_post_types();
+            $arr = [];
+            foreach ($postTypes as $postType) {
+                if (\Municipio\Helper\Purpose::getPurpose($postType)[0]->key == 'place') {
+                    $postTypeObject = get_post_type_object($postType);
+                    $arr[$postTypeObject->name] = $postTypeObject->label;
+                }
+            }
+
+        reset($arr);
+        $first_key = key($arr);
+        $field['default_value'] = $first_key;
+
+        $field['choices'] = $arr;
+        return $field;
+    }
+
+    public function termsToShow($field) {
+        $postType = get_field('mod_osm_post_type');
+        $arr = TaxonomiesHelper::getTerms($postType);
+
+        if(empty($arr)) {
+            $arr = ['none' => 'No post found'];
+        }
+        
+        $field['choices'] = $arr;
+
+        return $field;
+    }
+
+    public function handleFullWidthField( $field ) {
+        if (get_post_type() == 'page') {
+            return false;
+        }
+        return $field;
+    }
+
+        public function addKirkiPanel() {
         if (class_exists('Kirki')) {
             Kirki::add_section( 'openstreetmap', array(
                 'title'          => esc_html__( 'OpenStreetMap', 'modularity-open-street-map' ),
@@ -46,38 +86,6 @@ class App
                 ],
             ]);
         }
-    }
-
-    public function getTermsForPostType($request)
-    {
-        $postType = $request->get_param('post_type');
-        $arr = TaxonomiesHelper::getTerms($postType);
-
-        if (empty($arr)) {
-            $arr = array('none' => 'No post found');
-        }
-
-        return $arr;
-    }
-
-    public function termsToShow($field) {
-        $postType = get_field('mod_osm_post_type');
-        $arr = TaxonomiesHelper::getTerms($postType);
-
-        if(empty($arr)) {
-            $arr = ['none' => 'No post found'];
-        }
-        
-        $field['choices'] = $arr;
-
-        return $field;
-    }
-
-    public function handleFullWidthField( $field ) {
-        if (get_post_type() == 'page') {
-            return false;
-        }
-        return $field;
     }
 
     /**

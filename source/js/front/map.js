@@ -10,14 +10,16 @@ class Map {
             return;
         }
         
-        let startPosition = JSON.parse(container.getAttribute('js-map-start-position'));
-        let locations = JSON.parse(container.getAttribute('js-map-locations'));
-        let tiles = this.getTilesStyle(container);
+        let startPosition = JSON.parse(this.container.getAttribute('js-map-start-position'));
+        let locations = JSON.parse(this.container.getAttribute('js-map-locations'));
+        let tiles = this.getTilesStyle(this.container);
         this.setMapView(locations, startPosition, tiles);
     }
 
     setMapView(locations, startPosition, tiles) {
-        let map = L.map('openstreetmap_map');
+        let map = L.map('openstreetmap__map');
+        let expand = this.container.querySelector('.openstreetmap__expand-icon');
+        
         map.setView([startPosition.lat, startPosition.lng], startPosition.zoom);
         L.tileLayer(tiles?.url ? tiles.url : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,

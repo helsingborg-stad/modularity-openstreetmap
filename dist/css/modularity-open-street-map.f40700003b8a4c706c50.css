@@ -45,14 +45,14 @@
   padding: 1rem;
   height: 100%;
 }
+#openstreetmap #openstreetmap__map {
+  width: 70%;
+}
 #openstreetmap.is-expanded .openstreetmap__sidebar {
   width: 80%;
 }
 #openstreetmap.is-expanded #openstreetmap__map {
   width: 20%;
-}
-#openstreetmap #openstreetmap__map {
-  width: 70%;
 }
 #openstreetmap .openstreetmap__marker {
   padding: 8px;
@@ -652,4 +652,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.a38bd213495c3a353750.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.f40700003b8a4c706c50.css.map*/

@@ -22,7 +22,11 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 			height: 100%;
 		}
 	}
-	
+
+	#openstreetmap__map {
+		width: 70%;
+	}
+
 	&.is-expanded {
 		.openstreetmap__sidebar {
 			width: 80%;
@@ -30,10 +34,6 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 		#openstreetmap__map {
 			width: 20%;
 		}
-	}
-
-	#openstreetmap__map {
-		width: 70%;
 	}
 
 	.openstreetmap__marker {

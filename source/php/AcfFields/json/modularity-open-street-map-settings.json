@@ -6,7 +6,7 @@
             "key": "field_642a8818a908c",
             "label": "Post type",
             "name": "mod_osm_post_type",
-            "type": "posttype_select",
+            "type": "select",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
@@ -15,12 +15,17 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "allow_null": 0,
+            "choices": {
+                "place": "Platser",
+                "custompost": "custompost"
+            },
+            "default_value": false,
+            "return_format": "value",
             "multiple": 0,
-            "placeholder": "",
-            "disabled": 0,
-            "readonly": 0
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         },
         {
             "key": "field_6422b15cf1b12",
