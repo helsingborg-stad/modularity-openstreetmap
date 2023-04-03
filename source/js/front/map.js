@@ -12,11 +12,11 @@ class Map {
 
         let startPosition = JSON.parse(this.container.getAttribute('js-map-start-position'));
         let locations = JSON.parse(this.container.getAttribute('js-map-locations'));
-        let tiles = this.getTilesStyle(this.container);
-        this.setMapView(locations, startPosition, tiles);
+
+        this.setMapView(locations, startPosition);
     }
 
-    setMapView(locations, startPosition, tiles) {
+    setMapView(locations, startPosition) {
         let map = L.map('openstreetmap__map');
         let expand = this.container.querySelector('.openstreetmap__expand-icon');
 
@@ -74,9 +74,7 @@ class Map {
         marker.bindPopup(this.createTooltip(tooltip));
         
         marker.on('click', (e) => {
-            // if (!this.container.classList.contains('is-expanded')) {
-                map.setView(e.latlng, 15);
-            // }
+            map.setView(e.latlng, 15);
         });
     }
 }
