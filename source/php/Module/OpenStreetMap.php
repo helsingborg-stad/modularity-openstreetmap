@@ -36,9 +36,14 @@ class OpenStreetMap extends \Modularity\Module
         }
         
         if(empty($secondaryQuery)) {
-            $termToShow = $fields['mod_osm_terms_to_show'];
-            $taxonomyToShow = get_term($termToShow)->taxonomy;
-            $placesData = $this->getPlacePosts($termToShow, $taxonomyToShow);
+            $termsToShow = $fields['mod_osm_terms_to_show'];
+            $postTypeToShow = $fields['mod_osm_post_type'];
+            $taxonomyToShow = [];
+            foreach ($termsToShow as $term) {
+                $taxonomy = get_term($term)->taxonomy;
+                $taxonomyToShow[$taxonomy][] = $term;
+            }
+            $placesData = $this->getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow);
         } else {
             $placesData = $this->buildPlacePosts($secondaryQuery->posts);
         }
@@ -61,18 +66,22 @@ class OpenStreetMap extends \Modularity\Module
         return $data;
     }
 
-    private function getPlacePosts($termToShow, $taxonomyToShow) {
+    private function getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow) {
         $args = [
-            'post_type' => 'place',
+            'post_type' => $postTypeToShow,
             'posts_per_page' => 8,
             'tax_query' => [
-                [
-                    'taxonomy' => $taxonomyToShow,
-                    'field' => 'term_id',
-                    'terms' => $termToShow
-                ]
+                'relation' => 'OR',
             ]
         ];
+
+        foreach ($taxonomyToShow as $taxonomy => $terms) {
+            $args['tax_query'][] = [
+                'taxonomy' => $taxonomy,
+                'field' => 'term_id',
+                'terms' => $terms
+            ];
+        }
 
         $posts = get_posts($args);
 
@@ -91,8 +100,6 @@ class OpenStreetMap extends \Modularity\Module
                 $direction = 'https://www.google.com/maps/dir/?api=1&destination=' . $post->location['lat'] . ',' . $post->location['lng'] . '&travelmode=transit';
             }
             $coords[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termMarker];
-
-            // var_dump($post->location['']);
         }
         return [
             'places' => $posts,

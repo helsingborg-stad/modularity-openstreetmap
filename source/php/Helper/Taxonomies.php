@@ -40,6 +40,7 @@ class Taxonomies
         if (!empty($termIcons)) {
             foreach ($termIcons as $termIcon) {
                 if ($termIcon['icon']['type'] == 'icon' || !empty($termIcon['icon']['src'])) {
+                    /* TODO: Add correct icon */
                     $termIcon['icon']['src'] = 'restaurant';
                     $icon = $termIcon;
                     break;

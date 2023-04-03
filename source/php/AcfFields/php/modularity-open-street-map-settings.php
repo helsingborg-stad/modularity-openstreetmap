@@ -41,9 +41,10 @@
             'choices' => array(
                 'none' => __('No post found', 'modularity-open-street-map'),
             ),
-            'default_value' => false,
+            'default_value' => array(
+            ),
             'return_format' => 'value',
-            'multiple' => 0,
+            'multiple' => 1,
             'allow_null' => 0,
             'ui' => 0,
             'ajax' => 0,
