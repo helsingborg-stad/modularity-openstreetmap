@@ -12,12 +12,23 @@ class App
         add_action('wp_enqueue_scripts', array($this, 'enqueueFrontend'));
         add_action('plugins_loaded', array($this, 'registerModule'));
 
-        add_filter('acf/load_field/name=mod_osm_terms_to_show', array($this, 'termsToShow'));
+        add_filter('acf/prepare_field/name=mod_osm_terms_to_show', array($this, 'termsToShow'));
         add_filter( 'acf/prepare_field/name=mod_osm_full_width', array($this, 'handleFullWidthField'), 10, 2 );
 
         $this->cacheBust = new \ModularityOpenStreetMap\Helper\CacheBust();
     }
 
+    public function getTermsForPostType($request)
+    {
+        $postType = $request->get_param('post_type');
+        $arr = TaxonomiesHelper::getTerms($postType);
+
+        if (empty($arr)) {
+            $arr = array('none' => 'No post found');
+        }
+
+        return $arr;
+    }
 
     public function termsToShow($field) {
         $postType = get_field('mod_osm_post_type');

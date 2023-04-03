@@ -69,7 +69,7 @@ class OpenStreetMap extends \Modularity\Module
     private function getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow) {
         $args = [
             'post_type' => $postTypeToShow,
-            'posts_per_page' => 8,
+            'posts_per_page' => 999,
             'tax_query' => [
                 'relation' => 'OR',
             ]
