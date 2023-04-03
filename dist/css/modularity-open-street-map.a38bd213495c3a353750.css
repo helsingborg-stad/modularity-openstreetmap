@@ -29,24 +29,30 @@
   /* Directions */
   /* Printing */
 }
-#openstreetmap .openstreetmap-sidebar {
+#openstreetmap .openstreetmap__sidebar {
   position: absolute;
   height: 100%;
-  width: 80%;
+  width: 30%;
   right: 0;
   top: 0;
   z-index: 1000;
   background-color: white;
   transition: ease-in 0.3s;
 }
-#openstreetmap .openstreetmap-sidebar.is-expanded {
-  width: 30%;
-}
-#openstreetmap .openstreetmap-sidebar .openstreetmap__container {
+#openstreetmap .openstreetmap__sidebar .openstreetmap__container {
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1rem;
   height: 100%;
+}
+#openstreetmap.is-expanded .openstreetmap__sidebar {
+  width: 80%;
+}
+#openstreetmap.is-expanded #openstreetmap__map {
+  width: 20%;
+}
+#openstreetmap #openstreetmap__map {
+  width: 70%;
 }
 #openstreetmap .openstreetmap__marker {
   padding: 8px;
@@ -56,10 +62,8 @@
 #openstreetmap .openstreetmap__inner-blocks {
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 1rem;
-  height: 100%;
 }
-#openstreetmap .openstreetmap-expand-icon {
+#openstreetmap .openstreetmap__expand-icon {
   position: absolute;
   top: 50%;
   transform: translate(-100%, -50%);
@@ -648,4 +652,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.1c352318e106ad8dc28a.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.a38bd213495c3a353750.css.map*/

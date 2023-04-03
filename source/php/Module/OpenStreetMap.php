@@ -36,9 +36,14 @@ class OpenStreetMap extends \Modularity\Module
         }
         
         if(empty($secondaryQuery)) {
-            $termToShow = $fields['mod_osm_terms_to_show'];
-            $taxonomyToShow = get_term($termToShow)->taxonomy;
-            $placesData = $this->getPlacePosts($termToShow, $taxonomyToShow);
+            $termsToShow = $fields['mod_osm_terms_to_show'];
+            $postTypeToShow = $fields['mod_osm_post_type'];
+            $taxonomyToShow = [];
+            foreach ($termsToShow as $term) {
+                $taxonomy = get_term($term)->taxonomy;
+                $taxonomyToShow[$taxonomy][] = $term;
+            }
+            $placesData = $this->getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow);
         } else {
             $placesData = $this->buildPlacePosts($secondaryQuery->posts);
         }
@@ -58,6 +63,7 @@ class OpenStreetMap extends \Modularity\Module
             'lng' =>  $fields['longitude_start'] ?  $fields['longitude_start'] : '12.759173',
             'zoom' => !empty($zoom) ? $zoom : 14,
         ]);
+
         return $data;
     }
 
@@ -70,18 +76,22 @@ class OpenStreetMap extends \Modularity\Module
         }
     }
 
-    private function getPlacePosts($termToShow, $taxonomyToShow) {
+    private function getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow) {
         $args = [
-            'post_type' => 'place',
-            'posts_per_page' => 8,
+            'post_type' => $postTypeToShow,
+            'posts_per_page' => 999,
             'tax_query' => [
-                [
-                    'taxonomy' => $taxonomyToShow,
-                    'field' => 'term_id',
-                    'terms' => $termToShow
-                ]
+                'relation' => 'OR',
             ]
         ];
+
+        foreach ($taxonomyToShow as $taxonomy => $terms) {
+            $args['tax_query'][] = [
+                'taxonomy' => $taxonomy,
+                'field' => 'term_id',
+                'terms' => $terms
+            ];
+        }
 
         $posts = get_posts($args);
 
@@ -96,7 +106,10 @@ class OpenStreetMap extends \Modularity\Module
             $post->postExcerpt = $this->createExcerpt($post);
             $post->termMarker = TaxonomiesHelper::getTermIcon($post->id);
             $post->location = get_field('location', $post->id);
-            $coords[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'title' => $post->postTitle, 'icon' => $post->termMarker];
+            if($post->location['lat'] && $post->location['lng']) {
+                $direction = 'https://www.google.com/maps/dir/?api=1&destination=' . $post->location['lat'] . ',' . $post->location['lng'] . '&travelmode=transit';
+            }
+            $coords[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termMarker];
         }
         return [
             'places' => $posts,

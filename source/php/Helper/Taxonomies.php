@@ -4,8 +4,8 @@ namespace ModularityOpenStreetMap\Helper;
 
 class Taxonomies
 {
-    public function getTaxonomies() {
-        $taxonomies = get_object_taxonomies('place');
+    public function getTerms($postType) {
+        $taxonomies = get_object_taxonomies($postType);
         
         $arr = [];
         foreach ($taxonomies as $taxonomy) {
@@ -20,6 +20,7 @@ class Taxonomies
                 }
             }
         }
+
         return $arr;
     }
 
@@ -39,6 +40,7 @@ class Taxonomies
         if (!empty($termIcons)) {
             foreach ($termIcons as $termIcon) {
                 if ($termIcon['icon']['type'] == 'icon' || !empty($termIcon['icon']['src'])) {
+                    /* TODO: Add correct icon */
                     $termIcon['icon']['src'] = 'restaurant';
                     $icon = $termIcon;
                     break;

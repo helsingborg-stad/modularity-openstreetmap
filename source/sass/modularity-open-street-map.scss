@@ -5,19 +5,15 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 #openstreetmap {
 	/* Our code */
 	position: relative;
-	.openstreetmap-sidebar {
+	.openstreetmap__sidebar {
 		position: absolute;
 		height: 100%;
-		width: 80%;
+		width: 30%;
 		right: 0;
 		top: 0;
 		z-index: 1000;
 		background-color: white;
 		transition: ease-in .3s;
-
-		&.is-expanded {
-			width: 30%;
-		}
 
 		.openstreetmap__container {
 			overflow-x: hidden;
@@ -25,6 +21,19 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 			padding: 1rem;
 			height: 100%;
 		}
+	}
+	
+	&.is-expanded {
+		.openstreetmap__sidebar {
+			width: 80%;
+		}
+		#openstreetmap__map {
+			width: 20%;
+		}
+	}
+
+	#openstreetmap__map {
+		width: 70%;
 	}
 
 	.openstreetmap__marker {
@@ -36,11 +45,11 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 	.openstreetmap__inner-blocks {
 		overflow-x: hidden;
 		overflow-y: auto;
-		padding: 1rem;
-		height: 100%;
+		// padding: 1rem;
+		// height: 100%;
 	}
 
-	.openstreetmap-expand-icon {
+	.openstreetmap__expand-icon {
 		position: absolute;
 		top: 50%;
 		transform: translate(calc(-100%), -50%);
