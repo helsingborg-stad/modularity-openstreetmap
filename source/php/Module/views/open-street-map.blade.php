@@ -1,11 +1,11 @@
-<div id="openstreetmap" js-map-locations="{{$coords}}" js-map-start-position="{{$startPosition}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}}">
-    <div style="height:1000px" id="openstreetmap_map"></div>
+<div id="openstreetmap" js-map-locations="{{$coords}}" js-map-start-position="{{$startPosition}}" js-map-style="{{$mapStyle}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}} " data-js-toggle-item="expand" data-js-toggle-class="is-expanded">
+    <div style="height:1000px" id="openstreetmap__map"></div>
     @if($places)
-    <div class="openstreetmap-sidebar" data-js-toggle-item="expand" data-js-toggle-class="is-expanded">
+    <div class="openstreetmap__sidebar">
         @icon([
             'icon' => 'map',
             'size' => 'lg',
-            'classList' => ['openstreetmap-expand-icon'],
+            'classList' => ['openstreetmap__expand-icon'],
             'attributeList' => ['data-js-toggle-trigger' => 'expand']
         ])
         @endicon
