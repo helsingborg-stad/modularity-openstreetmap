@@ -4,6 +4,8 @@
 #openstreetmap {
   /* Our code */
   position: relative;
+  /* Cluster plugin */
+  /* IE 6-8 fallback colors */
   /* Required styles leaflet */
   /* Prevents IE11 from highlighting tiles in blue */
   /* Safari renders non-retina tile on retina better with this, but Chrome is worse */
@@ -45,14 +47,8 @@
   padding: 1rem;
   height: 100%;
 }
-#openstreetmap #openstreetmap__map {
-  width: 70%;
-}
 #openstreetmap.is-expanded .openstreetmap__sidebar {
   width: 80%;
-}
-#openstreetmap.is-expanded #openstreetmap__map {
-  width: 20%;
 }
 #openstreetmap .openstreetmap__marker {
   padding: 8px;
@@ -80,6 +76,58 @@
   margin-left: -50vw;
   margin-right: -50vw;
   border-radius: 0;
+}
+#openstreetmap .marker-cluster-small {
+  background-color: rgba(181, 226, 140, 0.6);
+}
+#openstreetmap .marker-cluster-small div {
+  background-color: rgba(110, 204, 57, 0.6);
+}
+#openstreetmap .marker-cluster-medium {
+  background-color: rgba(241, 211, 87, 0.6);
+}
+#openstreetmap .marker-cluster-medium div {
+  background-color: rgba(240, 194, 12, 0.6);
+}
+#openstreetmap .marker-cluster-large {
+  background-color: rgba(253, 156, 115, 0.6);
+}
+#openstreetmap .marker-cluster-large div {
+  background-color: rgba(241, 128, 23, 0.6);
+}
+#openstreetmap .leaflet-oldie .marker-cluster-small {
+  background-color: rgb(181, 226, 140);
+}
+#openstreetmap .leaflet-oldie .marker-cluster-small div {
+  background-color: rgb(110, 204, 57);
+}
+#openstreetmap .leaflet-oldie .marker-cluster-medium {
+  background-color: rgb(241, 211, 87);
+}
+#openstreetmap .leaflet-oldie .marker-cluster-medium div {
+  background-color: rgb(240, 194, 12);
+}
+#openstreetmap .leaflet-oldie .marker-cluster-large {
+  background-color: rgb(253, 156, 115);
+}
+#openstreetmap .leaflet-oldie .marker-cluster-large div {
+  background-color: rgb(241, 128, 23);
+}
+#openstreetmap .marker-cluster {
+  background-clip: padding-box;
+  border-radius: 20px;
+}
+#openstreetmap .marker-cluster div {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  margin-top: 5px;
+  text-align: center;
+  border-radius: 15px;
+  font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+#openstreetmap .marker-cluster span {
+  line-height: 30px;
 }
 #openstreetmap .leaflet-pane,
 #openstreetmap .leaflet-tile,
@@ -652,4 +700,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.f40700003b8a4c706c50.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.4aa6e3748d0b9dd40e11.css.map*/

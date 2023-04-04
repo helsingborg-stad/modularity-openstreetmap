@@ -19,7 +19,10 @@ class Map {
     setMapView(locations, startPosition, tiles) {
         let map = L.map('openstreetmap__map');
         let expand = this.container.querySelector('.openstreetmap__expand-icon');
-        
+        let markers = L.markerClusterGroup({
+            maxClusterRadius: 50
+        });
+
         map.setView([startPosition.lat, startPosition.lng], startPosition.zoom);
         L.tileLayer(tiles?.url ? tiles.url : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -32,17 +35,40 @@ class Map {
                 if (location?.icon) {
                     customIcon = location.icon;
                 }
-                this.setMarker(map, location.lat, location.lng, location.tooltip, customIcon);
+                let marker = L.marker([location.lat, location.lng], { icon: this.createMarker(customIcon) });
+                marker.bindPopup(this.createTooltip(location.tooltip));
+                marker.on('click', (e) => {
+                    map.setView(e.latlng, 15);
+                });
+
+                markers.addLayer(marker);
+
             }
         });
 
+        markers.addTo(map);
+
         if (expand) {
             expand.addEventListener('click', () => {
-                map.invalidateSize();
+                let mapEl = this.container.querySelector('#openstreetmap__map');
+                setTimeout(function () {
+                    mapEl.style.width = mapEl.style.width == '20%' ? '70%' : '20%';
+                    // mapEl.style.transition = 'width 0.4s ease-in-out';
+                    map.invalidateSize();
+                }, 200);
+
             });
         }
     }
 
+
+    setMarker(map, lat, lng, tooltip, customIcon = false) {
+        let marker = L.marker([lat, lng], { icon: this.createMarker(customIcon) }).addTo(map);
+        marker.bindPopup(this.createTooltip(tooltip));
+        return marker;
+    }
+
+    
     getPrimaryColor() {
         let color = getComputedStyle(document.documentElement).getPropertyValue('--color-primary');
         return color ? color : '#ae0b05';
@@ -66,15 +92,6 @@ class Map {
         let html = this.components.tooltip.html;
         html = html.replace('{TOOLTIP_HEADING}', tooltip.title).replace('{TOOLTIP_DIRECTIONS_URL}', tooltip.direction.url).replace('{TOOLTIP_DIRECTIONS_LABEL}', tooltip.direction.label);
         return html;
-    }
-
-    setMarker(map, lat, lng, tooltip, customIcon = false) {
-        let marker = L.marker([lat, lng], { icon: this.createMarker(customIcon) }).addTo(map);
-        marker.bindPopup(this.createTooltip(tooltip));
-        
-        marker.on('click', (e) => {
-            map.setView(e.latlng, 15);
-        });
     }
 
     getTilesStyle(container) {
