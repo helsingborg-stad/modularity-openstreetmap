@@ -27,26 +27,24 @@ class Taxonomies
      public function getTermIcon($postId, $postType) {
         $taxonomies = get_object_taxonomies($postType);
         
-        $termIcons = [];
+        $termIcon = [];
         foreach ($taxonomies as $taxonomy) {
             $terms = get_the_terms($postId, $taxonomy);
             if (!empty($terms)) {
                 foreach ($terms as $term) {
-                    $termIcons[] = ['icon' => \Municipio\Helper\Term::getTermIcon($term, $taxonomy), 'color' => \Municipio\Helper\Term::getTermColor($term, $taxonomy)];
+                    if (empty($termIcon)) {
+                        $icon = \Municipio\Helper\Term::getTermIcon($term, $taxonomy);
+                        if (!empty($icon) /*  && !empty($icon['src']) && $icon['type'] == 'icon' */) {
+                            $termIcon['icon'] = /* $icon['src'] */ 'restaurant';
+                            $termIcon['size'] = 'md';
+                            $termIcon['color'] = 'white';
+                            $termIcon['backgroundColor'] = \Municipio\Helper\Term::getTermColor($term, $taxonomy);
+                        }
+                    }
                 }
             }
         }
-        $icon = "";
-        if (!empty($termIcons)) {
-            foreach ($termIcons as $termIcon) {
-                if ($termIcon['icon']['type'] == 'icon' || !empty($termIcon['icon']['src'])) {
-                    /* TODO: Add correct icon */
-                    $termIcon['icon']['src'] = 'restaurant';
-                    $icon = $termIcon;
-                    break;
-                }
-            }
-        }
-        return $icon;
+
+        return $termIcon;
     }
 }

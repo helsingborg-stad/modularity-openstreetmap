@@ -60,14 +60,6 @@ class Map {
             });
         }
     }
-
-
-    setMarker(map, lat, lng, tooltip, customIcon = false) {
-        let marker = L.marker([lat, lng], { icon: this.createMarker(customIcon) }).addTo(map);
-        marker.bindPopup(this.createTooltip(tooltip));
-        return marker;
-    }
-
     
     getPrimaryColor() {
         let color = getComputedStyle(document.documentElement).getPropertyValue('--color-primary');
@@ -76,8 +68,8 @@ class Map {
     
     createMarker(customIcon) {
         let html = this.components.icon.html;
-        let icon = customIcon?.icon?.src ? customIcon.icon.src : 'location_on';
-        let color = customIcon?.color ? customIcon.color : this.getPrimaryColor();
+        let icon = customIcon?.icon ? customIcon.icon : 'location_on';
+        let color = customIcon.backgroundColor ? customIcon.backgroundColor : this.getPrimaryColor();
 
         html = html.replace('{icon-name}', icon).replace('{ICON_NAME}', icon).replace('{ICON_BACKGROUND_COLOR}', color);
         let marker = L.divIcon({

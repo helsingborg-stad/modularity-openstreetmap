@@ -32,14 +32,10 @@
                 @endtypography
                 @if($place->termMarker)
                     @inlineCssWrapper([
-                        'styles' => ['background-color' => $place->termMarker['color'], 'display' => 'flex'],
-                        'classList' => [$place->termMarker['color'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
+                        'styles' => ['background-color' => $place->termMarker['backgroundColor'], 'display' => 'flex'],
+                        'classList' => [$place->termMarker['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
                     ])
-                        @icon([
-                            'icon' => $place->termMarker['icon']['src'],
-                            'size' => 'md',
-                            'color' => 'white'
-                        ])
+                        @icon($place->termMarker)
                         @endicon
                     @endinlineCssWrapper
                 @endif
