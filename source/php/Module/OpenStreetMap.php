@@ -96,16 +96,16 @@ class OpenStreetMap extends \Modularity\Module
 
         $posts = get_posts($args);
 
-        return $this->buildPlacePosts($posts);
+        return $this->buildPlacePosts($posts, $postTypeToShow);
     }
 
-    private function buildPlacePosts($posts) {
+    private function buildPlacePosts($posts, $postTypeToShow) {
         $coords = [];
         foreach ($posts as &$post) {
 
             $post = \Municipio\Helper\Post::preparePostObject($post);
             $post->postExcerpt = $this->createExcerpt($post);
-            $post->termMarker = TaxonomiesHelper::getTermIcon($post->id);
+            $post->termMarker = TaxonomiesHelper::getTermIcon($post->id, $postTypeToShow);
             $post->location = get_field('location', $post->id);
             if($post->location['lat'] && $post->location['lng']) {
                 $direction = 'https://www.google.com/maps/dir/?api=1&destination=' . $post->location['lat'] . ',' . $post->location['lng'] . '&travelmode=transit';

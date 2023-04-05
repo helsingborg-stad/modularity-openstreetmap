@@ -24,8 +24,8 @@ class Taxonomies
         return $arr;
     }
 
-     public function getTermIcon($postId) {
-        $taxonomies = get_object_taxonomies('place');
+     public function getTermIcon($postId, $postType) {
+        $taxonomies = get_object_taxonomies($postType);
         
         $termIcons = [];
         foreach ($taxonomies as $taxonomy) {
