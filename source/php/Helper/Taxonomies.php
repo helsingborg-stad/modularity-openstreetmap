@@ -34,10 +34,13 @@ class Taxonomies
                 foreach ($terms as $term) {
                     if (empty($termIcon)) {
                         $icon = \Municipio\Helper\Term::getTermIcon($term, $taxonomy);
-                        if (!empty($icon) /*  && !empty($icon['src']) && $icon['type'] == 'icon' */) {
-                            $termIcon['icon'] = /* $icon['src'] */ 'restaurant';
+                        $color = \Municipio\Helper\Term::getTermColor($term, $taxonomy);
+                        if (!empty($icon) && !empty($icon['src']) && $icon['type' == 'icon']) {
+                            $termIcon['icon'] = $icon['src'];
                             $termIcon['size'] = 'md';
                             $termIcon['color'] = 'white';
+                        }
+                        if(!empty($color)) {
                             $termIcon['backgroundColor'] = \Municipio\Helper\Term::getTermColor($term, $taxonomy);
                         }
                     }

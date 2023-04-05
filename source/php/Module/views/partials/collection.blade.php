@@ -30,7 +30,7 @@
                 ])
                     {{$place->postTitle}}
                 @endtypography
-                @if($place->termMarker)
+                @if($place->termMarker['icon'])
                     @inlineCssWrapper([
                         'styles' => ['background-color' => $place->termMarker['backgroundColor'], 'display' => 'flex'],
                         'classList' => [$place->termMarker['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
