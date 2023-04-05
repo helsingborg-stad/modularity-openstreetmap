@@ -30,7 +30,19 @@
                 ])
                     {{$place->postTitle}}
                 @endtypography
-                {{-- TODO: Add icon --}}
+                @if($place->termMarker)
+                    @inlineCssWrapper([
+                        'styles' => ['background-color' => $place->termMarker['color'], 'display' => 'flex'],
+                        'classList' => [$place->termMarker['color'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
+                    ])
+                        @icon([
+                            'icon' => $place->termMarker['icon']['src'],
+                            'size' => 'md',
+                            'color' => 'white'
+                        ])
+                        @endicon
+                    @endinlineCssWrapper
+                @endif
             @endgroup
                 @tags([
                     'tags' => $place->termsUnlinked,
