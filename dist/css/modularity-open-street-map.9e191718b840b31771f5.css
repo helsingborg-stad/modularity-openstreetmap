@@ -6,6 +6,7 @@
   position: relative;
   display: flex;
   flex-direction: row;
+  background-color: white;
   /* Cluster plugin */
   /* IE 6-8 fallback colors */
   /* Required styles leaflet */
@@ -36,12 +37,10 @@
 #openstreetmap .openstreetmap__sidebar {
   position: static;
   min-height: 100vh;
-  width: 30%;
   right: 0;
   top: 0;
   z-index: 1000;
   background-color: white;
-  transition: ease-in 0.3s;
 }
 #openstreetmap .openstreetmap__sidebar .openstreetmap__container {
   overflow-x: hidden;
@@ -50,11 +49,13 @@
   height: 100%;
 }
 #openstreetmap #openstreetmap__map {
+  transition: flex-basis 0.2s ease-in-out;
   position: sticky;
   top: 0;
+  flex: 1 0 70%;
 }
-#openstreetmap.is-expanded .openstreetmap__sidebar {
-  width: 80%;
+#openstreetmap.is-expanded #openstreetmap__map {
+  flex: 1 0 20%;
 }
 #openstreetmap .openstreetmap__marker {
   padding: 8px;
@@ -706,4 +707,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.7e3bb5bbcf1e2ebf3a40.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.9e191718b840b31771f5.css.map*/
