@@ -4,6 +4,8 @@
 #openstreetmap {
   /* Our code */
   position: relative;
+  display: flex;
+  flex-direction: row;
   /* Cluster plugin */
   /* IE 6-8 fallback colors */
   /* Required styles leaflet */
@@ -32,8 +34,8 @@
   /* Printing */
 }
 #openstreetmap .openstreetmap__sidebar {
-  position: absolute;
-  height: 100%;
+  position: static;
+  min-height: 100vh;
   width: 30%;
   right: 0;
   top: 0;
@@ -46,6 +48,10 @@
   overflow-y: auto;
   padding: 1rem;
   height: 100%;
+}
+#openstreetmap #openstreetmap__map {
+  position: sticky;
+  top: 0;
 }
 #openstreetmap.is-expanded .openstreetmap__sidebar {
   width: 80%;
@@ -700,4 +706,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.4aa6e3748d0b9dd40e11.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.7e3bb5bbcf1e2ebf3a40.css.map*/

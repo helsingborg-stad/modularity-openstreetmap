@@ -1,19 +1,26 @@
 @collection([
-    'classList' => ['c-collection--posts', 'o-grid']
+    'classList' => ['c-collection--posts', 'o-grid'],
+    'attributeList' => [
+        'js-pagination-container' => '',
+    ]
 ])
     @foreach($places as $place)
-    <div class="{{$postsColumns}}">
+    <div class="{{$postsColumns}}" js-pagination-item>
         @collection__item([
             'classList' => ['c-collection__item--post'],
             'containerAware' => true,
             // 'link' => $place->permalink,
-            'attributeList' => ['js-map-lat' => $place->location['lat'], 'js-map-lng' => $place->location['lng']]
+            'attributeList' => [
+                'js-map-lat' => $place->location['lat'], 
+                'js-map-lng' => $place->location['lng'],
+            ]
         ])
         @slot('before')
             @if(!empty($place->thumbnail['src']))
                 @image([
                     'src' => $place->thumbnail['src'],
                     'alt' => $place->thumbnail['alt'] ? $place->thumbnail['alt'] : $place->postTitle,
+                    'classList' => ['u-width--100']
                 ])
                 @endimage
             @endif

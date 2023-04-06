@@ -1,5 +1,5 @@
 <div id="openstreetmap" js-map-locations="{{$coords}}" js-map-start-position="{{$startPosition}}" js-map-style="{{$mapStyle}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}} " data-js-toggle-item="expand" data-js-toggle-class="is-expanded">
-    <div style="height:1000px; width: 70%;" id="openstreetmap__map"></div>
+    <div style="height:100vh; width: 70%;" id="openstreetmap__map"></div>
     @if($places)
     <div class="openstreetmap__sidebar">
         @icon([
@@ -9,7 +9,7 @@
             'attributeList' => ['data-js-toggle-trigger' => 'expand']
         ])
         @endicon
-        <div class="openstreetmap__container">
+        <div class="openstreetmap__container" js-pagination-target>
         @if (!$hideTitle && !empty($postTitle))
             @typography([
                 'id' => 'mod-posts-' . $ID . '-label',
@@ -23,10 +23,18 @@
         <div class="openstreetmap__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
         @include('partials.collection')
             @pagination([
-                'list' => $secondaryPaginationList,
-                'classList' => ['u-margin__top--8', 'u-display--flex', 'u-justify-content--center'],
+                'list' => [
+                    ['href' => '?pagination=1', 'label' => 'Page 1'],
+                ],
+                'classList' => [
+                    'u-padding__top--8',
+                    'u-padding__bottom--6',
+                    'u-justify-content--center'
+                ],
+                'useJS' => true,
                 'current' => 1,
-                'linkPrefix' => '?paged='
+                'perPage' => 8,
+                'pagesToShow' => 4,
             ])
             @endpagination
         </div>
