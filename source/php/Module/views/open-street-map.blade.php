@@ -1,14 +1,15 @@
 <div id="openstreetmap" js-map-locations="{{$coords}}" js-map-start-position="{{$startPosition}}" js-map-style="{{$mapStyle}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}} " data-js-toggle-item="expand" data-js-toggle-class="is-expanded">
-    <div style="height:100vh;" id="openstreetmap__map"></div>
-    @if($places)
-    <div class="openstreetmap__sidebar">
-        @icon([
+    <div style="height:100vh;" id="openstreetmap__map">
+            @icon([
             'icon' => 'map',
             'size' => 'lg',
-            'classList' => ['openstreetmap__expand-icon'],
+            'classList' => ['openstreetmap__expand-icon', 'u-level-1'],
             'attributeList' => ['data-js-toggle-trigger' => 'expand']
         ])
         @endicon
+    </div>
+    @if($places)
+    <div class="openstreetmap__sidebar">
         <div class="openstreetmap__container" js-pagination-target>
         @if (!$hideTitle && !empty($postTitle))
             @typography([

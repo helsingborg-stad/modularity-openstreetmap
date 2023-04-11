@@ -53,7 +53,8 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 	.openstreetmap__expand-icon {
 		position: absolute;
 		top: 50%;
-		transform: translate(calc(-100%), -50%);
+		right: 0;
+		transform: translateY(-50%);
 		color: $button-color-text;
 		background-color: $button-color;
 		padding: .5rem;

@@ -69,7 +69,8 @@
 #openstreetmap .openstreetmap__expand-icon {
   position: absolute;
   top: 50%;
-  transform: translate(-100%, -50%);
+  right: 0;
+  transform: translateY(-50%);
   color: var(--c-button-color-contrasting, #3d3d3d);
   background-color: var(--c-button-color, #f5f5f5);
   padding: 0.5rem;
@@ -707,4 +708,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.9e191718b840b31771f5.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.2f83ad6d0f5d22235a08.css.map*/
