@@ -50,10 +50,7 @@ class Map {
 
         if (expand) {
             expand.addEventListener('click', () => {
-                let mapEl = this.container.querySelector('#openstreetmap__map');
                 setTimeout(function () {
-                    mapEl.style.width = mapEl.style.width == '20%' ? '70%' : '20%';
-                    // mapEl.style.transition = 'width 0.4s ease-in-out';
                     map.invalidateSize();
                 }, 200);
 

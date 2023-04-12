@@ -17249,10 +17249,7 @@ class Map {
 
         if (expand) {
             expand.addEventListener('click', () => {
-                let mapEl = this.container.querySelector('#openstreetmap__map');
                 setTimeout(function () {
-                    mapEl.style.width = mapEl.style.width == '20%' ? '70%' : '20%';
-                    // mapEl.style.transition = 'width 0.4s ease-in-out';
                     map.invalidateSize();
                 }, 200);
 
@@ -17402,4 +17399,4 @@ const MapInstance = new _front_map__WEBPACK_IMPORTED_MODULE_2__["default"](openS
 
 /******/ })()
 ;
-//# sourceMappingURL=modularity-open-street-map.753aa3f433e06dc31b4b.js.map
+//# sourceMappingURL=modularity-open-street-map.0513a924cee372271200.js.map
