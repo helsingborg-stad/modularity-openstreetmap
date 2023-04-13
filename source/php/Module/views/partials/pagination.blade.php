@@ -9,7 +9,7 @@
     ],
     'useJS' => true,
     'current' => 1,
-    'perPage' => 8,
+    'perPage' => $perPage,
     'pagesToShow' => 4,
 ])
 @endpagination

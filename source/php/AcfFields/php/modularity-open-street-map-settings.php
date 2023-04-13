@@ -22,7 +22,7 @@
                 'place' => __('Platser', 'modularity-open-street-map'),
                 'custompost' => __('custompost', 'modularity-open-street-map'),
             ),
-            'default_value' => false,
+            'default_value' => __('place', 'modularity-open-street-map'),
             'return_format' => 'value',
             'multiple' => 0,
             'allow_null' => 0,
@@ -101,6 +101,27 @@
             'placeholder' => '',
         ),
         4 => array(
+            'key' => 'field_6437f4c860c15',
+            'label' => __('Per page', 'modularity-open-street-map'),
+            'name' => 'mod_osm_per_page',
+            'type' => 'number',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => 8,
+            'min' => '',
+            'max' => '',
+            'placeholder' => '',
+            'step' => '',
+            'prepend' => '',
+            'append' => '',
+        ),
+        5 => array(
             'key' => 'field_6426a19f8c575',
             'label' => __('Latitude start', 'modularity-open-street-map'),
             'name' => 'latitude_start',
@@ -121,7 +142,7 @@
             'prepend' => '',
             'append' => '',
         ),
-        5 => array(
+        6 => array(
             'key' => 'field_6426a1dd8c576',
             'label' => __('Longitude start', 'modularity-open-street-map'),
             'name' => 'longitude_start',
@@ -142,7 +163,7 @@
             'prepend' => '',
             'append' => '',
         ),
-        6 => array(
+        7 => array(
             'key' => 'field_6426a973f0745',
             'label' => __('Start zoom value', 'modularity-open-street-map'),
             'name' => 'start_zoom_value',

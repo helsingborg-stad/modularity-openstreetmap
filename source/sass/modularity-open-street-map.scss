@@ -2,8 +2,8 @@ $color-primary: var(--color-primary, #000) !default;
 $button-color: var(--c-button-color, #f5f5f5) !default;
 $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 
+/* Our code */
 #openstreetmap {
-	/* Our code */
 	position: relative;
 	display: flex;
 	flex-direction: row;

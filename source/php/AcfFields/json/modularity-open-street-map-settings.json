@@ -19,7 +19,7 @@
                 "place": "Platser",
                 "custompost": "custompost"
             },
-            "default_value": false,
+            "default_value": "place",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -95,6 +95,27 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": ""
+        },
+        {
+            "key": "field_6437f4c860c15",
+            "label": "Per page",
+            "name": "mod_osm_per_page",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 8,
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_6426a19f8c575",

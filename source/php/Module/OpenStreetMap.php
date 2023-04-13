@@ -53,6 +53,7 @@ class OpenStreetMap extends \Modularity\Module
         $data['places'] = $placesData['places'];
         $data['coords'] = json_encode($placesData['coords']);
         $data['mapStyle'] = $this->getMapStyle();
+        $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8; 
 
         if (!empty($fields['start_zoom_value'])) {
             $zoom = $fields['start_zoom_value'];
