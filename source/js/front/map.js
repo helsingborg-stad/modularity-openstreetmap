@@ -1,11 +1,11 @@
 class Map {
-    constructor(components) {
+    constructor(components, map) {
         this.components = components;
         this.container = document.querySelector('#openstreetmap');
-        this.container && this.init();
+        (this.container && map) && this.init(map);
     }
 
-    init() {
+    init(map) {
         if (!this.container.hasAttribute('js-map-locations') || !this.container.hasAttribute('js-map-start-position')) {
             return;
         }
@@ -13,11 +13,10 @@ class Map {
         let startPosition = JSON.parse(this.container.getAttribute('js-map-start-position'));
         let locations = JSON.parse(this.container.getAttribute('js-map-locations'));
         let tiles = this.getTilesStyle(this.container);
-        this.setMapView(locations, startPosition, tiles);
+        this.setMapView(locations, startPosition, tiles, map);
     }
 
-    setMapView(locations, startPosition, tiles) {
-        let map = L.map('openstreetmap__map');
+    setMapView(locations, startPosition, tiles, map) {
         let expand = this.container.querySelector('.openstreetmap__expand-icon');
         let markers = L.markerClusterGroup({
             maxClusterRadius: 50
@@ -38,11 +37,14 @@ class Map {
                 let marker = L.marker([location.lat, location.lng], { icon: this.createMarker(customIcon) });
                 marker.bindPopup(this.createTooltip(location.tooltip));
                 marker.on('click', (e) => {
+                    let latlng = e.latlng ? e.latlng : (e.sourceTarget._latlng ? e.sourceTarget._latlng : false);
                     let zoomLevel = map.getZoom();
-                    if (zoomLevel >= 15) {
-                        map.setView(e.latlng);
-                    } else {
-                        map.setView(e.latlng, 15);
+                    if (latlng) {
+                        if (zoomLevel >= 15) {
+                            map.setView(latlng);
+                        } else {
+                            map.setView(latlng, 15);
+                        }
                     }
                 });
 
