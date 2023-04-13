@@ -43,11 +43,15 @@
   background-color: white;
 }
 #openstreetmap .openstreetmap__sidebar.has-active .openstreetmap__collection__item,
-#openstreetmap .openstreetmap__sidebar.has-active .c-pagination {
+#openstreetmap .openstreetmap__sidebar.has-active .c-pagination,
+#openstreetmap .openstreetmap__sidebar.has-active [js-pagination-item]:not(.is-active) {
   display: none;
 }
 #openstreetmap .openstreetmap__sidebar.has-active .is-active[js-pagination-item] .openstreetmap__post {
   display: block;
+}
+#openstreetmap .openstreetmap__sidebar.has-active .openstreetmap__container {
+  padding: 0;
 }
 #openstreetmap .openstreetmap__sidebar .openstreetmap__container {
   overflow-x: hidden;
@@ -66,6 +70,16 @@
   margin-right: auto;
   margin-left: auto;
   padding: 0;
+}
+#openstreetmap .openstreetmap__post .openstreetmap__post-icon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--color-primary, #000);
+  padding: 0.25rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 3000;
 }
 #openstreetmap .openstreetmap__post.c-group--size-sm .openstreetmap__post-related-post {
   flex: 0 0 calc(50% - var(--grid-gap) * 0.5);
@@ -752,4 +766,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.3d8780c8a3b09da0ffad.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.c50026661bb4a4bca5eb.css.map*/

@@ -2,6 +2,13 @@
         'classList' => ['openstreetmap__post'],
         'containerAware' => true,
     ])
+    @icon([
+        'icon' => 'arrow_back',
+        'size' => 'md',
+        'color' => 'white',
+        'classList' => ['openstreetmap__post-icon'],
+    ])
+    @endicon
     @if (!empty($place->thumbnail['src']))
         @hero([
             'image' => $place->thumbnail['src']
@@ -42,19 +49,22 @@
         @endpaper
     </div>
     @foreach ($place->relatedPosts as $postType => $posts)
-        <div class="o-grid openstreetmap__post-related-posts o-container">
+    <div class="u-margin__x--2">
+        <div class="o-grid o-container openstreetmap__post-related-posts">
             @group([
                 'justifyContent' => 'space-between'
             ])
                 @typography([
                     'element' => 'h2'
                 ])
+                {{-- TODO: Add translation --}}
                     {{ $labels['related'] }} {{ $postType }}
                 @endtypography
                 @if (!empty(get_post_type_archive_link($postType)))
                     @link([
                         'href' => get_post_type_archive_link($postType)
                     ])
+                        {{-- TODO: Add translation --}}
                         {{ $labels['showAll'] }}
                     @endlink
                 @endif
@@ -74,5 +84,6 @@
                 </div>
             @endforeach
         </div>
+    </div>
     @endforeach
 @endgroup
