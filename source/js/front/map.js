@@ -38,7 +38,12 @@ class Map {
                 let marker = L.marker([location.lat, location.lng], { icon: this.createMarker(customIcon) });
                 marker.bindPopup(this.createTooltip(location.tooltip));
                 marker.on('click', (e) => {
-                    map.setView(e.latlng, 15);
+                    let zoomLevel = map.getZoom();
+                    if (zoomLevel >= 15) {
+                        map.setView(e.latlng);
+                    } else {
+                        map.setView(e.latlng, 15);
+                    }
                 });
 
                 markers.addLayer(marker);

@@ -17237,7 +17237,12 @@ class Map {
                 let marker = L.marker([location.lat, location.lng], { icon: this.createMarker(customIcon) });
                 marker.bindPopup(this.createTooltip(location.tooltip));
                 marker.on('click', (e) => {
-                    map.setView(e.latlng, 15);
+                    let zoomLevel = map.getZoom();
+                    if (zoomLevel >= 15) {
+                        map.setView(e.latlng);
+                    } else {
+                        map.setView(e.latlng, 15);
+                    }
                 });
 
                 markers.addLayer(marker);
@@ -17329,11 +17334,16 @@ class ShowPost {
     handleClick() {
         let paginationContainer = this.container.querySelector('[js-pagination-container]');
         let sidebar = this.container.querySelector('.openstreetmap__sidebar');
+        let gridClass = false;
         
         paginationContainer.addEventListener('click', (e) => {
             let paginationItem = e.target.closest('[js-pagination-item]');
             let backButton = e.target.closest('.openstreetmap__post-icon');
             if (paginationItem) {
+                if (!gridClass) {
+                    gridClass = paginationItem.className ? paginationItem.className : '';
+                }
+                paginationItem.className = "";
                 paginationItem.classList.add('is-active');
                 sidebar.classList.add('has-active');
             }
@@ -17341,6 +17351,9 @@ class ShowPost {
             if (backButton) {
                 sidebar.classList.remove('has-active');
                 sidebar.querySelectorAll('[js-pagination-item]').forEach(item => {
+                    if (gridClass) {
+                        !item.classList.contains(gridClass) ? item.classList.add(gridClass) : '';
+                    }
                     item.classList.remove('is-active');
                 });
             }
@@ -17444,4 +17457,4 @@ const ShowPostInstance = new _front_showPost__WEBPACK_IMPORTED_MODULE_3__["defau
 
 /******/ })()
 ;
-//# sourceMappingURL=modularity-open-street-map.223662dbe0525ba948d2.js.map
+//# sourceMappingURL=modularity-open-street-map.93ffcb5ba82bc6aee71f.js.map
