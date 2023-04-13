@@ -5,6 +5,7 @@ class ShowPost {
     }
     handleClick() {
         let paginationContainer = this.container.querySelector('[js-pagination-container]');
+        let sidebar = this.container.querySelector('.openstreetmap__sidebar');
         
         paginationContainer.addEventListener('click', (e) => {
             let paginationItem = e.target.closest('[js-pagination-item]');
@@ -13,9 +14,7 @@ class ShowPost {
                 return;
             }
             paginationItem.classList.add('is-active');
-            paginationContainer.querySelectorAll('.openstreetmap__collection__item').forEach(item => {
-                item.classList.add('u-display--none');
-            })
+            sidebar.classList.add('has-active');
         })
     }
 }

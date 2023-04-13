@@ -42,6 +42,13 @@
   z-index: 1000;
   background-color: white;
 }
+#openstreetmap .openstreetmap__sidebar.has-active .openstreetmap__collection__item,
+#openstreetmap .openstreetmap__sidebar.has-active .c-pagination {
+  display: none;
+}
+#openstreetmap .openstreetmap__sidebar.has-active .is-active[js-pagination-item] .openstreetmap__post {
+  display: block;
+}
 #openstreetmap .openstreetmap__sidebar .openstreetmap__container {
   overflow-x: hidden;
   overflow-y: auto;
@@ -50,12 +57,6 @@
   position: relative;
 }
 #openstreetmap .openstreetmap__sidebar .openstreetmap__container .openstreetmap__post {
-  display: none;
-}
-#openstreetmap .openstreetmap__sidebar .openstreetmap__container .is-active[js-pagination-item] .openstreetmap__post {
-  display: block;
-}
-#openstreetmap .openstreetmap__sidebar .openstreetmap__container .is-active[js-pagination-item] .openstreetmap__collection__item {
   display: none;
 }
 #openstreetmap .openstreetmap__post .openstreetmap__post-container {
@@ -750,4 +751,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.ada1d8255f06c8d7b6dd.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.9b12eb5ab7233413781e.css.map*/

@@ -15,6 +15,19 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 		top: 0;
 		z-index: 1000;
 		background-color: white;
+
+		&.has-active {
+			.openstreetmap__collection__item,
+			.c-pagination {
+				display: none;
+			}
+
+			.is-active[js-pagination-item] {
+				.openstreetmap__post {
+					display: block;
+				}
+			}
+		}
 		
 		.openstreetmap__container {
 			overflow-x: hidden;
@@ -25,15 +38,6 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 			
 			.openstreetmap__post {
 				display: none;
-			}
-
-			.is-active[js-pagination-item] {
-				.openstreetmap__post {
-					display: block;
-				}
-				.openstreetmap__collection__item {
-					display: none;
-				}
 			}
 		}
 	}
