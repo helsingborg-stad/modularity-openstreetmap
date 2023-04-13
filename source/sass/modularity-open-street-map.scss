@@ -16,6 +16,18 @@ $button-color-text: var(--c-button-color-contrasting, #3d3d3d) !default;
 		z-index: 1000;
 		background-color: white;
 
+		.openstreetmap__collection__item {
+			cursor: pointer;
+
+			.c-collection__content {
+				transition: transform 300ms;
+				transform: translateX(0);
+			}
+			&:hover .c-collection__content {
+				transform: translateX(.25rem);
+			}
+		}
+
 		&.has-active {
 			.openstreetmap__collection__item,
 			.c-pagination,
