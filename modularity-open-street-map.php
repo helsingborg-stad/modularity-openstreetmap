@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       Modularity Open Street Map
  * Plugin URI:        https://github.com/NiclasNorin/modularity-open-street-map
- * Description:       A boilerplate repo for WordPress plugins.
+ * Description:       A map based of OSM.
  * Version:           1.0.0
  * Author:            Niclas Norin
  * Author URI:        https://github.com/NiclasNorin

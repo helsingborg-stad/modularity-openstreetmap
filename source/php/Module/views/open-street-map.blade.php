@@ -1,6 +1,6 @@
 <div id="openstreetmap" js-map-locations="{{$coords}}" js-map-start-position="{{$startPosition}}" js-map-style="{{$mapStyle}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}} " data-js-toggle-item="expand" data-js-toggle-class="is-expanded">
     <div style="height:100vh;" id="openstreetmap__map">
-            @icon([
+        @icon([
             'icon' => 'map',
             'size' => 'lg',
             'classList' => ['openstreetmap__expand-icon', 'u-level-1'],
