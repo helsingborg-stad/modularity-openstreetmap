@@ -47,6 +47,16 @@
   overflow-y: auto;
   padding: 1rem;
   height: 100%;
+  position: relative;
+}
+#openstreetmap .openstreetmap__sidebar .openstreetmap__container .openstreetmap__post {
+  display: none;
+}
+#openstreetmap .openstreetmap__sidebar .openstreetmap__container .is-active[js-pagination-item] .openstreetmap__post {
+  display: block;
+}
+#openstreetmap .openstreetmap__sidebar .openstreetmap__container .is-active[js-pagination-item] .openstreetmap__collection__item {
+  display: none;
 }
 #openstreetmap #openstreetmap__map {
   transition: flex-basis 0.2s ease-in-out;
@@ -708,4 +718,4 @@
   }
 }
 
-/*# sourceMappingURL=modularity-open-street-map.2f83ad6d0f5d22235a08.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.eed08dcbfe36f4c187a8.css.map*/

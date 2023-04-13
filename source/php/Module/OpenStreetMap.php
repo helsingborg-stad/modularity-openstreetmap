@@ -102,20 +102,84 @@ class OpenStreetMap extends \Modularity\Module
     private function buildPlacePosts($posts, $postTypeToShow) {
         $coords = [];
         foreach ($posts as &$post) {
-
             $post = \Municipio\Helper\Post::preparePostObject($post);
             $post->postExcerpt = $this->createExcerpt($post);
             $post->termMarker = TaxonomiesHelper::getTermIcon($post->id, $postTypeToShow);
-            $post->location = get_field('location', $post->id);
+            $postFields = get_fields($post->id);
+            $post->location = $postFields['location'];
             if($post->location['lat'] && $post->location['lng']) {
                 $direction = 'https://www.google.com/maps/dir/?api=1&destination=' . $post->location['lat'] . ',' . $post->location['lng'] . '&travelmode=transit';
             }
+            $post->list[] = $this->createListItem($postFields['location']['street_name'] . ' ' . $postFields['location']['street_number'], 'location_on', $direction);
+            $post->list[] = $this->createListItem($postFields['phone'], 'call');
+            $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
             $coords[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termMarker];
+            $post->relatedPosts = $this->getRelatedPosts($post->id);
+            // var_dump($post->relatedPosts);
         }
         return [
             'places' => $posts,
             'coords' => $coords,
         ];
+    }
+
+        private function getRelatedPosts($postId) {
+        $taxonomies = get_post_taxonomies($postId);
+        $postTypes = get_post_types(array('public' => true, '_builtin' => false), 'objects');
+
+        $arr = [];
+        foreach ($taxonomies as $taxonomy) {
+            $terms = get_the_terms($postId, $taxonomy);
+            if (!empty($terms)) {
+                foreach ($terms as $term) {
+                    $arr[$taxonomy][] = $term->term_id;                 
+                }
+            }
+        }
+
+        if (empty($arr)) {
+            return false;
+        }
+        
+        $posts = [];
+        foreach ($postTypes as $postType) {
+            $args = array(
+                'numberposts' => 3,
+                'post_type' => $postType->name,
+                'post__not_in' => array($postId),
+                'tax_query' => array(
+                    'relation' => 'OR',
+                ),
+            );
+
+            foreach ($arr as $tax => $ids) {
+                $args['tax_query'][] = array(
+                    'taxonomy' => $tax,
+                    'field' => 'term_id',
+                    'terms' => $ids,
+                    'operator' => 'IN',
+                );
+            }
+
+            $result = get_posts($args);
+            
+            if (!empty($result)) {
+                foreach ($result as &$post) {
+                    $post = \Municipio\Helper\Post::preparePostObject($post);
+                    $posts[$postType->label] = $result;
+                }
+            }
+        }
+
+        return $posts;
+    }
+
+    private function createListItem($label, $icon, $href = false) {
+        if (!empty($label) && $label != " ") {
+            return ['label' => $label, 'icon' => ['icon' => $icon, 'size' => 'md'], 'href' => $href];
+        }
+        
+        return false;
     }
 
     private function createExcerpt($post) {
