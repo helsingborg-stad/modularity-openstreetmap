@@ -17331,10 +17331,14 @@ class ShowPost {
         
         paginationContainer.addEventListener('click', (e) => {
             let paginationItem = e.target.closest('[js-pagination-item]');
-            /* eslint-disable */console.log(...oo_oo(`75b2c6d2_0`,paginationItem));
-            if (paginationItem) {
-                paginationItem.classList.add('is-active');
+            /* eslint-disable */console.log(...oo_oo(`4cee62d8_0`,paginationItem));
+            if (!paginationItem) {
+                return;
             }
+            paginationItem.classList.add('is-active');
+            paginationContainer.querySelectorAll('.openstreetmap__collection__item').forEach(item => {
+                item.classList.add('u-display--none');
+            })
         })
     }
 }
@@ -17436,4 +17440,4 @@ const ShowPostInstance = new _front_showPost__WEBPACK_IMPORTED_MODULE_3__["defau
 
 /******/ })()
 ;
-//# sourceMappingURL=modularity-open-street-map.cab619b102d585a581db.js.map
+//# sourceMappingURL=modularity-open-street-map.23ab2174139098b2ae41.js.map

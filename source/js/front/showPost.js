@@ -9,9 +9,13 @@ class ShowPost {
         paginationContainer.addEventListener('click', (e) => {
             let paginationItem = e.target.closest('[js-pagination-item]');
             console.log(paginationItem);
-            if (paginationItem) {
-                paginationItem.classList.add('is-active');
+            if (!paginationItem) {
+                return;
             }
+            paginationItem.classList.add('is-active');
+            paginationContainer.querySelectorAll('.openstreetmap__collection__item').forEach(item => {
+                item.classList.add('u-display--none');
+            })
         })
     }
 }
