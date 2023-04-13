@@ -17308,6 +17308,48 @@ class Map {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Map);
 
+/***/ }),
+
+/***/ "./source/js/front/showPost.js":
+/*!*************************************!*\
+  !*** ./source/js/front/showPost.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class ShowPost {
+    constructor() {
+        this.container = document.querySelector('#openstreetmap');
+        this.container && this.handleClick();
+    }
+    handleClick() {
+        let paginationContainer = this.container.querySelector('[js-pagination-container]');
+        let sidebar = this.container.querySelector('.openstreetmap__sidebar');
+        
+        paginationContainer.addEventListener('click', (e) => {
+            let paginationItem = e.target.closest('[js-pagination-item]');
+            let backButton = e.target.closest('.openstreetmap__post-icon');
+            if (paginationItem) {
+                paginationItem.classList.add('is-active');
+                sidebar.classList.add('has-active');
+            }
+
+            if (backButton) {
+                sidebar.classList.remove('has-active');
+                sidebar.querySelectorAll('[js-pagination-item]').forEach(item => {
+                    item.classList.remove('is-active');
+                });
+            }
+        })
+    }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShowPost);
+
 /***/ })
 
 /******/ 	});
@@ -17391,12 +17433,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var leaflet_markercluster__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet.markercluster */ "./node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js");
 /* harmony import */ var leaflet_markercluster__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(leaflet_markercluster__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _front_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./front/map */ "./source/js/front/map.js");
+/* harmony import */ var _front_showPost__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./front/showPost */ "./source/js/front/showPost.js");
+
 
 
 
 const MapInstance = new _front_map__WEBPACK_IMPORTED_MODULE_2__["default"](openStreetMapComponents);
+const ShowPostInstance = new _front_showPost__WEBPACK_IMPORTED_MODULE_3__["default"]();
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=modularity-open-street-map.0513a924cee372271200.js.map
+//# sourceMappingURL=modularity-open-street-map.223662dbe0525ba948d2.js.map

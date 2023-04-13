@@ -1,63 +1,52 @@
-@collection([
-    'classList' => ['c-collection--posts', 'o-grid'],
+@collection__item([
+    'classList' => ['c-collection__item--post', 'openstreetmap__collection__item'],
+    'containerAware' => true,
+    // 'link' => $place->permalink,
     'attributeList' => [
-        'js-pagination-container' => '',
+        'js-map-lat' => $place->location['lat'], 
+        'js-map-lng' => $place->location['lng'],
     ]
 ])
-    @foreach($places as $place)
-    <div class="{{$postsColumns}}" js-pagination-item>
-        @collection__item([
-            'classList' => ['c-collection__item--post'],
-            'containerAware' => true,
-            // 'link' => $place->permalink,
-            'attributeList' => [
-                'js-map-lat' => $place->location['lat'], 
-                'js-map-lng' => $place->location['lng'],
-            ]
+@slot('before')
+    @if(!empty($place->thumbnail['src']))
+        @image([
+            'src' => $place->thumbnail['src'],
+            'alt' => $place->thumbnail['alt'] ? $place->thumbnail['alt'] : $place->postTitle,
+            'classList' => ['u-width--100']
         ])
-        @slot('before')
-            @if(!empty($place->thumbnail['src']))
-                @image([
-                    'src' => $place->thumbnail['src'],
-                    'alt' => $place->thumbnail['alt'] ? $place->thumbnail['alt'] : $place->postTitle,
-                    'classList' => ['u-width--100']
-                ])
-                @endimage
-            @endif
-        @endslot
-        @group([
-            'direction' => 'vertical'
+        @endimage
+    @endif
+@endslot
+@group([
+    'direction' => 'vertical'
+])
+    @group([
+        'justifyContent' => 'space-between'
+    ])
+        @typography([
+            'element' => 'h2',
+            'variant' => 'h3',
         ])
-            @group([
-                'justifyContent' => 'space-between'
+            {{$place->postTitle}}
+        @endtypography
+        @if($place->termMarker['icon'])
+            @inlineCssWrapper([
+                'styles' => ['background-color' => $place->termMarker['backgroundColor'], 'display' => 'flex'],
+                'classList' => [$place->termMarker['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
             ])
-                @typography([
-                    'element' => 'h2',
-                    'variant' => 'h3',
-                ])
-                    {{$place->postTitle}}
-                @endtypography
-                @if($place->termMarker['icon'])
-                    @inlineCssWrapper([
-                        'styles' => ['background-color' => $place->termMarker['backgroundColor'], 'display' => 'flex'],
-                        'classList' => [$place->termMarker['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
-                    ])
-                        @icon($place->termMarker)
-                        @endicon
-                    @endinlineCssWrapper
-                @endif
-            @endgroup
-                @tags([
-                    'tags' => $place->termsUnlinked,
-                    'classList' => ['u-padding__y--2'],
-                    'format' => true,
-                ])
-                @endtags
-                @typography([])
-                    {{$place->postExcerpt}}
-                @endtypography
-            @endgroup
-        @endcollection__item
-    </div>
-    @endforeach
-@endcollection
+                @icon($place->termMarker)
+                @endicon
+            @endinlineCssWrapper
+        @endif
+    @endgroup
+        @tags([
+            'tags' => $place->termsUnlinked,
+            'classList' => ['u-padding__y--2'],
+            'format' => true,
+        ])
+        @endtags
+        @typography([])
+            {{$place->postExcerpt}}
+        @endtypography
+    @endgroup
+@endcollection__item
