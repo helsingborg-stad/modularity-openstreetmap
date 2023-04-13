@@ -112,7 +112,9 @@ class OpenStreetMap extends \Modularity\Module
             }
             $post->list[] = $this->createListItem($postFields['location']['street_name'] . ' ' . $postFields['location']['street_number'], 'location_on', $direction);
             $post->list[] = $this->createListItem($postFields['phone'], 'call');
-            $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
+            if ($postFields['website']) {
+                $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
+            }
             $coords[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termMarker];
             $post->relatedPosts = $this->getRelatedPosts($post->id);
             // var_dump($post->relatedPosts);

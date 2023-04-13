@@ -42,7 +42,7 @@
         @endpaper
     </div>
     @foreach ($place->relatedPosts as $postType => $posts)
-        <div class="o-grid openstreetmap__post-related-posts">
+        <div class="o-grid openstreetmap__post-related-posts o-container">
             @group([
                 'justifyContent' => 'space-between'
             ])
