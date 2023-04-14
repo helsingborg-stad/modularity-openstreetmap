@@ -28,6 +28,7 @@ class Taxonomies
         $taxonomies = get_object_taxonomies($postType);
         
         $termIcon = [];
+        $termColor = false;
         foreach ($taxonomies as $taxonomy) {
             $terms = get_the_terms($postId, $taxonomy);
             if (!empty($terms)) {
@@ -40,14 +41,19 @@ class Taxonomies
                                 $termIcon['icon'] = $icon['src'];
                                 $termIcon['size'] = 'md';
                                 $termIcon['color'] = 'white';
+                                $termIcon['backgroundColor'] = $color;
                             }
                             if(!empty($color)) {
-                                $termIcon['backgroundColor'] = \Municipio\Helper\Term::getTermColor($term, $taxonomy);
+                                $termColor = $color;
                             }
                         }
                     }
                 }
             }
+        }
+
+        if (empty($termIcon) && !empty($termColor)) {
+            $termIcon['backgroundColor'] = $termColor;
         }
 
         return $termIcon;
