@@ -39,16 +39,14 @@ class Map {
                     let latlng = e.latlng ? e.latlng : (e.sourceTarget?._latlng ? e.sourceTarget?._latlng : false);
                     let zoomLevel = this.map.getZoom();
                     if (latlng) {
-                        if (zoomLevel >= 15) {
+                        if (zoomLevel >= 16) {
                             this.map.setView(latlng);
                         } else {
-                            this.map.setView(latlng, 15);
+                            this.map.setView(latlng, 16);
                         }
                     }
                 });
-
                 this.markers.addLayer(marker);
-
             }
         });
 

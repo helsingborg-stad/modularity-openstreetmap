@@ -17238,16 +17238,14 @@ class Map {
                     let latlng = e.latlng ? e.latlng : (e.sourceTarget?._latlng ? e.sourceTarget?._latlng : false);
                     let zoomLevel = this.map.getZoom();
                     if (latlng) {
-                        if (zoomLevel >= 15) {
+                        if (zoomLevel >= 16) {
                             this.map.setView(latlng);
                         } else {
-                            this.map.setView(latlng, 15);
+                            this.map.setView(latlng, 16);
                         }
                     }
                 });
-
                 this.markers.addLayer(marker);
-
             }
         });
 
@@ -17350,6 +17348,7 @@ class ShowPost {
                 paginationItem.className = "";
                 paginationItem.classList.add('is-active');
                 sidebar.classList.add('has-active');
+                paginationContainer.scrollIntoView({block: "start"});
                 this.setMapZoom(collectionItem);
             }
 
@@ -17501,4 +17500,4 @@ const ShowPostInstance = new _front_showPost__WEBPACK_IMPORTED_MODULE_3__["defau
 
 /******/ })()
 ;
-//# sourceMappingURL=modularity-open-street-map.2470f836c74582fa271b.js.map
+//# sourceMappingURL=modularity-open-street-map.7332c036e19a7b19f617.js.map
