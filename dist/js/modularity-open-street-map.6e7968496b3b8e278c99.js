@@ -17348,8 +17348,8 @@ class ShowPost {
                 paginationItem.className = "";
                 paginationItem.classList.add('is-active');
                 sidebar.classList.add('has-active');
-                paginationContainer.scrollIntoView({block: "start"});
                 this.setMapZoom(collectionItem);
+                paginationItem.scrollIntoView({block: "start"});
             }
 
             if (backButton) {
@@ -17500,4 +17500,4 @@ const ShowPostInstance = new _front_showPost__WEBPACK_IMPORTED_MODULE_3__["defau
 
 /******/ })()
 ;
-//# sourceMappingURL=modularity-open-street-map.7332c036e19a7b19f617.js.map
+//# sourceMappingURL=modularity-open-street-map.6e7968496b3b8e278c99.js.map

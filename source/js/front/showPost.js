@@ -21,8 +21,8 @@ class ShowPost {
                 paginationItem.className = "";
                 paginationItem.classList.add('is-active');
                 sidebar.classList.add('has-active');
-                paginationContainer.scrollIntoView({block: "start"});
                 this.setMapZoom(collectionItem);
+                paginationItem.scrollIntoView({block: "start"});
             }
 
             if (backButton) {
