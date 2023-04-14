@@ -1,8 +1,9 @@
 class ShowPost {
-    constructor(map) {
+    constructor(map, markers) {
         this.container = document.querySelector('#openstreetmap');
         this.map = map;
-        (this.container && this.map) && this.handleClick();
+        this.markers = markers;
+        (this.container && this.map && this.markers) && this.handleClick();
     }
     handleClick() {
         let paginationContainer = this.container.querySelector('[js-pagination-container]');
@@ -14,7 +15,6 @@ class ShowPost {
             let paginationItem = collectionItem?.parentElement;
             let backButton = e.target.closest('.openstreetmap__post-icon');
             if (paginationItem) {
-                console.log("hej");
                 if (!gridClass) {
                     gridClass = paginationItem.className ? paginationItem.className : '';
                 }
@@ -37,7 +37,6 @@ class ShowPost {
     }
 
     setMapZoom(collectionItem) {
-        console.log(collectionItem);
         if (collectionItem && collectionItem.hasAttribute('js-map-lat') && collectionItem.hasAttribute('js-map-lng')) {
             let lat = collectionItem.getAttribute('js-map-lat');
             let lng = collectionItem.getAttribute('js-map-lng');
@@ -46,9 +45,15 @@ class ShowPost {
                 let markerLatLng = L.latLng(lat, lng);
 
                 let marker;
-                this.map.eachLayer(function (layer) {
+                this.markers.getLayers().forEach(function (layer) {
                     if (layer instanceof L.Marker && layer.getLatLng().equals(markerLatLng)) {
                         marker = layer;
+                    } else if (layer instanceof L.MarkerCluster) {
+                        layer.getAllChildMarkers().forEach(function (child) {
+                            if (child.getLatLng().equals(markerLatLng)) {
+                                marker = child;
+                            }
+                        });
                     }
                 });
                 if (marker) {

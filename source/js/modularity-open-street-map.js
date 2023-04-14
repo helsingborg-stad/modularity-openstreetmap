@@ -5,9 +5,14 @@ import ShowPost from './front/showPost';
 
 let container = document.querySelector('#openstreetmap');
 let map = false;
+let markers = false;
 if (container) {
     map = L.map('openstreetmap__map');
+    markers = L.markerClusterGroup({
+        maxClusterRadius: 50
+    });
 } 
 
-const MapInstance = new Map(openStreetMapComponents, map);
-const ShowPostInstance = new ShowPost(map);
+
+const MapInstance = new Map(openStreetMapComponents, map, markers);
+const ShowPostInstance = new ShowPost(map, markers);
