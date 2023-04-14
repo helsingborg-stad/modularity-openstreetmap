@@ -118,7 +118,6 @@ class OpenStreetMap extends \Modularity\Module
             }
             $coords[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termMarker];
             $post->relatedPosts = $this->getRelatedPosts($post->id);
-            // var_dump($post->relatedPosts);
         }
         return [
             'places' => $posts,

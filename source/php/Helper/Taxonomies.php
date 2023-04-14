@@ -36,7 +36,7 @@ class Taxonomies
                         if (empty($termIcon)) {
                             $icon = \Municipio\Helper\Term::getTermIcon($term, $taxonomy);
                             $color = \Municipio\Helper\Term::getTermColor($term, $taxonomy);
-                            if (!empty($icon) && !empty($icon['src']) && $icon['type' == 'icon']) {
+                            if (!empty($icon) && !empty($icon['src']) && $icon['type'] == 'icon') {
                                 $termIcon['icon'] = $icon['src'];
                                 $termIcon['size'] = 'md';
                                 $termIcon['color'] = 'white';
