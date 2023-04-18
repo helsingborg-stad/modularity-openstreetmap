@@ -1,5 +1,5 @@
 @collection__item([
-    'classList' => ['c-collection__item--post', 'openstreetmap__collection__item'],
+    'classList' => ['c-collection__item--post', 'c-openstreetmap__collection__item'],
     'containerAware' => true,
     'attributeList' => [
         'js-map-lat' => $place->location['lat'], 

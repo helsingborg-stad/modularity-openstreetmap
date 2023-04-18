@@ -1,12 +1,12 @@
 @group([
-        'classList' => ['openstreetmap__post'],
+        'classList' => ['c-openstreetmap__post'],
         'containerAware' => true,
     ])
     @icon([
         'icon' => 'arrow_back',
         'size' => 'md',
         'color' => 'white',
-        'classList' => ['openstreetmap__post-icon'],
+        'classList' => ['c-openstreetmap__post-icon'],
     ])
     @endicon
     @if (!empty($place->thumbnail['src']))
@@ -29,14 +29,14 @@
             ])
             {{ $place->postTitle }}
         @endtypography
-            <div class="o-grid openstreetmap__post-container">
-                <div class="openstreetmap__post-content">
+            <div class="o-grid c-openstreetmap__post-container">
+                <div class="c-openstreetmap__post-content">
                         @typography([
                         ])
                         {!! $place->postContentFiltered !!}
                         @endtypography
                 </div>
-                <div class="openstreetmap__post-list">
+                <div class="c-openstreetmap__post-list">
                     @listing([
                         'list' => $place->list,
                         'icon' => false,
@@ -50,7 +50,7 @@
     </div>
     @foreach ($place->relatedPosts as $postType => $posts)
     <div class="u-margin__x--2">
-        <div class="o-grid o-container openstreetmap__post-related-posts">
+        <div class="o-grid o-container c-openstreetmap__post-related-posts">
             @group([
                 'justifyContent' => 'space-between'
             ])
@@ -70,7 +70,7 @@
                 @endif
             @endgroup
             @foreach ($posts as $post)
-                <div class="u-margin__bottom--8 openstreetmap__post-related-post">
+                <div class="u-margin__bottom--8 c-openstreetmap__post-related-post">
                     @segment([
                         'layout' => 'card',
                         'title' => $post->postTitle,

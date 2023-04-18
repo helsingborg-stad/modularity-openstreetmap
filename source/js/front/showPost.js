@@ -6,13 +6,13 @@ class ShowPost {
     handleClick() {
         
         let paginationContainer = this.container.querySelector('[js-pagination-container]');
-        let sidebar = this.container.querySelector('.openstreetmap__sidebar');
+        let sidebar = this.container.querySelector('.c-openstreetmap__sidebar');
         let gridClass = false;
         
         paginationContainer.addEventListener('click', (e) => {
-            let collectionItem = e.target.closest('.openstreetmap__collection__item');
+            let collectionItem = e.target.closest('.c-openstreetmap__collection__item');
             let paginationItem = collectionItem?.parentElement;
-            let backButton = e.target.closest('.openstreetmap__post-icon');
+            let backButton = e.target.closest('.c-openstreetmap__post-icon');
             if (paginationItem) {
                 if (!gridClass) {
                     gridClass = paginationItem.className ? paginationItem.className : '';
