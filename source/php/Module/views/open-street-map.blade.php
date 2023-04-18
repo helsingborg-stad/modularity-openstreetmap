@@ -2,7 +2,7 @@
     'pins' => $pins,
     'startPosition' => $startPosition,
     'mapStyle' => $mapStyle,
-    'classList' => [$blockData['align'] == 'full' || $isFullWidth ? 'openstreetmap--full-width' : '']
+    'fullWidth' => $blockData['align'] == 'full' || $isFullWidth ? true : false
 
 ])
     @if($places)
@@ -17,7 +17,6 @@
                 {!! $postTitle !!}
             @endtypography
         @endif
-        <div class="openstreetmap__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
         @collection([
             'classList' => ['c-collection--posts', 'o-grid'],
             'attributeList' => [
