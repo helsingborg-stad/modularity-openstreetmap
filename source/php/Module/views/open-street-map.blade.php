@@ -1,4 +1,4 @@
-<div id="openstreetmap" js-map-locations="{{$coords}}" js-map-start-position="{{$startPosition}}" js-map-style="{{$mapStyle}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}} " data-js-toggle-item="expand" data-js-toggle-class="is-expanded">
+<div id="openstreetmap" js-map-pin-data="{{$pins}}" js-map-start-position="{{$startPosition}}" js-map-style="{{$mapStyle}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}} " data-js-toggle-item="expand" data-js-toggle-class="is-expanded">
     <div style="height:100vh;" id="openstreetmap__map">
         @icon([
             'icon' => 'map',

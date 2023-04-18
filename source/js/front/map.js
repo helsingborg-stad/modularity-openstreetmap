@@ -2,30 +2,29 @@ class Map {
     constructor(components, map, markers) {
         this.components = components;
         this.container = document.querySelector('#openstreetmap');
-        this.map = map;
         this.markers = markers;
-        (this.container && this.map && this.markers) && this.init();
+        (this.container && map && this.markers) && this.init(map);
     }
 
-    init() {
-        if (!this.container.hasAttribute('js-map-locations') || !this.container.hasAttribute('js-map-start-position')) {
+    init(map) {
+        if (!this.container.hasAttribute('js-map-pin-data') || !this.container.hasAttribute('js-map-start-position')) {
             return;
         }
         
         let startPosition = JSON.parse(this.container.getAttribute('js-map-start-position'));
-        let locations = JSON.parse(this.container.getAttribute('js-map-locations'));
+        let locations = JSON.parse(this.container.getAttribute('js-map-pin-data'));
         let tiles = this.getTilesStyle(this.container);
-        this.setMapView(locations, startPosition, tiles);
+        this.setMapView(locations, startPosition, tiles, map);
     }
 
-    setMapView(locations, startPosition, tiles) {
+    setMapView(locations, startPosition, tiles, map) {
         let expand = this.container.querySelector('.openstreetmap__expand-icon');
 
-        this.map.setView([startPosition.lat, startPosition.lng], startPosition.zoom);
+        map.setView([startPosition.lat, startPosition.lng], startPosition.zoom);
         L.tileLayer(tiles?.url ? tiles.url : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: tiles?.attribution ? tiles.attribution : '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(this.map);
+        }).addTo(map);
 
         locations.forEach(location => {
             if (location?.lat && location?.lng && location?.tooltip) {
@@ -37,25 +36,25 @@ class Map {
                 marker.bindPopup(this.createTooltip(location.tooltip));
                 marker.on('click', (e) => {
                     let latlng = e.latlng ? e.latlng : (e.sourceTarget?._latlng ? e.sourceTarget?._latlng : false);
-                    let zoomLevel = this.map.getZoom();
+                    let zoomLevel = map.getZoom();
                     if (latlng) {
                         if (zoomLevel >= 16) {
-                            this.map.setView(latlng);
+                            map.setView(latlng);
                         } else {
-                            this.map.setView(latlng, 16);
+                            map.setView(latlng, 16);
                         }
                     }
                 });
                 this.markers.addLayer(marker);
             }
         });
+        this.markers.addTo(map);
 
-        this.markers.addTo(this.map);
-
+        /* TODO: makes it a little jumpy but centers the map correctly based on the users position */
         if (expand) {
             expand.addEventListener('click', () => {
                 setTimeout(function () {
-                    this.map.invalidateSize();
+                    map.invalidateSize();
                 }, 200);
 
             });

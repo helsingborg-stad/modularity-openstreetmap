@@ -51,7 +51,7 @@ class OpenStreetMap extends \Modularity\Module
         $data['postsColumns'] = apply_filters('Modularity/Display/replaceGrid', $fields['mod_osm_post_columns']);
         $data['isFullWidth'] = $fields['mod_osm_full_width'];
         $data['places'] = $placesData['places'];
-        $data['coords'] = json_encode($placesData['coords']);
+        $data['pins'] = json_encode($placesData['pins'], JSON_UNESCAPED_UNICODE);
         $data['mapStyle'] = $this->getMapStyle();
         $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8; 
 
@@ -116,12 +116,12 @@ class OpenStreetMap extends \Modularity\Module
             if ($postFields['website']) {
                 $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
             }
-            $coords[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termMarker];
+            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termMarker];
             $post->relatedPosts = $this->getRelatedPosts($post->id);
         }
         return [
             'places' => $posts,
-            'coords' => $coords,
+            'pins' => $pins,
         ];
     }
 

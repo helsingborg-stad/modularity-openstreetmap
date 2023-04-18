@@ -1,7 +1,6 @@
 @collection__item([
     'classList' => ['c-collection__item--post', 'openstreetmap__collection__item'],
     'containerAware' => true,
-    // 'link' => $place->permalink,
     'attributeList' => [
         'js-map-lat' => $place->location['lat'], 
         'js-map-lng' => $place->location['lng'],
