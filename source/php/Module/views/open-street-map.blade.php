@@ -8,6 +8,17 @@
 ])
     @if($places)
     @slot('sidebarContent')
+        @if (!$hideTitle && !empty($postTitle))
+            @typography([
+                'id' => 'mod-posts-' . $ID . '-label',
+                'element' => 'h2',
+                'variant' => 'h2',
+                'classList' => ['module-title']
+            ])
+                {!! $postTitle !!}
+            @endtypography
+        @endif
+        <div class="openstreetmap__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
         @collection([
             'classList' => ['c-collection--posts', 'o-grid'],
             'attributeList' => [
