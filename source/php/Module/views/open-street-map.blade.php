@@ -2,7 +2,6 @@
     'pins' => $pins,
     'startPosition' => $startPosition,
     'mapStyle' => $mapStyle,
-    'title' => !$hideTitle && !empty($postTitle) ? $postTitle : false,
     'classList' => [$blockData['align'] == 'full' || $isFullWidth ? 'openstreetmap--full-width' : '']
 
 ])
