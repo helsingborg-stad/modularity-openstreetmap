@@ -1,27 +1,13 @@
-<div id="openstreetmap" js-map-pin-data="{{$pins}}" js-map-start-position="{{$startPosition}}" js-map-style="{{$mapStyle}}" class="openstreetmap{{$blockData['align'] == 'full' || $isFullWidth ? ' openstreetmap--full-width' : ''}} " data-js-toggle-item="expand" data-js-toggle-class="is-expanded">
-    <div style="height:100vh;" id="openstreetmap__map">
-        @icon([
-            'icon' => 'map',
-            'size' => 'lg',
-            'classList' => ['openstreetmap__expand-icon', 'u-level-1'],
-            'attributeList' => ['data-js-toggle-trigger' => 'expand']
-        ])
-        @endicon
-    </div>
+@openStreetMap([
+    'pins' => $pins,
+    'startPosition' => $startPosition,
+    'mapStyle' => $mapStyle,
+    'title' => !$hideTitle && !empty($postTitle) ? $postTitle : false,
+    'classList' => [$blockData['align'] == 'full' || $isFullWidth ? 'openstreetmap--full-width' : '']
+
+])
     @if($places)
-    <div class="openstreetmap__sidebar">
-        <div class="openstreetmap__container" js-pagination-target>
-        @if (!$hideTitle && !empty($postTitle))
-            @typography([
-                'id' => 'mod-posts-' . $ID . '-label',
-                'element' => 'h2',
-                'variant' => 'h2',
-                'classList' => ['module-title']
-            ])
-                {!! $postTitle !!}
-            @endtypography
-        @endif
-        <div class="openstreetmap__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
+    @slot('sidebarContent')
         @collection([
             'classList' => ['c-collection--posts', 'o-grid'],
             'attributeList' => [
@@ -35,9 +21,6 @@
                 </div>
             @endforeach
         @endcollection
-
-        @include('partials.pagination')
-        </div>
-    </div>
+    @endslot
     @endif
-</div>
+@endopenStreetMap
