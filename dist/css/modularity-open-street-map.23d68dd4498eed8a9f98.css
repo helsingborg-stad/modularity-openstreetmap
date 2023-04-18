@@ -1,0 +1,66 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./node_modules/import-glob-loader/index.js!./source/sass/modularity-open-street-map.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+#openstreetmap .openstreetmap__sidebar .openstreetmap__collection__item {
+  cursor: pointer;
+}
+#openstreetmap .openstreetmap__sidebar .openstreetmap__collection__item .c-collection__content {
+  transition: transform 300ms;
+  transform: translateX(0);
+}
+#openstreetmap .openstreetmap__sidebar .openstreetmap__collection__item:hover .c-collection__content {
+  transform: translateX(0.25rem);
+}
+#openstreetmap .openstreetmap__sidebar.has-active .openstreetmap__collection__item,
+#openstreetmap .openstreetmap__sidebar.has-active .c-pagination,
+#openstreetmap .openstreetmap__sidebar.has-active [js-pagination-item]:not(.is-active) {
+  display: none;
+}
+#openstreetmap .openstreetmap__sidebar.has-active .is-active[js-pagination-item] .openstreetmap__post {
+  display: block;
+}
+#openstreetmap .openstreetmap__sidebar.has-active .openstreetmap__container {
+  padding: 0;
+}
+#openstreetmap .openstreetmap__sidebar .openstreetmap__container .openstreetmap__post {
+  display: none;
+}
+#openstreetmap .openstreetmap__post .openstreetmap__post-container {
+  flex-direction: column;
+}
+#openstreetmap .openstreetmap__post .openstreetmap__post-related-posts {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
+}
+#openstreetmap .openstreetmap__post .openstreetmap__post-icon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--color-primary, #000);
+  padding: 0.25rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 3000;
+}
+#openstreetmap .openstreetmap__post.c-group--size-sm .openstreetmap__post-related-post {
+  flex: 0 0 calc(50% - var(--grid-gap) * 0.5);
+  max-width: calc(50% - var(--grid-gap) * 0.5);
+}
+#openstreetmap .openstreetmap__post.c-group--size-md .openstreetmap__post-container {
+  flex-direction: row;
+}
+#openstreetmap .openstreetmap__post.c-group--size-md .openstreetmap__post-content {
+  flex: 0 0 calc(75% - var(--grid-gap) * 0.25);
+  max-width: calc(75% - var(--grid-gap) * 0.25);
+}
+#openstreetmap .openstreetmap__post.c-group--size-md .openstreetmap__post-list {
+  flex: 0 0 calc(25% - var(--grid-gap) * 0.75);
+  max-width: calc(25% - var(--grid-gap) * 0.75);
+}
+#openstreetmap .openstreetmap__post.c-group--size-md .openstreetmap__post-related-post {
+  flex: 0 0 calc(33.33333% - var(--grid-gap) * 0.66667);
+  max-width: calc(33.33333% - var(--grid-gap) * 0.66667);
+}
+
+/*# sourceMappingURL=modularity-open-street-map.23d68dd4498eed8a9f98.css.map*/

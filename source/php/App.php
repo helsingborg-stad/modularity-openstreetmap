@@ -11,7 +11,6 @@ class App
 {
     public function __construct()
     {
-        new ComponentsJs();
         add_action('wp_enqueue_scripts', array($this, 'enqueueFrontend'));
         add_action('plugins_loaded', array($this, 'registerModule'));
         add_action('municipio_customizer_section_registered', array($this, 'addKirkiPanel'), 11);
