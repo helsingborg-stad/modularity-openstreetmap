@@ -21,6 +21,8 @@
                 </div>
             @endforeach
         @endcollection
+
+        @include('partials.pagination')
     @endslot
     @endif
 @endopenStreetMap
