@@ -105,7 +105,6 @@ class OpenStreetMap extends \Modularity\Module
         foreach ($posts as &$post) {
             $post = \Municipio\Helper\Post::preparePostObject($post);
             $post->postExcerpt = $this->createExcerpt($post);
-            $post->termMarker = TaxonomiesHelper::getTermIcon($post->id, $postTypeToShow);
             $postFields = get_fields($post->id);
             $post->location = $postFields['location'];
             if($post->location['lat'] && $post->location['lng']) {
@@ -116,7 +115,7 @@ class OpenStreetMap extends \Modularity\Module
             if ($postFields['website']) {
                 $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
             }
-            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termMarker];
+            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
             $post->relatedPosts = $this->getRelatedPosts($post->id);
         }
         return [
