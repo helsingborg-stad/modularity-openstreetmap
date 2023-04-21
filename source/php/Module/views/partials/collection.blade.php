@@ -20,7 +20,8 @@
     'direction' => 'vertical'
 ])
     @group([
-        'justifyContent' => 'space-between'
+        'justifyContent' => 'space-between',
+        'alignItems' => 'flex-start',
     ])
         @typography([
             'element' => 'h2',
