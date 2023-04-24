@@ -2,7 +2,8 @@
     'pins' => $pins,
     'startPosition' => $startPosition,
     'mapStyle' => $mapStyle,
-    'fullWidth' => $blockData['align'] == 'full' || $isFullWidth ? true : false
+    'fullWidth' => $blockData['align'] == 'full' || $isFullWidth ? true : false,
+    'containerAware' => true,
 
 ])
     @if($places)
