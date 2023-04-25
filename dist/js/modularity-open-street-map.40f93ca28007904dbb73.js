@@ -17186,133 +17186,6 @@
 
 /***/ }),
 
-/***/ "./source/js/front/map.js":
-/*!********************************!*\
-  !*** ./source/js/front/map.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-class Map {
-    constructor(components, map, markers) {
-        this.components = components;
-        this.container = document.querySelector('#openstreetmap');
-        this.markers = markers;
-        (this.container && map && this.markers) && this.init(map);
-    }
-
-    init(map) {
-        if (!this.container.hasAttribute('js-map-pin-data') || !this.container.hasAttribute('js-map-start-position')) {
-            return;
-        }
-        
-        let startPosition = JSON.parse(this.container.getAttribute('js-map-start-position'));
-        let locations = JSON.parse(this.container.getAttribute('js-map-pin-data'));
-        let tiles = this.getTilesStyle(this.container);
-        this.setMapView(locations, startPosition, tiles, map);
-    }
-
-    setMapView(locations, startPosition, tiles, map) {
-        let expand = this.container.querySelector('.openstreetmap__expand-icon');
-
-        map.setView([startPosition.lat, startPosition.lng], startPosition.zoom);
-        L.tileLayer(tiles?.url ? tiles.url : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: tiles?.attribution ? tiles.attribution : '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
-        locations.forEach(location => {
-            if (location?.lat && location?.lng && location?.tooltip) {
-                let customIcon = false;
-                if (location?.icon) {
-                    customIcon = location.icon;
-                }
-                let marker = L.marker([location.lat, location.lng], { icon: this.createMarker(customIcon) });
-                marker.bindPopup(this.createTooltip(location.tooltip));
-                marker.on('click', (e) => {
-                    let latlng = e.latlng ? e.latlng : (e.sourceTarget?._latlng ? e.sourceTarget?._latlng : false);
-                    let zoomLevel = map.getZoom();
-                    if (latlng) {
-                        if (zoomLevel >= 16) {
-                            map.setView(latlng);
-                        } else {
-                            map.setView(latlng, 16);
-                        }
-                    }
-                });
-                this.markers.addLayer(marker);
-            }
-        });
-        this.markers.addTo(map);
-
-        /* TODO: makes it a little jumpy but centers the map correctly based on the users position */
-        if (expand) {
-            expand.addEventListener('click', () => {
-                setTimeout(function () {
-                    map.invalidateSize();
-                }, 200);
-
-            });
-        }
-    }
-    
-    getPrimaryColor() {
-        let color = getComputedStyle(document.documentElement).getPropertyValue('--color-primary');
-        return color ? color : '#ae0b05';
-    }
-    
-    createMarker(customIcon) {
-        let html = this.components.icon.html;
-        let icon = customIcon?.icon ? customIcon.icon : 'location_on';
-        let color = customIcon.backgroundColor ? customIcon.backgroundColor : this.getPrimaryColor();
-
-        html = html.replace('{icon-name}', icon).replace('{ICON_NAME}', icon).replace('{ICON_BACKGROUND_COLOR}', color);
-        let marker = L.divIcon({
-            className: 'openstreetmap__icon',
-            html: html
-        });
-
-        return marker;
-    }
-
-    createTooltip(tooltip) {
-        let html = this.components.tooltip.html;
-        html = html.replace('{TOOLTIP_HEADING}', tooltip.title).replace('{TOOLTIP_DIRECTIONS_URL}', tooltip.direction.url).replace('{TOOLTIP_DIRECTIONS_LABEL}', tooltip.direction.label);
-        return html;
-    }
-
-    getTilesStyle(container) {
-        let tiles = container.hasAttribute('js-map-style') ? container.getAttribute('js-map-style') : 'default';
-
-        switch (tiles) {
-            case 'dark':
-                return { 'attribution': '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>', 'url': 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' };
-            case 'pale':
-                return { 'attribution': '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributor', 'url': 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png' };
-            case 'default':
-                return {
-                    'attribution': '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>', 'url': 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
-                };
-            case 'color':
-                return {
-                    'attribution': 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community', 'url': 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
-                };
-            default:
-                return {
-                    'attribution': '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>', 'url': 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
-                };
-        }
-    }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Map);
-
-/***/ }),
-
 /***/ "./source/js/front/showPost.js":
 /*!*************************************!*\
   !*** ./source/js/front/showPost.js ***!
@@ -17475,7 +17348,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var leaflet_markercluster__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet.markercluster */ "./node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js");
 /* harmony import */ var leaflet_markercluster__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(leaflet_markercluster__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _front_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./front/map */ "./source/js/front/map.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './front/map'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _front_showPost__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./front/showPost */ "./source/js/front/showPost.js");
 
 
@@ -17493,10 +17366,10 @@ if (container) {
 } 
 
 
-const MapInstance = new _front_map__WEBPACK_IMPORTED_MODULE_2__["default"](openStreetMapComponents, map, markers);
+const MapInstance = new Object(function webpackMissingModule() { var e = new Error("Cannot find module './front/map'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(openStreetMapComponents, map, markers);
 const ShowPostInstance = new _front_showPost__WEBPACK_IMPORTED_MODULE_3__["default"](map, markers);
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=modularity-open-street-map.b4efbe92124e014cb1e4.js.map
+//# sourceMappingURL=modularity-open-street-map.40f93ca28007904dbb73.js.map
