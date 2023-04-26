@@ -61,8 +61,8 @@ class OpenStreetMap extends \Modularity\Module
         }
 
         $data['startPosition'] = json_encode([
-            'lat' => $fields['latitude_start'] ? $fields['latitude_start'] : '56.044383', 
-            'lng' =>  $fields['longitude_start'] ?  $fields['longitude_start'] : '12.759173',
+            'lat' => $fields['latitude_start'] ? $fields['latitude_start'] : '56.046029', 
+            'lng' =>  $fields['longitude_start'] ?  $fields['longitude_start'] : '12.693904',
             'zoom' => !empty($zoom) ? $zoom : 14,
         ]);
 
