@@ -18,6 +18,12 @@ class OpenStreetMap extends \Modularity\Module
         $this->nameSingular = __("OpenStreetMap", 'modularity-open-street-map');
         $this->namePlural = __("OpenStreetMaps", 'modularity-open-street-map');
         $this->description = __("Outputs a map.", 'modularity-open-street-map');
+
+        add_filter('Municipio/Controller/Singular/displaySecondaryQuery', array($this, 'replaceArchivePosts'), 10, 1);
+    }
+
+    public function replaceArchivePosts($item) {
+        return !$this->hasModule();
     }
 
      /**
@@ -28,13 +34,7 @@ class OpenStreetMap extends \Modularity\Module
     {
         $fields = get_fields($this->ID);
         $secondaryQuery = get_query_var('secondaryQuery');
-
-        if ($secondaryQuery) {
-            add_filter('Municipio/Controller/Singular/displaySecondaryQuery', function() {
-                return false;
-            });
-        }
-        
+      
         if(empty($secondaryQuery)) {
             $termsToShow = $fields['mod_osm_terms_to_show'];
             $postTypeToShow = $fields['mod_osm_post_type'];
