@@ -115,63 +115,11 @@ class OpenStreetMap extends \Modularity\Module
                 $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
             }
             $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
-            $post->relatedPosts = $this->getRelatedPosts($post->id);
         }
         return [
             'places' => $posts,
             'pins' => $pins,
         ];
-    }
-
-        private function getRelatedPosts($postId) {
-        $taxonomies = get_post_taxonomies($postId);
-        $postTypes = get_post_types(array('public' => true, '_builtin' => false), 'objects');
-
-        $arr = [];
-        foreach ($taxonomies as $taxonomy) {
-            $terms = get_the_terms($postId, $taxonomy);
-            if (!empty($terms)) {
-                foreach ($terms as $term) {
-                    $arr[$taxonomy][] = $term->term_id;                 
-                }
-            }
-        }
-
-        if (empty($arr)) {
-            return false;
-        }
-        
-        $posts = [];
-        foreach ($postTypes as $postType) {
-            $args = array(
-                'numberposts' => 3,
-                'post_type' => $postType->name,
-                'post__not_in' => array($postId),
-                'tax_query' => array(
-                    'relation' => 'OR',
-                ),
-            );
-
-            foreach ($arr as $tax => $ids) {
-                $args['tax_query'][] = array(
-                    'taxonomy' => $tax,
-                    'field' => 'term_id',
-                    'terms' => $ids,
-                    'operator' => 'IN',
-                );
-            }
-
-            $result = get_posts($args);
-            
-            if (!empty($result)) {
-                foreach ($result as &$post) {
-                    $post = \Municipio\Helper\Post::preparePostObject($post);
-                    $posts[$postType->label] = $result;
-                }
-            }
-        }
-
-        return $posts;
     }
 
     private function createListItem($label, $icon, $href = false) {

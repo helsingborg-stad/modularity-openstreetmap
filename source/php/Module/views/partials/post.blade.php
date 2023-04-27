@@ -48,42 +48,4 @@
             </div>
         @endpaper
     </div>
-    @foreach ($place->relatedPosts as $postType => $posts)
-    <div class="u-margin__x--2">
-        <div class="o-grid o-container c-openstreetmap__post-related-posts">
-            @group([
-                'justifyContent' => 'space-between'
-            ])
-                @typography([
-                    'element' => 'h2'
-                ])
-                {{-- TODO: Add translation --}}
-                    {{ $labels['related'] }} {{ $postType }}
-                @endtypography
-                @if (!empty(get_post_type_archive_link($postType)))
-                    @link([
-                        'href' => get_post_type_archive_link($postType)
-                    ])
-                        {{-- TODO: Add translation --}}
-                        {{ $labels['showAll'] }}
-                    @endlink
-                @endif
-            @endgroup
-            @foreach ($posts as $post)
-                <div class="u-margin__bottom--8 c-openstreetmap__post-related-post">
-                    @segment([
-                        'layout' => 'card',
-                        'title' => $post->postTitle,
-                        'content' => $post->excerptShort,
-                        'image' => $post->thumbnail['src'],
-                        'buttons' => [['text' => 'Read more', 'href' => $post->permalink]],
-                        'tags' => $post->terms,
-                        'meta' => $post->readingTime
-                    ])
-                    @endsegment
-                </div>
-            @endforeach
-        </div>
-    </div>
-    @endforeach
 @endgroup
