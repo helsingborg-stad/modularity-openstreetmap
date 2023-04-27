@@ -29,12 +29,12 @@
         ])
             {{$place->postTitle}}
         @endtypography
-        @if($place->termMarker['icon'])
+        @if($place->termIcon['icon'])
             @inlineCssWrapper([
-                'styles' => ['background-color' => $place->termMarker['backgroundColor'], 'display' => 'flex'],
-                'classList' => [$place->termMarker['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
+                'styles' => ['background-color' => $place->termIcon['backgroundColor'], 'display' => 'flex'],
+                'classList' => [$place->termIcon['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
             ])
-                @icon($place->termMarker)
+                @icon($place->termIcon)
                 @endicon
             @endinlineCssWrapper
         @endif
