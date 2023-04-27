@@ -45,7 +45,7 @@ class OpenStreetMap extends \Modularity\Module
             }
             $placesData = $this->getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow);
         } else {
-            $placesData = $this->buildPlacePosts($secondaryQuery->posts);
+            $placesData = $this->buildPlacePosts($secondaryQuery->posts, false);
         }
         $data['postsColumns'] = apply_filters('Modularity/Display/replaceGrid', $fields['mod_osm_post_columns']);
         $data['isFullWidth'] = $fields['mod_osm_full_width'];
@@ -99,10 +99,12 @@ class OpenStreetMap extends \Modularity\Module
         return $this->buildPlacePosts($posts);
     }
 
-    private function buildPlacePosts($posts) {
+    private function buildPlacePosts($posts, $complemenPost = true) {
         $coords = [];
         foreach ($posts as &$post) {
-            $post = \Municipio\Helper\Post::preparePostObject($post);
+            if ($complemenPost) {
+                $post = \Municipio\Helper\Post::preparePostObject($post);
+            }
             $post->postExcerpt = $this->createExcerpt($post);
             $postFields = get_fields($post->id);
             $post->location = $postFields['location'];
