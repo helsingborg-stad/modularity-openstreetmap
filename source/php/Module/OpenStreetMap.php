@@ -96,10 +96,10 @@ class OpenStreetMap extends \Modularity\Module
 
         $posts = get_posts($args);
 
-        return $this->buildPlacePosts($posts, $postTypeToShow);
+        return $this->buildPlacePosts($posts);
     }
 
-    private function buildPlacePosts($posts, $postTypeToShow) {
+    private function buildPlacePosts($posts) {
         $coords = [];
         foreach ($posts as &$post) {
             $post = \Municipio\Helper\Post::preparePostObject($post);
