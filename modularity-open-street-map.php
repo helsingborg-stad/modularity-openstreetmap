@@ -21,11 +21,8 @@ if (! defined('WPINC')) {
 define('MODULARITYOPENSTREETMAP_PATH', plugin_dir_path(__FILE__));
 define('MODULARITYOPENSTREETMAP_URL', plugins_url('', __FILE__));
 define('MODULARITYOPENSTREETMAP_TEMPLATE_PATH', MODULARITYOPENSTREETMAP_PATH . 'templates/');
-define('MODULARITYOPENSTREETMAP_TEXT_DOMAIN', 'modularity-open-street-map');
 define('MODULARITYOPENSTREETMAP_VIEW_PATH', MODULARITYOPENSTREETMAP_PATH . 'views/');
 define('MODULARITYOPENSTREETMAP_MODULE_VIEW_PATH', MODULARITYOPENSTREETMAP_PATH . 'source/php/Module/views');
-
-load_plugin_textdomain(MODULARITYOPENSTREETMAP_TEXT_DOMAIN, false, MODULARITYOPENSTREETMAP_PATH . '/languages');
 
 require_once MODULARITYOPENSTREETMAP_PATH . 'Public.php';
 
@@ -50,3 +47,5 @@ add_action('acf/init', function () {
 
 // Start application
 new ModularityOpenStreetMap\App();
+
+load_plugin_textdomain('modularity-open-street-map', false, plugin_basename(dirname(__FILE__)) . '/languages');
