@@ -138,7 +138,7 @@
             'name' => 'map_start_values',
             'aria-label' => '',
             'type' => 'google_map',
-            'instructions' => '',
+            'instructions' => __('Click on the map to place a marker for the default center of the map. Use the plus- and minus-signs (+/-) to set the default zoom level.', 'modularity-open-street-map'),
             'required' => 0,
             'conditional_logic' => 0,
             'wrapper' => array(
@@ -172,7 +172,7 @@
     'position' => 'normal',
     'style' => 'default',
     'label_placement' => 'left',
-    'instruction_placement' => 'label',
+    'instruction_placement' => 'above_field',
     'hide_on_screen' => '',
     'active' => true,
     'description' => '',
