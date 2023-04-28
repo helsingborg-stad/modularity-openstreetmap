@@ -69,17 +69,6 @@ class OpenStreetMap extends \Modularity\Module
             $data['startPosition'] = json_encode($data['startPosition']);
         }
 
-        // if (!empty($fields['start_zoom_value'])) {
-        //     $zoom = $fields['start_zoom_value'];
-        //     $zoom = $zoom < 5 ? 5 : ($zoom > 20 ? 20 : $zoom);
-        // }
-
-        // $data['startPosition'] = json_encode([
-        //     'lat' => $fields['latitude_start'] ? $fields['latitude_start'] : '56.046029',
-        //     'lng' =>  $fields['longitude_start'] ?  $fields['longitude_start'] : '12.693904',
-        //     'zoom' => !empty($zoom) ? $zoom : 14,
-        // ]);
-
         return $data;
     }
 
