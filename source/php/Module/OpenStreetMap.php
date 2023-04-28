@@ -18,6 +18,20 @@ class OpenStreetMap extends \Modularity\Module
         $this->nameSingular = __("OpenStreetMap", 'modularity-open-street-map');
         $this->namePlural = __("OpenStreetMaps", 'modularity-open-street-map');
         $this->description = __("Outputs a map.", 'modularity-open-street-map');
+        add_filter('wpPageForTerm/secondaryQueryArgs', array($this, 'setPostsPerPage'), 10, 2);
+        add_filter('Municipio/Controller/Singular/displaySecondaryQuery', array($this, 'replaceArchivePosts'), 10, 1);
+    }
+
+    public function setPostsPerPage($secondaryQueryArgs, $query) {
+        if ($this->hasModule()) {
+            $secondaryQueryArgs['posts_per_page'] = 999;
+        }
+            
+        return $secondaryQueryArgs;
+    }
+
+    public function replaceArchivePosts($item) {
+        return !$this->hasModule();
     }
 
      /**
