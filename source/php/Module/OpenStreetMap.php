@@ -19,11 +19,6 @@ class OpenStreetMap extends \Modularity\Module
         $this->namePlural = __("OpenStreetMaps", 'modularity-open-street-map');
         $this->description = __("Outputs a map.", 'modularity-open-street-map');
 
-        // $blockSettings = apply_filters(
-        //     'Modularity/Block/Settings',
-        //     $blockSettings,
-        //     $class->slug
-        // );
         add_filter('Modularity/Block/Settings', function ($blockSettings, $slug) {
             if ($slug == $this->slug) {
                 $blockSettings['mode'] = 'edit';

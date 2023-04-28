@@ -151,28 +151,6 @@
             'zoom' => '',
             'height' => '',
         ),
-        6 => array(
-            'key' => 'field_6426a973f0745',
-            'label' => __('Start zoom value', 'modularity-open-street-map'),
-            'name' => 'start_zoom_value',
-            'aria-label' => '',
-            'type' => 'number',
-            'instructions' => __('A value between 5-20 that sets the zoom value. Default value is 14.', 'modularity-open-street-map'),
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => 14,
-            'min' => 5,
-            'max' => 20,
-            'placeholder' => '',
-            'step' => '',
-            'prepend' => '',
-            'append' => '',
-        ),
     ),
     'location' => array(
         0 => array(
