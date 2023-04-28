@@ -18,6 +18,12 @@ class OpenStreetMap extends \Modularity\Module
         $this->nameSingular = __("OpenStreetMap", 'modularity-open-street-map');
         $this->namePlural = __("OpenStreetMaps", 'modularity-open-street-map');
         $this->description = __("Outputs a map.", 'modularity-open-street-map');
+
+        add_filter('Municipio/Controller/Singular/displaySecondaryQuery', array($this, 'replaceArchivePosts'), 10, 1);
+    }
+
+    public function replaceArchivePosts($item) {
+        return !$this->hasModule();
     }
 
      /**
@@ -28,13 +34,7 @@ class OpenStreetMap extends \Modularity\Module
     {
         $fields = get_fields($this->ID);
         $secondaryQuery = get_query_var('secondaryQuery');
-
-        if ($secondaryQuery) {
-            add_filter('Municipio/Controller/Singular/displaySecondaryQuery', function() {
-                return false;
-            });
-        }
-        
+      
         if(empty($secondaryQuery)) {
             $termsToShow = $fields['mod_osm_terms_to_show'];
             $postTypeToShow = $fields['mod_osm_post_type'];
@@ -45,7 +45,7 @@ class OpenStreetMap extends \Modularity\Module
             }
             $placesData = $this->getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow);
         } else {
-            $placesData = $this->buildPlacePosts($secondaryQuery->posts);
+            $placesData = $this->buildPlacePosts($secondaryQuery->posts, false);
         }
         $data['postsColumns'] = apply_filters('Modularity/Display/replaceGrid', $fields['mod_osm_post_columns']);
         $data['isFullWidth'] = $fields['mod_osm_full_width'];
@@ -99,10 +99,12 @@ class OpenStreetMap extends \Modularity\Module
         return $this->buildPlacePosts($posts);
     }
 
-    private function buildPlacePosts($posts) {
+    private function buildPlacePosts($posts, $complemenPost = true) {
         $coords = [];
         foreach ($posts as &$post) {
-            $post = \Municipio\Helper\Post::preparePostObject($post);
+            if ($complemenPost) {
+                $post = \Municipio\Helper\Post::preparePostObject($post);
+            }
             $post->postExcerpt = $this->createExcerpt($post);
             $postFields = get_fields($post->id);
             $post->location = $postFields['location'];
