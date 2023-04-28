@@ -13,7 +13,7 @@ class OpenStreetMap extends \Modularity\Module
     );
 
     public function init()
-    {   
+    {
         //Define module
         $this->nameSingular = __("OpenStreetMap", 'modularity-open-street-map');
         $this->namePlural = __("OpenStreetMaps", 'modularity-open-street-map');
@@ -30,12 +30,12 @@ class OpenStreetMap extends \Modularity\Module
         $secondaryQuery = get_query_var('secondaryQuery');
 
         if ($secondaryQuery) {
-            add_filter('Municipio/Controller/Singular/displaySecondaryQuery', function() {
+            add_filter('Municipio/Controller/Singular/displaySecondaryQuery', function () {
                 return false;
             });
         }
-        
-        if(empty($secondaryQuery)) {
+
+        if (empty($secondaryQuery)) {
             $termsToShow = $fields['mod_osm_terms_to_show'];
             $postTypeToShow = $fields['mod_osm_post_type'];
             $taxonomyToShow = [];
@@ -52,32 +52,48 @@ class OpenStreetMap extends \Modularity\Module
         $data['places'] = $placesData['places'];
         $data['pins'] = json_encode($placesData['pins'], JSON_UNESCAPED_UNICODE);
         $data['mapStyle'] = $this->getMapStyle();
-        $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8; 
+        $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8;
 
-        if (!empty($fields['start_zoom_value'])) {
-            $zoom = $fields['start_zoom_value'];
-            $zoom = $zoom < 5 ? 5 : ($zoom > 20 ? 20 : $zoom);
+        $mapStartValues = $fields['map_start_values'] ?? [];
+        $data['startPosition'] = [];
+        if (empty($mapStartValues)) {
+            $data['startPosition'] = json_encode([
+                'lat'  => '56.046029',
+                'lng'  => '12.693904',
+                'zoom' => 14,
+            ]);
+        } else {
+            foreach ($mapStartValues as $key => $value) {
+                $data['startPosition'][$key] = $value;
+            }
+            $data['startPosition'] = json_encode($data['startPosition']);
         }
 
-        $data['startPosition'] = json_encode([
-            'lat' => $fields['latitude_start'] ? $fields['latitude_start'] : '56.046029', 
-            'lng' =>  $fields['longitude_start'] ?  $fields['longitude_start'] : '12.693904',
-            'zoom' => !empty($zoom) ? $zoom : 14,
-        ]);
+        // if (!empty($fields['start_zoom_value'])) {
+        //     $zoom = $fields['start_zoom_value'];
+        //     $zoom = $zoom < 5 ? 5 : ($zoom > 20 ? 20 : $zoom);
+        // }
+
+        // $data['startPosition'] = json_encode([
+        //     'lat' => $fields['latitude_start'] ? $fields['latitude_start'] : '56.046029',
+        //     'lng' =>  $fields['longitude_start'] ?  $fields['longitude_start'] : '12.693904',
+        //     'zoom' => !empty($zoom) ? $zoom : 14,
+        // ]);
 
         return $data;
     }
 
-    private function getMapStyle() {
+    private function getMapStyle()
+    {
         if (function_exists('get_theme_mod')) {
             return get_theme_mod('osm_map_style', 'default');
-        }
-        else {
+        } else {
             return 'default';
         }
     }
 
-    private function getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow) {
+    private function getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow)
+    {
         $args = [
             'post_type' => $postTypeToShow,
             'posts_per_page' => 999,
@@ -99,14 +115,15 @@ class OpenStreetMap extends \Modularity\Module
         return $this->buildPlacePosts($posts);
     }
 
-    private function buildPlacePosts($posts) {
+    private function buildPlacePosts($posts)
+    {
         $coords = [];
         foreach ($posts as &$post) {
             $post = \Municipio\Helper\Post::preparePostObject($post);
             $post->postExcerpt = $this->createExcerpt($post);
             $postFields = get_fields($post->id);
             $post->location = $postFields['location'];
-            if($post->location['lat'] && $post->location['lng']) {
+            if ($post->location['lat'] && $post->location['lng']) {
                 $direction = 'https://www.google.com/maps/dir/?api=1&destination=' . $post->location['lat'] . ',' . $post->location['lng'] . '&travelmode=transit';
             }
             $post->list[] = $this->createListItem($postFields['location']['street_name'] . ' ' . $postFields['location']['street_number'], 'location_on', $direction);
@@ -122,15 +139,17 @@ class OpenStreetMap extends \Modularity\Module
         ];
     }
 
-    private function createListItem($label, $icon, $href = false) {
+    private function createListItem($label, $icon, $href = false)
+    {
         if (!empty($label) && $label != " ") {
             return ['label' => $label, 'icon' => ['icon' => $icon, 'size' => 'md'], 'href' => $href];
         }
-        
+
         return false;
     }
 
-    private function createExcerpt($post) {
+    private function createExcerpt($post)
+    {
         if ($post->postContent) {
             return wp_trim_words(wp_strip_all_tags(strip_shortcodes($post->postContent)), 10, '...');
         }
