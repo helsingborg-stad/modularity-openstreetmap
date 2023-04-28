@@ -25,7 +25,16 @@ class OpenStreetMap extends \Modularity\Module
             return $blockSettings;
         }, 10, 2);
 
+        add_filter('wpPageForTerm/secondaryQueryArgs', array($this, 'setPostsPerPage'), 10, 2);
         add_filter('Municipio/Controller/Singular/displaySecondaryQuery', array($this, 'replaceArchivePosts'), 10, 1);
+    }
+
+    public function setPostsPerPage($secondaryQueryArgs, $query) {
+        if ($this->hasModule()) {
+            $secondaryQueryArgs['posts_per_page'] = 999;
+        }
+            
+        return $secondaryQueryArgs;
     }
 
     public function replaceArchivePosts($item)
