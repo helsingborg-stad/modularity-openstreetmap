@@ -71,13 +71,7 @@ class OpenStreetMap extends \Modularity\Module
 
         $mapStartValues = $fields['map_start_values'] ?? [];
         $data['startPosition'] = [];
-        if (empty($mapStartValues)) {
-            $data['startPosition'] =[
-                'lat'  => '56.046029',
-                'lng'  => '12.693904',
-                'zoom' => 14,
-            ];
-        } else {
+        if (!empty($mapStartValues)) {
             foreach ($mapStartValues as $key => $value) {
                 $data['startPosition'][$key] = $value;
             }
