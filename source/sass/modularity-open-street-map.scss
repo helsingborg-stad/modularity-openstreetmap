@@ -1,4 +1,5 @@
 $color-primary: var(--color-primary, #000) !default;
+$grid-gap: var(--grid-gap, 4) !default;
 
 #openstreetmap {
 	.c-openstreetmap__sidebar {
@@ -35,6 +36,23 @@ $color-primary: var(--color-primary, #000) !default;
 		.c-openstreetmap__container {
 			.c-openstreetmap__post {
 				display: none;
+			}
+		}
+
+		.openstreetmap__post-container {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+		&.c-openstreetmap__sidebar--size-sm {
+			.openstreetmap__post-container {
+				flex: 0 0 calc(50% - $grid-gap * .5);
+				max-width: calc(50% - $grid-gap * .5);
+			}
+		}
+		&.c-openstreetmap__sidebar--size-md {
+			.openstreetmap__post-container {
+				flex: 0 0 calc(33.33333% - $grid-gap * 0.66667);
+				max-width: 0 0 calc(33.33333% - $grid-gap * 0.66667);
 			}
 		}
 	}

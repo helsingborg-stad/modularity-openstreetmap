@@ -63,7 +63,6 @@ class OpenStreetMap extends \Modularity\Module
         } else {
             $placesData = $this->buildPlacePosts($secondaryQuery->posts, false);
         }
-        $data['postsColumns'] = apply_filters('Modularity/Display/replaceGrid', $fields['mod_osm_post_columns']);
         $data['isFullWidth'] = $fields['mod_osm_full_width'];
         $data['places'] = $placesData['places'];
         $data['pins'] = json_encode($placesData['pins'], JSON_UNESCAPED_UNICODE);
