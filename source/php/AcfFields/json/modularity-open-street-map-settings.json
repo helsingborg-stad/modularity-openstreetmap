@@ -6,7 +6,6 @@
             "key": "field_642a8818a908c",
             "label": "Post type",
             "name": "mod_osm_post_type",
-            "aria-label": "",
             "type": "select",
             "instructions": "",
             "required": 1,
@@ -18,7 +17,7 @@
             },
             "choices": {
                 "place": "Platser",
-                "infopoint": "Infopoints"
+                "custompost": "custompost"
             },
             "default_value": "place",
             "return_format": "value",
@@ -26,15 +25,12 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": "",
-            "allow_custom": 0,
-            "search_placeholder": ""
+            "placeholder": ""
         },
         {
             "key": "field_6422b15cf1b12",
             "label": "Select place categories to show",
             "name": "mod_osm_terms_to_show",
-            "aria-label": "",
             "type": "select",
             "instructions": "",
             "required": 0,
@@ -53,15 +49,12 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": "",
-            "allow_custom": 0,
-            "search_placeholder": ""
+            "placeholder": ""
         },
         {
             "key": "field_6424301cc4fd8",
             "label": "Full width",
             "name": "mod_osm_full_width",
-            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -78,39 +71,9 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_642434d17fdaa",
-            "label": "Post columns",
-            "name": "mod_osm_post_columns",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "This does not affect inner blocks",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "grid-md-12": "1",
-                "grid-md-6": "2",
-                "grid-md-4": "3"
-            },
-            "default_value": "grid-md-12",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "allow_custom": 0,
-            "search_placeholder": ""
-        },
-        {
             "key": "field_6437f4c860c15",
             "label": "Per page",
             "name": "mod_osm_per_page",
-            "aria-label": "",
             "type": "number",
             "instructions": "",
             "required": 0,
@@ -129,12 +92,53 @@
             "append": ""
         },
         {
-            "key": "field_644b51b53a332",
-            "label": "Starting point and zoom level",
-            "name": "map_start_values",
-            "aria-label": "",
-            "type": "google_map",
-            "instructions": "Click on the map to place a marker for the default center of the map. Use the plus- and minus-signs (+\/-) to set the default zoom level.",
+            "key": "field_6426a19f8c575",
+            "label": "Latitude start",
+            "name": "latitude_start",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6426a1dd8c576",
+            "label": "Longitude start",
+            "name": "longitude_start",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6426a973f0745",
+            "label": "Start zoom value",
+            "name": "start_zoom_value",
+            "type": "number",
+            "instructions": "A value between 5-20 that sets the zoom value. Default value is 14.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -142,10 +146,13 @@
                 "class": "",
                 "id": ""
             },
-            "center_lat": "56.048767661222115",
-            "center_lng": "12.703459264197518",
-            "zoom": "",
-            "height": ""
+            "default_value": 14,
+            "min": 5,
+            "max": 20,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -168,7 +175,7 @@
     "position": "normal",
     "style": "default",
     "label_placement": "left",
-    "instruction_placement": "above_field",
+    "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
     "description": "",

@@ -25,7 +25,7 @@
             ]
         ])
             @foreach($places as $place)
-                <div class="{{$postsColumns}}" js-pagination-item>
+                <div class="openstreetmap__post-container" js-pagination-item>
                     @include('partials.collection')
                     @include('partials.post')
                 </div>
