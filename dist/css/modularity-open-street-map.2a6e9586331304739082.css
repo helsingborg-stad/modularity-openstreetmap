@@ -1,51 +1,51 @@
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./node_modules/import-glob-loader/index.js!./source/sass/modularity-open-street-map.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************/
-#openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__collection__item {
+.c-openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__collection__item {
   cursor: pointer;
 }
-#openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__collection__item .c-collection__content {
+.c-openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__collection__item .c-collection__content {
   transition: transform 300ms;
   transform: translateX(0);
 }
-#openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__collection__item:hover .c-collection__content {
+.c-openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__collection__item:hover .c-collection__content {
   transform: translateX(0.25rem);
 }
-#openstreetmap .c-openstreetmap__sidebar.has-active .c-openstreetmap__collection__item,
-#openstreetmap .c-openstreetmap__sidebar.has-active .c-pagination,
-#openstreetmap .c-openstreetmap__sidebar.has-active [js-pagination-item]:not(.is-active) {
+.c-openstreetmap .c-openstreetmap__sidebar.has-active .c-openstreetmap__collection__item,
+.c-openstreetmap .c-openstreetmap__sidebar.has-active .c-pagination,
+.c-openstreetmap .c-openstreetmap__sidebar.has-active [js-pagination-item]:not(.is-active) {
   display: none;
 }
-#openstreetmap .c-openstreetmap__sidebar.has-active .is-active[js-pagination-item] .c-openstreetmap__post {
+.c-openstreetmap .c-openstreetmap__sidebar.has-active .is-active[js-pagination-item] .c-openstreetmap__post {
   display: block;
 }
-#openstreetmap .c-openstreetmap__sidebar.has-active .c-openstreetmap__container {
+.c-openstreetmap .c-openstreetmap__sidebar.has-active .c-openstreetmap__container {
   padding: 0;
 }
-#openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__container .c-openstreetmap__post {
+.c-openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__container .c-openstreetmap__post {
   display: none;
 }
-#openstreetmap .c-openstreetmap__sidebar .openstreetmap__post-container {
+.c-openstreetmap .c-openstreetmap__sidebar .openstreetmap__post-container {
   flex: 0 0 100%;
   max-width: 100%;
 }
-#openstreetmap .c-openstreetmap__sidebar.c-openstreetmap__sidebar--size-sm .openstreetmap__post-container {
+.c-openstreetmap .c-openstreetmap__sidebar.c-openstreetmap__sidebar--size-sm .openstreetmap__post-container {
   flex: 0 0 calc(50% - var(--grid-gap, 4) * 0.5);
   max-width: calc(50% - var(--grid-gap, 4) * 0.5);
 }
-#openstreetmap .c-openstreetmap__sidebar.c-openstreetmap__sidebar--size-md .openstreetmap__post-container {
+.c-openstreetmap .c-openstreetmap__sidebar.c-openstreetmap__sidebar--size-md .openstreetmap__post-container {
   flex: 0 0 calc(33.33333% - var(--grid-gap, 4) * 0.66667);
   max-width: 0 0 calc(33.33333% - var(--grid-gap, 4) * 0.66667);
 }
-#openstreetmap .c-openstreetmap__post .c-openstreetmap__post-container {
+.c-openstreetmap .c-openstreetmap__post .c-openstreetmap__post-container {
   flex-direction: column;
 }
-#openstreetmap .c-openstreetmap__post .c-openstreetmap__post-related-posts {
+.c-openstreetmap .c-openstreetmap__post .c-openstreetmap__post-related-posts {
   margin-right: auto;
   margin-left: auto;
   padding: 0;
 }
-#openstreetmap .c-openstreetmap__post .c-openstreetmap__post-icon {
+.c-openstreetmap .c-openstreetmap__post .c-openstreetmap__post-icon {
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -55,24 +55,24 @@
   cursor: pointer;
   z-index: 3000;
 }
-#openstreetmap .c-openstreetmap__post.c-group--size-sm .c-openstreetmap__post-related-post {
+.c-openstreetmap .c-openstreetmap__post.c-group--size-sm .c-openstreetmap__post-related-post {
   flex: 0 0 calc(50% - var(--grid-gap) * 0.5);
   max-width: calc(50% - var(--grid-gap) * 0.5);
 }
-#openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-container {
+.c-openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-container {
   flex-direction: row;
 }
-#openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-content {
+.c-openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-content {
   flex: 0 0 calc(75% - var(--grid-gap) * 0.25);
   max-width: calc(75% - var(--grid-gap) * 0.25);
 }
-#openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-list {
+.c-openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-list {
   flex: 0 0 calc(25% - var(--grid-gap) * 0.75);
   max-width: calc(25% - var(--grid-gap) * 0.75);
 }
-#openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-related-post {
+.c-openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-related-post {
   flex: 0 0 calc(33.33333% - var(--grid-gap) * 0.66667);
   max-width: calc(33.33333% - var(--grid-gap) * 0.66667);
 }
 
-/*# sourceMappingURL=modularity-open-street-map.2d8d4f2a5105531480a7.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.2a6e9586331304739082.css.map*/

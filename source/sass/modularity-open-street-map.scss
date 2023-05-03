@@ -1,7 +1,7 @@
 $color-primary: var(--color-primary, #000) !default;
 $grid-gap: var(--grid-gap, 4) !default;
 
-#openstreetmap {
+.c-openstreetmap {
 	.c-openstreetmap__sidebar {
 		.c-openstreetmap__collection__item {
 			cursor: pointer;
