@@ -65,23 +65,17 @@ class OpenStreetMap extends \Modularity\Module
         }
         $data['isFullWidth'] = $fields['mod_osm_full_width'];
         $data['places'] = $placesData['places'];
-        $data['pins'] = json_encode($placesData['pins'], JSON_UNESCAPED_UNICODE);
+        $data['pins'] = $placesData['pins'];
         $data['mapStyle'] = $this->getMapStyle();
         $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8;
 
         $mapStartValues = $fields['map_start_values'] ?? [];
         $data['startPosition'] = [];
-        if (empty($mapStartValues)) {
-            $data['startPosition'] = json_encode([
-                'lat'  => '56.046029',
-                'lng'  => '12.693904',
-                'zoom' => 14,
-            ]);
-        } else {
+        if (!empty($mapStartValues)) {
             foreach ($mapStartValues as $key => $value) {
                 $data['startPosition'][$key] = $value;
             }
-            $data['startPosition'] = json_encode($data['startPosition']);
+            $data['startPosition'] = $data['startPosition'];
         }
 
         return $data;
