@@ -10,20 +10,22 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "initializeMapClick": () => (/* binding */ initializeMapClick)
 /* harmony export */ });
 class ShowPost {
-    constructor() {
-        this.container = document.querySelector('#openstreetmap');
+    constructor(container, id) {
+        this.container = container;
+        this.clusters = window.leafletClusters[`${id}`] ?? false;
+
         (window.leafletMap && this.container && window.leafletClusters) && this.handleClick();
     }
     handleClick() {
-        
         let paginationContainer = this.container.querySelector('[js-pagination-container]');
         let sidebar = this.container.querySelector('.c-openstreetmap__sidebar');
         let gridClass = false;
         
-        paginationContainer.addEventListener('click', (e) => {
+        paginationContainer && paginationContainer.addEventListener('click', (e) => {
             let collectionItem = e.target.closest('.c-openstreetmap__collection__item');
             let paginationItem = collectionItem?.parentElement;
             let backButton = e.target.closest('.c-openstreetmap__post-icon');
@@ -56,7 +58,7 @@ class ShowPost {
             let lng = collectionItem.getAttribute('js-map-lng');
             if (lat && lng) {
                 let markerLatLng = L.latLng(lat, lng);
-                let markers = window.leafletClusters;
+                let markers = this.clusters;
                 let marker;
                 markers.getLayers().forEach(function (layer) {
                     if (layer instanceof L.Marker && layer.getLatLng().equals(markerLatLng)) {
@@ -75,6 +77,13 @@ class ShowPost {
             }
         }
     }
+}
+
+function initializeMapClick() {
+    [...document.querySelectorAll('.c-openstreetmap')].forEach(container => {
+        let id = container.getAttribute('id') ?? false;
+        id && new ShowPost(container, id);
+    });
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShowPost);
@@ -148,10 +157,9 @@ __webpack_require__.r(__webpack_exports__);
 // import Map from './front/map';
 
 
-// const MapInstance = new Map(openStreetMapComponents, map, markers);
-const ShowPostInstance = new _front_showPost__WEBPACK_IMPORTED_MODULE_0__["default"](window.leafletClusters);
+(0,_front_showPost__WEBPACK_IMPORTED_MODULE_0__.initializeMapClick)();
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=modularity-open-street-map.ba3d54a50ab733285daf.js.map
+//# sourceMappingURL=modularity-open-street-map.ab65db7e63cfc4a88ea1.js.map
