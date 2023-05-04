@@ -9,7 +9,8 @@ class ShowPost {
         let sidebar = this.container.querySelector('.c-openstreetmap__sidebar');
         let gridClass = false;
         
-        paginationContainer.addEventListener('click', (e) => {
+        paginationContainer && paginationContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.c-collection__item__floating')) { return; };
             let collectionItem = e.target.closest('.c-openstreetmap__collection__item');
             let paginationItem = collectionItem?.parentElement;
             let backButton = e.target.closest('.c-openstreetmap__post-icon');

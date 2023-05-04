@@ -113,11 +113,11 @@ class OpenStreetMap extends \Modularity\Module
         return $this->buildPlacePosts($posts);
     }
 
-    private function buildPlacePosts($posts, $complemenPost = true)
+    private function buildPlacePosts($posts, $complementPost = true)
     {
         $coords = [];
         foreach ($posts as &$post) {
-            if ($complemenPost) {
+            if ($complementPost) {
                 $post = \Municipio\Helper\Post::preparePostObject($post);
             }
             $post->postExcerpt = $this->createExcerpt($post);

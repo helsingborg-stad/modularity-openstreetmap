@@ -23,12 +23,20 @@
             'containerAware' => true,
             'classList' => ['u-padding--6', 'o-container']
         ])
+        @group([
+            'justifyContent' => 'space-between',
+        ])
         @typography([
             'element' => 'h1',
             'variant' => 'h1'
             ])
             {{ $place->postTitle }}
         @endtypography
+        @if (!empty($place->callToActionItems['floating']))
+            @icon($place->callToActionItems['floating'])
+            @endicon
+        @endif
+        @endgroup
             <div class="o-grid c-openstreetmap__post-container">
                 <div class="c-openstreetmap__post-content">
                         @typography([
