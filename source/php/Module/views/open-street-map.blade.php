@@ -19,7 +19,7 @@
             @endtypography
         @endif
         @collection([
-            'classList' => ['o-grid', 'o-grid--vertical'],
+            'classList' => ['o-grid', 'o-grid--horizontal'],
             'attributeList' => [
                 'js-pagination-container' => '',
             ]
