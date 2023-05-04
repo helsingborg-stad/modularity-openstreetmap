@@ -1,6 +1,6 @@
 <?php
 
-namespace ModularityLikePosts\Module;
+namespace ModularityOpenStreetMap\Module;
 
 class OpenStreetMap extends \Modularity\Module
 {
