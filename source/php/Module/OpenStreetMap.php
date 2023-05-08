@@ -76,6 +76,12 @@ class OpenStreetMap extends \Modularity\Module
                 $data['startPosition'][$key] = $value;
             }
             $data['startPosition'] = $data['startPosition'];
+        } else {
+            $data['startPosition'] = [
+                'lat' => '56.046029',
+                'lng' => '12.693904',
+                'zoom' => '14'
+            ];
         }
 
         return $data;
@@ -136,7 +142,7 @@ class OpenStreetMap extends \Modularity\Module
             if (!empty($postFields['website'])) {
                 $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
             }
-            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'directions' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
+            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'excerpt' => $post->postExcerpt, 'link' => $post->permalink, 'directions' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
         }
         return [
             'places' => $posts,
