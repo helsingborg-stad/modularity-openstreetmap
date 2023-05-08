@@ -5,6 +5,7 @@ $grid-gap: var(--grid-gap, 4) !default;
 	.c-openstreetmap__sidebar {
 		.c-openstreetmap__collection__item {
 			cursor: pointer;
+			height: 100%;
 
 			.c-collection__content {
 				transition: transform 300ms;
@@ -42,14 +43,15 @@ $grid-gap: var(--grid-gap, 4) !default;
 		.openstreetmap__post-container {
 			flex: 0 0 100%;
 			max-width: 100%;
+			margin-top: -2px;
 		}
-		&.c-openstreetmap__sidebar--size-sm {
+		&.c-openstreetmap__sidebar--size-md {
 			.openstreetmap__post-container {
 				flex: 0 0 calc(50% - $grid-gap * .5);
 				max-width: calc(50% - $grid-gap * .5);
 			}
 		}
-		&.c-openstreetmap__sidebar--size-md {
+		&.c-openstreetmap__sidebar--size-lg {
 			.openstreetmap__post-container {
 				flex: 0 0 calc(33.33333% - $grid-gap * 0.66667);
 				max-width: 0 0 calc(33.33333% - $grid-gap * 0.66667);
