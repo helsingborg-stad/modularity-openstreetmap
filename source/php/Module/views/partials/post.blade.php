@@ -44,15 +44,17 @@
                         {!! $place->postContentFiltered !!}
                         @endtypography
                 </div>
+                @if($place->placeInfo)
                 <div class="c-openstreetmap__post-list">
                     @listing([
-                        'list' => $place->list,
+                        'list' => $place->placeInfo,
                         'icon' => false,
                         'classList' => ['unlist'],
                         'padding' => 4,
                         ])
                     @endlisting
                 </div>
+                @endif
             </div>
         @endpaper
     </div>
