@@ -33,7 +33,7 @@ class OpenStreetMap extends \Modularity\Module
         if ($this->hasModule()) {
             $secondaryQueryArgs['posts_per_page'] = 999;
         }
-            
+
         return $secondaryQueryArgs;
     }
 
@@ -120,18 +120,23 @@ class OpenStreetMap extends \Modularity\Module
             if ($complemenPost) {
                 $post = \Municipio\Helper\Post::preparePostObject($post);
             }
+
             $post->postExcerpt = $this->createExcerpt($post);
             $postFields = get_fields($post->id);
-            $post->location = $postFields['location'];
-            if ($post->location['lat'] && $post->location['lng']) {
+
+            $post->location = $postFields['location'] ?? [];
+            if (!empty($post->location['lat']) && !empty($post->location['lng'])) {
                 $direction = 'https://www.google.com/maps/dir/?api=1&destination=' . $post->location['lat'] . ',' . $post->location['lng'] . '&travelmode=transit';
             }
+
+            $post->list = [];
             $post->list[] = $this->createListItem($postFields['location']['street_name'] . ' ' . $postFields['location']['street_number'], 'location_on', $direction);
             $post->list[] = $this->createListItem($postFields['phone'], 'call');
-            if ($postFields['website']) {
+
+            if (!empty($postFields['website'])) {
                 $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
             }
-            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
+            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'directions' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
         }
         return [
             'places' => $posts,
