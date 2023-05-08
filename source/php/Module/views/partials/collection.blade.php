@@ -7,6 +7,12 @@
         'js-map-lng' => $place->location['lng'],
     ]
 ])
+@if (!empty($place->callToActionItems['floating']))
+    @slot('floating')
+        @icon($place->callToActionItems['floating'])
+        @endicon
+    @endslot
+@endif
 @slot('before')
     @if(!empty($place->thumbnail['src']))
         @image([
