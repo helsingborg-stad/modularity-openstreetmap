@@ -123,7 +123,7 @@ class OpenStreetMap extends \Modularity\Module
     {
         foreach ($posts as &$post) {
 
-            $post = \Municipio\Helper\PurposePlace::complimentPlacePosts($post, true);
+            $post = \Municipio\Helper\PurposePlace::complimentPlacePosts($post, $complementPost);
 
             $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'excerpt' => $post->postExcerpt, 'link' => $post->permalink, 'directions' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
         }

@@ -54,6 +54,16 @@
                         ])
                     @endlisting
                 </div>
+                @if (!empty($place->bookingLink))
+                    @button([
+                        'text' => $lang->bookHere ?? 'Book here',
+                        'color' => 'primary',
+                        'style' => 'filled',
+                        'href' => $place->bookingLink,
+                        'classList' => ['u-width--100'],
+                    ])
+                    @endbutton
+                @endif
                 @endif
             </div>
         @endpaper
