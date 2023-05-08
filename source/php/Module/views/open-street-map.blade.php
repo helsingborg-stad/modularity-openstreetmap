@@ -19,13 +19,13 @@
             @endtypography
         @endif
         @collection([
-            'classList' => ['c-collection--posts', 'o-grid'],
+            'classList' => ['o-grid', 'o-grid--horizontal'],
             'attributeList' => [
                 'js-pagination-container' => '',
             ]
         ])
             @foreach($places as $place)
-                <div class="openstreetmap__post-container" js-pagination-item>
+                <div class="c-openstreetmap__posts" js-pagination-item>
                     @include('partials.collection')
                     @include('partials.post')
                 </div>

@@ -25,15 +25,15 @@ class OpenStreetMap extends \Modularity\Module
             return $blockSettings;
         }, 10, 2);
 
-        add_filter('wpPageForTerm/secondaryQueryArgs', array($this, 'setPostsPerPage'), 10, 2);
+        add_filter('wpPageForTerm/secondaryQueryArgs', array($this, 'setPostsPerPage'), 10, 1);
         add_filter('Municipio/Controller/Singular/displaySecondaryQuery', array($this, 'replaceArchivePosts'), 10, 1);
     }
 
-    public function setPostsPerPage($secondaryQueryArgs, $query) {
+    public function setPostsPerPage($secondaryQueryArgs) {
         if ($this->hasModule()) {
             $secondaryQueryArgs['posts_per_page'] = 999;
         }
-            
+
         return $secondaryQueryArgs;
     }
 
@@ -76,6 +76,12 @@ class OpenStreetMap extends \Modularity\Module
                 $data['startPosition'][$key] = $value;
             }
             $data['startPosition'] = $data['startPosition'];
+        } else {
+            $data['startPosition'] = [
+                'lat' => '56.046029',
+                'lng' => '12.693904',
+                'zoom' => '14'
+            ];
         }
 
         return $data;
@@ -120,18 +126,23 @@ class OpenStreetMap extends \Modularity\Module
             if ($complementPost) {
                 $post = \Municipio\Helper\Post::preparePostObject($post);
             }
+
             $post->postExcerpt = $this->createExcerpt($post);
             $postFields = get_fields($post->id);
-            $post->location = $postFields['location'];
-            if ($post->location['lat'] && $post->location['lng']) {
+
+            $post->location = $postFields['location'] ?? [];
+            if (!empty($post->location['lat']) && !empty($post->location['lng'])) {
                 $direction = 'https://www.google.com/maps/dir/?api=1&destination=' . $post->location['lat'] . ',' . $post->location['lng'] . '&travelmode=transit';
             }
+
+            $post->list = [];
             $post->list[] = $this->createListItem($postFields['location']['street_name'] . ' ' . $postFields['location']['street_number'], 'location_on', $direction);
             $post->list[] = $this->createListItem($postFields['phone'], 'call');
-            if ($postFields['website']) {
+
+            if (!empty($postFields['website'])) {
                 $post->list[] = $this->createListItem(__('Visit website', 'modularity-open-street-map'), 'language', $postFields['website']);
             }
-            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'thumbnail' => $post->thumbnail, 'link' => $post->permalink, 'direction' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
+            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'excerpt' => $post->postExcerpt, 'link' => $post->permalink, 'directions' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
         }
         return [
             'places' => $posts,

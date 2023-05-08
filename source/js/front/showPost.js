@@ -1,10 +1,11 @@
 class ShowPost {
-    constructor() {
-        this.container = document.querySelector('#openstreetmap');
+    constructor(container, id) {
+        this.container = container;
+        this.clusters = window.leafletClusters[`${id}`] ?? false;
+
         (window.leafletMap && this.container && window.leafletClusters) && this.handleClick();
     }
     handleClick() {
-        
         let paginationContainer = this.container.querySelector('[js-pagination-container]');
         let sidebar = this.container.querySelector('.c-openstreetmap__sidebar');
         let gridClass = false;
@@ -43,7 +44,7 @@ class ShowPost {
             let lng = collectionItem.getAttribute('js-map-lng');
             if (lat && lng) {
                 let markerLatLng = L.latLng(lat, lng);
-                let markers = window.leafletClusters;
+                let markers = this.clusters;
                 let marker;
                 markers.getLayers().forEach(function (layer) {
                     if (layer instanceof L.Marker && layer.getLatLng().equals(markerLatLng)) {
@@ -62,6 +63,13 @@ class ShowPost {
             }
         }
     }
+}
+
+export function initializeMapClick() {
+    [...document.querySelectorAll('.c-openstreetmap')].forEach(container => {
+        let id = container.getAttribute('id') ?? false;
+        id && new ShowPost(container, id);
+    });
 }
 
 export default ShowPost;

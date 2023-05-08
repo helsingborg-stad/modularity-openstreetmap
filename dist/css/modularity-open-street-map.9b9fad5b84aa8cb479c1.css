@@ -3,6 +3,7 @@
   \***************************************************************************************************************************************************************************************************************************************************************************************************************/
 .c-openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__collection__item {
   cursor: pointer;
+  height: 100%;
 }
 .c-openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__collection__item .c-collection__content {
   transition: transform 300ms;
@@ -25,15 +26,16 @@
 .c-openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__container .c-openstreetmap__post {
   display: none;
 }
-.c-openstreetmap .c-openstreetmap__sidebar .openstreetmap__post-container {
+.c-openstreetmap .c-openstreetmap__sidebar .c-openstreetmap__posts {
   flex: 0 0 100%;
   max-width: 100%;
+  margin-top: -2px;
 }
-.c-openstreetmap .c-openstreetmap__sidebar.c-openstreetmap__sidebar--size-sm .openstreetmap__post-container {
+.c-openstreetmap .c-openstreetmap__sidebar.c-openstreetmap__sidebar--size-md .c-openstreetmap__posts {
   flex: 0 0 calc(50% - var(--grid-gap, 4) * 0.5);
   max-width: calc(50% - var(--grid-gap, 4) * 0.5);
 }
-.c-openstreetmap .c-openstreetmap__sidebar.c-openstreetmap__sidebar--size-md .openstreetmap__post-container {
+.c-openstreetmap .c-openstreetmap__sidebar.c-openstreetmap__sidebar--size-lg .c-openstreetmap__posts {
   flex: 0 0 calc(33.33333% - var(--grid-gap, 4) * 0.66667);
   max-width: 0 0 calc(33.33333% - var(--grid-gap, 4) * 0.66667);
 }
@@ -70,9 +72,5 @@
   flex: 0 0 calc(25% - var(--grid-gap) * 0.75);
   max-width: calc(25% - var(--grid-gap) * 0.75);
 }
-.c-openstreetmap .c-openstreetmap__post.c-group--size-md .c-openstreetmap__post-related-post {
-  flex: 0 0 calc(33.33333% - var(--grid-gap) * 0.66667);
-  max-width: calc(33.33333% - var(--grid-gap) * 0.66667);
-}
 
-/*# sourceMappingURL=modularity-open-street-map.2a6e9586331304739082.css.map*/
+/*# sourceMappingURL=modularity-open-street-map.9b9fad5b84aa8cb479c1.css.map*/
