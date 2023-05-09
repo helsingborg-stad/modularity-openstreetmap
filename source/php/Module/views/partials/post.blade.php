@@ -44,15 +44,27 @@
                         {!! $place->postContentFiltered !!}
                         @endtypography
                 </div>
+                @if($place->placeInfo)
                 <div class="c-openstreetmap__post-list">
                     @listing([
-                        'list' => $place->list,
+                        'list' => $place->placeInfo,
                         'icon' => false,
                         'classList' => ['unlist'],
                         'padding' => 4,
                         ])
                     @endlisting
                 </div>
+                @if (!empty($place->bookingLink))
+                    @button([
+                        'text' => $lang->bookHere ?? 'Book here',
+                        'color' => 'primary',
+                        'style' => 'filled',
+                        'href' => $place->bookingLink,
+                        'classList' => ['u-width--100'],
+                    ])
+                    @endbutton
+                @endif
+                @endif
             </div>
         @endpaper
     </div>
