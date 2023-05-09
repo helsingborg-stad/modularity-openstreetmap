@@ -125,7 +125,7 @@ class OpenStreetMap extends \Modularity\Module
 
             $post = \Municipio\Helper\PurposePlace::complementPlacePost($post, $complementPost);
 
-            $pins[] = ['lat' => $post->location['lat'], 'lng' => $post->location['lng'], 'tooltip' => ['title' => $post->postTitle, 'excerpt' => $post->postExcerpt, 'link' => $post->permalink, 'directions' => ['url' => $direction, 'label' => $post->location['street_name'] . ' ' . $post->location['street_number']]], 'icon' => $post->termIcon];
+            $pins[] = $post->pin;
         }
         return [
             'places' => $posts,
