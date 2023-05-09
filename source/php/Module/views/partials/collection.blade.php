@@ -52,8 +52,5 @@
             'format' => true,
         ])
         @endtags
-        @typography([])
-            {{$place->postExcerpt}}
-        @endtypography
     @endgroup
 @endcollection__item
