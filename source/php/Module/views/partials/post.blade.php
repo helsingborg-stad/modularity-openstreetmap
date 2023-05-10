@@ -60,7 +60,6 @@
                         'color' => 'primary',
                         'style' => 'filled',
                         'href' => $place->bookingLink,
-                        'classList' => ['u-width--100'],
                     ])
                     @endbutton
                 @endif
