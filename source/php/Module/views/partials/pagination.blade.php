@@ -11,5 +11,6 @@
     'current' => 1,
     'perPage' => $perPage,
     'pagesToShow' => 4,
+    'keepDOM' => true,
 ])
 @endpagination
