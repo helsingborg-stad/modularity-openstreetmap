@@ -124,9 +124,9 @@ class OpenStreetMap extends \Modularity\Module
         foreach ($posts as &$post) {
 
             $post = \Municipio\Helper\PurposePlace::complementPlacePost($post, $complementPost);
-
             $pins[] = $post->pin;
         }
+
         return [
             'places' => $posts,
             'pins' => $pins,

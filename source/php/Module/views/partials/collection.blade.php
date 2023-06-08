@@ -3,8 +3,9 @@
     'containerAware' => true,
     'bordered' => true,
     'attributeList' => [
-        'js-map-lat' => $place->location['lat'], 
-        'js-map-lng' => $place->location['lng'],
+        'data-js-map-lat' => $place->location['lat'], 
+        'data-js-map-lng' => $place->location['lng'],
+        'data-js-scroll-to-marker' => '',
     ]
 ])
 @if (!empty($place->callToActionItems['floating']))
