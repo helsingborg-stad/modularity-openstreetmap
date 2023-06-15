@@ -4,7 +4,6 @@
     'bordered' => true,
     'attributeList' => [
         'data-js-map-location' => json_encode($place->location['pin']),
-        'data-js-scroll-to-marker' => '',
     ]
 ])
 @if (!empty($place->callToActionItems['floating']))
