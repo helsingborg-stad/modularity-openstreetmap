@@ -1,5 +1,4 @@
 @openStreetMap([
-    'pins' => $pins,
     'startPosition' => $startPosition,
     'mapStyle' => $mapStyle,
     'fullWidth' => $blockData['align'] == 'full' || $isFullWidth ? true : false,
@@ -21,11 +20,11 @@
         @collection([
             'classList' => ['o-grid', 'o-grid--horizontal'],
             'attributeList' => [
-                'js-pagination-container' => '',
+                'data-js-pagination-container' => '',
             ]
         ])
             @foreach($places as $place)
-                <div class="c-openstreetmap__posts" js-pagination-item tabindex="0">
+                <div class="c-openstreetmap__posts" data-js-pagination-item tabindex="0">
                     @include('partials.collection')
                     @include('partials.post')
                 </div>
