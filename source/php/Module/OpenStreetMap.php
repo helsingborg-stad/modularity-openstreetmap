@@ -121,8 +121,8 @@ class OpenStreetMap extends \Modularity\Module
     private function buildPlacePosts($posts, $complementPost = true)
     {
         foreach ($posts as &$post) {
-
-            $post = \Municipio\Helper\PurposePlace::complementPlacePost($post, $complementPost);
+            $purposePlace = new \Municipio\Helper\PurposePlace();
+            $post = $purposePlace->complementPlacePost($post, $complementPost);
         }
 
         return $posts;
