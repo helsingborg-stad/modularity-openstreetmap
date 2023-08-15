@@ -27,7 +27,8 @@ class App
             $postTypes = get_post_types();
             $arr = [];
             foreach ($postTypes as $postType) {
-                if (\Municipio\Helper\Purpose::getPurpose($postType)[0]->key == 'place') {
+                $purpose = \Municipio\Helper\Purpose::getPurpose($postType);
+                if (isset($purpose[0]->key) && $purpose[0]->key == 'place') {
                     $postTypeObject = get_post_type_object($postType);
                     $arr[$postTypeObject->name] = $postTypeObject->label;
                 }
