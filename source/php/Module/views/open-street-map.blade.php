@@ -1,7 +1,7 @@
 @openStreetMap([
     'startPosition' => $startPosition,
     'mapStyle' => $mapStyle,
-    'fullWidth' => $blockData['align'] == 'full' || $isFullWidth ? true : false,
+    'fullWidth' => (isset($blockData['align']) && $blockData['align'] == 'full') || $isFullWidth ? true : false,
     'containerAware' => true,
 
 ])
