@@ -3,7 +3,6 @@
 namespace ModularityOpenStreetMap;
 
 use ModularityOpenStreetMap\Helper\Taxonomies as TaxonomiesHelper;
-use Municipio\Helper\Purpose as PurposeHelper;
 use Municipio\Customizer as Customizer;
 use Kirki as Kirki;
 
@@ -27,7 +26,7 @@ class App
             $postTypes = get_post_types();
             $arr = [];
             foreach ($postTypes as $postType) {
-                $purpose = \Municipio\Helper\Purpose::getPurpose($postType);
+                $purpose = \Municipio\Helper\ContentType::getContentType($postType);
                 if (isset($purpose[0]->key) && $purpose[0]->key == 'place') {
                     $postTypeObject = get_post_type_object($postType);
                     $arr[$postTypeObject->name] = $postTypeObject->label;
