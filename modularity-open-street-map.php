@@ -27,7 +27,9 @@ define('MODULARITYOPENSTREETMAP_MODULE_VIEW_PATH', MODULARITYOPENSTREETMAP_PATH 
 require_once MODULARITYOPENSTREETMAP_PATH . 'Public.php';
 
 // Register the autoloader
-require __DIR__ . '/vendor/autoload.php';
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require __DIR__ . '/vendor/autoload.php';
+}
 
 add_filter('/Modularity/externalViewPath', function ($arr) {
     $arr['mod-open-street-map'] = MODULARITYOPENSTREETMAP_MODULE_VIEW_PATH;
