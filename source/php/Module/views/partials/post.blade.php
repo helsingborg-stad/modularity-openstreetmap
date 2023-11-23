@@ -9,16 +9,16 @@
         'classList' => ['c-openstreetmap__post-icon'],
     ])
     @endicon
-    @if (!empty($place->thumbnail['src']))
+    @if (!empty($place->images['thumbnail16:9']['src']))
         @hero([
-            'image' => $place->thumbnail['src']
+            'image' => $place->images['thumbnail16:9']['src']
         ])
         @endhero
     @endif
     <div class="u-margin__x--2">
         @paper([
             'attributeList' => [
-                'style' => !empty($place->thumbnail['src']) ? 'transform:translateY(calc(max(-50%, -50px)))' : 'margin-top: 32px'
+                'style' => !empty($place->images['thumbnail16:9']['src']) ? 'transform:translateY(calc(max(-50%, -50px)))' : 'margin-top: 32px'
             ],
             'containerAware' => true,
             'classList' => ['u-padding--6', 'o-container']
