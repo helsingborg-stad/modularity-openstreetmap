@@ -8,6 +8,8 @@ use Kirki as Kirki;
 
 class App
 {
+    protected \ModularityOpenStreetMap\Helper\CacheBust $cacheBust;
+
     public function __construct()
     {
         add_action('wp_enqueue_scripts', array($this, 'enqueueFrontend'));
