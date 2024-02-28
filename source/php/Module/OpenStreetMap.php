@@ -50,6 +50,7 @@ class OpenStreetMap extends \Modularity\Module
     {
         $fields = get_fields($this->ID);
         $secondaryQuery = get_query_var('secondaryQuery');
+        $data['ID'] = !empty($this->ID) ? $this->ID : uniqid();
 
         if (empty($secondaryQuery)) {
             $termsToShow = $fields['mod_osm_terms_to_show'];
