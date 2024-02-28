@@ -63,7 +63,7 @@ class OpenStreetMap extends \Modularity\Module
         } else {
             $places = $this->buildPlacePosts($secondaryQuery->posts, false);
         }
-        $data['isFullWidth'] = $fields['mod_osm_full_width'];
+        $data['isFullWidth'] = $fields['mod_osm_full_width'] ?? false;
         $data['places'] = $places;
         $data['mapStyle'] = $this->getMapStyle();
         $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8;
