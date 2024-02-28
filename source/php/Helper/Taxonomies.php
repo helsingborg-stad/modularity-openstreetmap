@@ -4,7 +4,7 @@ namespace ModularityOpenStreetMap\Helper;
 
 class Taxonomies
 {
-    public function getTerms($postType) {
+    public static function getTerms($postType) {
         $taxonomies = get_object_taxonomies($postType);
         
         $arr = [];
