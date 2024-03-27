@@ -122,6 +122,7 @@ class OpenStreetMap extends \Modularity\Module
     private function buildPlacePosts($posts)
     {
         foreach ($posts as &$post) {
+            $post = \Municipio\Helper\Post::preparePostObject($post);
             $post = \Municipio\Helper\ContentType::complementPlacePost($post);
         }
 
