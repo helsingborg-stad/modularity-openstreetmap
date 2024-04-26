@@ -4,6 +4,7 @@
     'bordered' => true,
     'attributeList' => [
         'data-js-map-location' => !empty($place->schemaData['place']['pin']) ? json_encode($place->schemaData['place']['pin']) : "", 
+    ]
 ])
 @if (!empty($place->callToActionItems['floating']))
     @slot('floating')
