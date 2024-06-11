@@ -123,6 +123,7 @@ class OpenStreetMap extends \Modularity\Module
     {
         foreach ($posts as &$post) {
             $post = \Municipio\Helper\ContentType::complementPlacePost($post);
+            $post = \Municipio\Helper\Post::preparePostObject($post);
         }
 
         return $posts;
