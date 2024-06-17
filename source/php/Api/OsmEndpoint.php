@@ -36,16 +36,7 @@ class OsmEndpoint extends RestApiEndpoint {
         unset($params['page']);
         unset($params['postsPerPage']);
 
-        $query = $this->getPosts($args, $params);
-
-        if (empty($query->posts)) {
-            return new WP_REST_Response([], 200);
-        }
-
-        $responseData = [
-            'posts' => $query->posts,
-            'foundPosts' => $query->found_posts
-        ];
+        $responseData = $this->getPosts($args, $params);
 
         return new WP_REST_Response($responseData, 200);
     }
@@ -69,8 +60,18 @@ class OsmEndpoint extends RestApiEndpoint {
             ];
         }
 
-        $posts = new \WP_Query($args);
+        $query = new \WP_Query($args);
 
-        return $posts;
+        if (!$query->have_posts()) {
+            return [];
+        }
+        
+        // foreach 
+        $responseData = [
+            'posts' => $query->posts,
+            'foundPosts' => $query->found_posts
+        ];
+
+        return $responseData;
     }
 }
