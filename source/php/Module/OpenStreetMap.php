@@ -2,6 +2,8 @@
 
 namespace ModularityOpenStreetMap\Module;
 
+use ModularityOpenStreetMap\Api\GetPosts;
+
 class OpenStreetMap extends \Modularity\Module
 {
     public $slug = 'open-street-map';
@@ -10,6 +12,8 @@ class OpenStreetMap extends \Modularity\Module
         'align' => ['full'],
         'mode' => false
     );
+
+    private string $endpoint = 'https://localhost:59181/wp-json/osm/v1/';
 
     public function init()
     {
@@ -24,9 +28,6 @@ class OpenStreetMap extends \Modularity\Module
             }
             return $blockSettings;
         }, 10, 2);
-
-        add_filter('wpPageForTerm/secondaryQueryArgs', array($this, 'setPostsPerPage'), 10, 1);
-        add_filter('Municipio/Controller/Singular/displaySecondaryQuery', array($this, 'replaceArchivePosts'), 10, 1);
     }
 
     public function setPostsPerPage($secondaryQueryArgs) {
@@ -49,42 +50,51 @@ class OpenStreetMap extends \Modularity\Module
     public function data(): array
     {
         $fields = get_fields($this->ID);
-        $secondaryQuery = get_query_var('secondaryQuery');
         $data['ID'] = !empty($this->ID) ? $this->ID : uniqid();
-
-        if (empty($secondaryQuery)) {
-            $termsToShow = $fields['mod_osm_terms_to_show'];
-            $postTypeToShow = $fields['mod_osm_post_type'];
-            $taxonomyToShow = [];
-            foreach ($termsToShow as $term) {
-                $taxonomy = get_term($term)->taxonomy;
-                $taxonomyToShow[$taxonomy][] = $term;
-            }
-            $places = $this->getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow);
-        } else {
-            $places = $secondaryQuery->posts;
-        }
+        
+        $termsToShow = $fields['mod_osm_terms_to_show'];
+        $postTypeToShow = $fields['mod_osm_post_type'];
         $data['isFullWidth'] = $fields['mod_osm_full_width'] ?? false;
-        $data['places'] = $places;
         $data['mapStyle'] = $this->getMapStyle();
-        $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8;
+        // $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8;
+        $data['perPage'] = 1;
+        $data['endPoint'] = $this->endpoint;
 
-        $mapStartValues = $fields['map_start_values'] ?? [];
-        $data['startPosition'] = [];
-        if (!empty($mapStartValues)) {
-            foreach ($mapStartValues as $key => $value) {
-                $data['startPosition'][$key] = $value;
-            }
-            $data['startPosition'] = $data['startPosition'];
-        } else {
-            $data['startPosition'] = [
+        $endpoint = $this->endpoint . $postTypeToShow . '?';
+
+        $taxonomyToShow = [];
+        foreach ($termsToShow as $term) {
+            $taxonomy = get_term($term)->taxonomy;
+            $taxonomyToShow[$taxonomy][] = $term;
+        }
+
+        foreach ($taxonomyToShow as $taxonomy => $terms) {
+            $endpoint .= ($endpoint === $this->endpoint . $postTypeToShow) ? '' : '&';
+            $endpoint .= $taxonomy . '=' . implode(',', $terms);
+        }
+
+        $data['endpoint'] = $endpoint;
+
+        // // $getPostsInstance = new GetPosts($postType);
+        // // echo '<pre>' . print_r( $endpoint, true ) . '</pre>';die;
+        // $data['places'] = $this->getPlacePosts($data['perPage'], $taxonomyToShow, $postTypeToShow);
+
+        $data['startPosition'] = $this->getStartPosition($fields['map_start_values'] ?? []);
+
+        return $data;
+    }
+
+    private function getStartPosition(array $mapStartValues) 
+    {
+        if (empty($mapStartValues)) {
+            return [
                 'lat' => '56.046029',
                 'lng' => '12.693904',
                 'zoom' => '14'
             ];
         }
 
-        return $data;
+        return $mapStartValues;
     }
 
     private function getMapStyle()
@@ -96,11 +106,11 @@ class OpenStreetMap extends \Modularity\Module
         }
     }
 
-    private function getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow)
+    private function getPlacePosts($perPage, $taxonomyToShow, $postTypeToShow)
     {
         $args = [
             'post_type' => $postTypeToShow,
-            'posts_per_page' => 999,
+            'posts_per_page' => $perPage,
             'tax_query' => [
                 'relation' => 'OR',
             ]
@@ -114,8 +124,7 @@ class OpenStreetMap extends \Modularity\Module
             ];
         }
 
-        $posts = get_posts($args);
-
+        // $posts = get_posts($args);
         return $this->buildPlacePosts($posts);
     }
 
