@@ -49,21 +49,18 @@ class OpenStreetMap extends \Modularity\Module
     public function data(): array
     {
         $fields = get_fields($this->ID);
-        $secondaryQuery = get_query_var('secondaryQuery');
         $data['ID'] = !empty($this->ID) ? $this->ID : uniqid();
 
-        if (empty($secondaryQuery)) {
-            $termsToShow = $fields['mod_osm_terms_to_show'];
-            $postTypeToShow = $fields['mod_osm_post_type'];
-            $taxonomyToShow = [];
-            foreach ($termsToShow as $term) {
-                $taxonomy = get_term($term)->taxonomy;
-                $taxonomyToShow[$taxonomy][] = $term;
-            }
-            $places = $this->getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow);
-        } else {
-            $places = $secondaryQuery->posts;
+        $termsToShow = $fields['mod_osm_terms_to_show'];
+        $postTypeToShow = $fields['mod_osm_post_type'];
+        $taxonomyToShow = [];
+        
+        foreach ($termsToShow as $term) {
+            $taxonomy = get_term($term)->taxonomy;
+            $taxonomyToShow[$taxonomy][] = $term;
         }
+        $places = $this->getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow);
+
         $data['isFullWidth'] = $fields['mod_osm_full_width'] ?? false;
         $data['places'] = $places;
         $data['mapStyle'] = $this->getMapStyle();
