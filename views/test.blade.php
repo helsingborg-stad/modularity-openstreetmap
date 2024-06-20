@@ -1,3 +1,5 @@
+
+<div class="c-openstreetmap__posts">
 @collection__item([
     'classList' => ['c-openstreetmap__collection__item'],
     'containerAware' => true,
@@ -6,7 +8,6 @@
         'data-js-map-location' => !empty($place->schemaData['place']['pin']) ? json_encode($place->schemaData['place']['pin']) : "",
     ]
 ])
-
 @if (!empty($place->callToActionItems['floating']))
     @slot('floating')
         @icon($place->callToActionItems['floating'])
@@ -54,3 +55,8 @@
         @endtags
     @endgroup
 @endcollection__item
+
+@if($includePost)
+    halloj
+@endif
+</div>

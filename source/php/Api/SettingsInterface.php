@@ -8,4 +8,5 @@ interface SettingsInterface {
     public function getPostsPerPage(): int;
     public function getTaxonomies(): array;
     public function getHtml(): bool;
+    public function getIncludePost(): bool;
 }

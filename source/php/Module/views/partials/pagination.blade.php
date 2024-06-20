@@ -1,4 +1,4 @@
-@pagination([
+{{-- @pagination([
     'list' => [
         ['href' => '?pagination=1', 'label' => 'Page 1'],
     ],
@@ -13,4 +13,4 @@
     'pagesToShow' => 4,
     'keepDOM' => true,
 ])
-@endpagination
+@endpagination --}}

@@ -5,7 +5,7 @@ namespace ModularityOpenStreetMap\Api;
 use ModularityOpenStreetMap\Api\PostTransformer\PostTransformerInterface;
 use ModularityOpenStreetMap\Api\SettingsInterface;
 
-class OsmPostsHandler
+class OsmTransformationHandler
 {
     private string $cacheKey;
     public function __construct(
@@ -26,14 +26,16 @@ class OsmPostsHandler
 
         $transformedPosts = [];
         foreach ($this->posts as $post) {
-            $cachedPost = wp_cache_get($post->ID, $this->cacheKey);
-            
+            $id = $post->ID;
+            wp_cache_flush();
+            $cachedPost = wp_cache_get($id, $this->cacheKey);
+
             if (!$cachedPost) {
-                $transformedPost = $this->default->transform($post);
-                $transformedPost = $this->html->transform($post);
+                $post = $this->default->transform($post);
+                $post = $this->html->transform($post);
                 
-                wp_cache_set($post->ID, $post, $this->cacheKey, 7 * \DAY_IN_SECONDS);
-                $cachedPost = $transformedPost;
+                wp_cache_set($id, $post, $this->cacheKey, 7 * \DAY_IN_SECONDS);
+                $cachedPost = $post;
             }
 
             $transformedPosts[] = $cachedPost;

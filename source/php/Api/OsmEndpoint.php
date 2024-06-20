@@ -7,19 +7,18 @@ use ModularityOpenStreetMap\Api\Settings;
 use ModularityOpenStreetMap\Api\SettingsInterface;
 use ModularityOpenStreetMap\Api\OsmGetPosts;
 use ModularityOpenStreetMap\Api\OsmQueryArgsCreator;
-use ModularityOpenStreetMap\Api\OsmPostsHandler;
+use ModularityOpenStreetMap\Api\OsmTransformationHandler;
 use ModularityOpenStreetMap\Api\PostTransformer\DefaultTransformer;
 use ModularityOpenStreetMap\Api\PostTransformer\HtmlTransformer;
 use WP_REST_Request;
 use WP_REST_Response;
 
 class OsmEndpoint extends RestApiEndpoint {
-    private const NAMESPACE = 'osm/v1';
     private const ROUTE     = '/(?P<postType>[a-zA-Z0-9-]+)';
     private SettingsInterface|null $settings = null;
 
     public function handleRegisterRestRoute(): bool {
-        return register_rest_route(self::NAMESPACE, self::ROUTE, array(
+        return register_rest_route(OSM_ENDPOINT, self::ROUTE, array(
             'methods'             => 'GET',
             'callback'            => array($this, 'handleRequest'),
             'permission_callback' => '__return_true'
@@ -36,16 +35,13 @@ class OsmEndpoint extends RestApiEndpoint {
 
         $argsInstance           = new OsmQueryArgsCreator($this->settings);
         $posts                  = (new OsmGetPosts($argsInstance->CreateQueryArgs()))->getPosts();
-        $postsHandlerInstance   = new OsmPostsHandler(
+        $postsHandlerInstance   = new OsmTransformationHandler(
             $posts, 
             $this->settings,
             new DefaultTransformer($this->settings),
             new HtmlTransformer($this->settings)
         );
 
-        $test = $postsHandlerInstance->getTransformedPosts();
-        echo '<pre>' . print_r( $test, true ) . '</pre>';
-        die;
         return new WP_REST_Response($postsHandlerInstance->getTransformedPosts(), 200);
     }
 }

@@ -27,17 +27,6 @@ class App
     {
         $postTypes = get_post_types();
         $arr = [];
-        // foreach ($postTypes as $postType) {
-        //     if ($postType === 'place') {
-        //         echo '<pre>' . print_r( $postType, true ) . '</pre>';
-        //         echo '<pre>' . print_r(  get_field('schema', $postType . '_options'), true ) . '</pre>';
-        //     }
-        //     $schemaType = get_field('schema', $postType . '_options');
-        //     if ($schemaType === 'Place') {
-        //         $postTypeObject = get_post_type_object($postType);
-        //         $arr[$postTypeObject->name] = $postTypeObject->label;
-        //     }
-        // }
 
         foreach ($postTypes as $postType) {
             $contentType = \Municipio\Helper\ContentType::getContentType($postType);

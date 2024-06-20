@@ -29,10 +29,4 @@
         @endcollection
         @include('partials.pagination')
     @endslot
-    <template id="{{$ID}}">
-        <div class="c-openstreetmap__posts" data-js-pagination-item tabindex="0">
-            @include('partials.collection')
-            @include('partials.post')
-        </div>
-    </template>
 @endopenStreetMap

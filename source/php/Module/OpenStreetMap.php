@@ -2,7 +2,7 @@
 
 namespace ModularityOpenStreetMap\Module;
 
-use ModularityOpenStreetMap\Api\GetPosts;
+use ModularityOpenStreetMap\Api\OsmTransformationHandler;
 
 class OpenStreetMap extends \Modularity\Module
 {
@@ -13,7 +13,6 @@ class OpenStreetMap extends \Modularity\Module
         'mode' => false
     );
 
-    private string $endpoint = 'https://localhost:59181/wp-json/osm/v1/';
     private string $taxonomyEndpointKey = 'taxonomies';
 
     public function init()
@@ -31,19 +30,6 @@ class OpenStreetMap extends \Modularity\Module
         }, 10, 2);
     }
 
-    public function setPostsPerPage($secondaryQueryArgs) {
-        if ($this->hasModule()) {
-            $secondaryQueryArgs['posts_per_page'] = 999;
-        }
-
-        return $secondaryQueryArgs;
-    }
-
-    public function replaceArchivePosts($item)
-    {
-        return !$this->hasModule();
-    }
-
      /**
      * View data
      * @return array
@@ -57,26 +43,27 @@ class OpenStreetMap extends \Modularity\Module
         $postTypeToShow = $fields['mod_osm_post_type'];
         $data['isFullWidth'] = $fields['mod_osm_full_width'] ?? false;
         $data['mapStyle'] = $this->getMapStyle();
-        $data['perPage'] = 20;
-        $data['endPoint'] = $this->createEndpoint($postTypeToShow, $termsToShow);
+        $data['endpoint'] = $this->createEndpoint($postTypeToShow, $termsToShow);
         $data['startPosition'] = $this->getStartPosition($fields['map_start_values'] ?? []);
 
         return $data;
     }
 
-    private function createEndpoint($postTypeToShow, $termsToShow)
-    {
-        $endpoint = $this->endpoint . $postTypeToShow . '?';
+    private function createEndpoint($postTypeToShow, $termsToShow): string
+    {   
+        $endpoint = rest_url(OSM_ENDPOINT . $postTypeToShow . '?');
 
         $taxonomyToShow = [];
         foreach ($termsToShow as $term) {
             $taxonomy = get_term($term)->taxonomy;
             $taxonomyToShow[$taxonomy][] = $term;
         }
+
         foreach ($taxonomyToShow as $taxonomy => $terms) {
-            $endpoint .= ($endpoint === $this->endpoint . $postTypeToShow) ? '' : '&';
-            $endpoint .= $this->taxonomyEndpointKey . '[' . $taxonomy . ']=' . implode(',', $terms);
+            $endpoint .= '&' . $this->taxonomyEndpointKey . '[' . $taxonomy . ']=' . implode(',', $terms);
         }
+
+        return $endpoint;
     }
 
     private function getStartPosition(array $mapStartValues) 

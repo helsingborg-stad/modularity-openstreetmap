@@ -11,6 +11,7 @@ class Settings implements SettingsInterface
     private int $postsPerPage = 20;
     private ?array $taxonomies = [];
     private bool $html = false;
+    private bool $includePost = false;
 
     public function __construct(array $settings)
     {
@@ -19,6 +20,7 @@ class Settings implements SettingsInterface
         $this->postsPerPage = isset($settings['postsPerPage']) ? intval($settings['postsPerPage']) : $this->postsPerPage;
         $this->taxonomies = isset($settings['taxonomies']) ? $settings['taxonomies'] : $this->taxonomies;
         $this->html     = isset($settings['html']) ? true : $this->html;
+        $this->includePost = isset($settings['includePost']) ? true : $this->includePost;
     }
 
     public function getPostType(): ?string
@@ -44,5 +46,10 @@ class Settings implements SettingsInterface
     public function getHtml(): bool
     {
         return $this->html;
+    }
+
+    public function getIncludePost(): bool
+    {
+        return $this->includePost;
     }
 }
