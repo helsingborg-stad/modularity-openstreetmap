@@ -27,6 +27,5 @@
         ])
 
         @endcollection
-        @include('partials.pagination')
     @endslot
 @endopenStreetMap

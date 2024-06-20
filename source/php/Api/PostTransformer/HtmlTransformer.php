@@ -14,6 +14,6 @@ class HtmlTransformer implements PostTransformerInterface {
             return $post;
         }
 
-        return open_street_map_render_blade_view('test', ['place' => $post, 'includePost' => $this->settings->getIncludePost()]);
+        return open_street_map_render_blade_view('html', ['place' => $post]);
     }
 }

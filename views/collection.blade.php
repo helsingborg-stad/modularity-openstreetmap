@@ -1,5 +1,3 @@
-
-<div class="c-openstreetmap__posts">
 @collection__item([
     'classList' => ['c-openstreetmap__collection__item'],
     'containerAware' => true,
@@ -55,8 +53,3 @@
         @endtags
     @endgroup
 @endcollection__item
-
-@if($includePost)
-    halloj
-@endif
-</div>
