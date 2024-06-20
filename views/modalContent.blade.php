@@ -1,4 +1,11 @@
-@group([
+@modal([
+    'closeButtonText' => 'Close',
+    'id' => 'modal-' . $place->id
+])
+my content
+@endmodal
+
+{{-- @group([
         'classList' => ['c-openstreetmap__post'],
         'containerAware' => true,
     ])
@@ -68,4 +75,4 @@
             </div>
         @endpaper
     </div>
-@endgroup
+@endgroup --}}

@@ -4,6 +4,7 @@
     'bordered' => true,
     'attributeList' => [
         'data-js-map-location' => !empty($place->schemaData['place']['pin']) ? json_encode($place->schemaData['place']['pin']) : "",
+        'data-open' => 'modal-' . $place->id,
     ]
 ])
 @if (!empty($place->callToActionItems['floating']))
