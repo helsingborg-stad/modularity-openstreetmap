@@ -3,8 +3,8 @@
     'containerAware' => true,
     'bordered' => true,
     'attributeList' => [
-        'data-js-map-location' => !empty($place->schemaData['place']['pin']) ? json_encode($place->schemaData['place']['pin']) : "",
-        'data-open' => 'modal-' . $place->id,
+        'data-js-map-location' => !empty($place->schemaData['place']['pin']) ? json_encode(array_merge($place->schemaData['place']['pin'], ['id' => 'osm-' . $place->id])) : "",
+        'data-open' => 'osm-' . $place->id,
     ]
 ])
 @if (!empty($place->callToActionItems['floating']))
