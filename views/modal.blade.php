@@ -1,6 +1,7 @@
 @modal([
     'closeButtonText' => 'Close',
-    'id' => 'modal-' . $place->id
+    'id' => 'modal-' . $place->id,
+    'isPanel' => true,
 ])
 my content
 @endmodal
