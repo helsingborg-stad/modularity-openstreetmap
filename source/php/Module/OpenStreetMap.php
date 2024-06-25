@@ -41,6 +41,7 @@ class OpenStreetMap extends \Modularity\Module
         
         $termsToShow = $fields['mod_osm_terms_to_show'];
         $postTypeToShow = $fields['mod_osm_post_type'];
+
         $data['isFullWidth'] = $fields['mod_osm_full_width'] ?? false;
         $data['mapStyle'] = $this->getMapStyle();
         $data['endpoint'] = $this->createEndpoint($postTypeToShow, $termsToShow);
