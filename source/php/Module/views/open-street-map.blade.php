@@ -9,6 +9,7 @@
 
 ])
     @slot('sidebarContent')
+    <div>
         @if (!$hideTitle && !empty($postTitle))
             @typography([
                 'id' => 'mod-posts-' . $ID . '-label',
@@ -22,10 +23,11 @@
       @collection([
             'classList' => ['o-grid', 'o-grid--horizontal'],
             'attributeList' => [
-                'data-js-pagination-container' => '',
+                'data-js-osm-endpoint-posts' => '',
             ]
         ])
 
         @endcollection
     @endslot
+    </div>
 @endopenStreetMap
