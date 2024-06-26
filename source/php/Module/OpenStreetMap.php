@@ -2,6 +2,8 @@
 
 namespace ModularityOpenStreetMap\Module;
 
+use ModularityOpenStreetMap\Api\OsmTransformationHandler;
+
 class OpenStreetMap extends \Modularity\Module
 {
     public $slug = 'open-street-map';
@@ -10,6 +12,8 @@ class OpenStreetMap extends \Modularity\Module
         'align' => ['full'],
         'mode' => false
     );
+
+    private string $taxonomyEndpointKey = 'taxonomies';
 
     public function init()
     {
@@ -24,22 +28,6 @@ class OpenStreetMap extends \Modularity\Module
             }
             return $blockSettings;
         }, 10, 2);
-
-        add_filter('wpPageForTerm/secondaryQueryArgs', array($this, 'setPostsPerPage'), 10, 1);
-        add_filter('Municipio/Controller/Singular/displaySecondaryQuery', array($this, 'replaceArchivePosts'), 10, 1);
-    }
-
-    public function setPostsPerPage($secondaryQueryArgs) {
-        if ($this->hasModule()) {
-            $secondaryQueryArgs['posts_per_page'] = 999;
-        }
-
-        return $secondaryQueryArgs;
-    }
-
-    public function replaceArchivePosts($item)
-    {
-        return !$this->hasModule();
     }
 
      /**
@@ -50,38 +38,46 @@ class OpenStreetMap extends \Modularity\Module
     {
         $fields = get_fields($this->ID);
         $data['ID'] = !empty($this->ID) ? $this->ID : uniqid();
-
+        
         $termsToShow = $fields['mod_osm_terms_to_show'];
         $postTypeToShow = $fields['mod_osm_post_type'];
+
+        $data['isFullWidth'] = $fields['mod_osm_full_width'] ?? false;
+        $data['mapStyle'] = $this->getMapStyle();
+        $data['endpoint'] = $this->createEndpoint($postTypeToShow, $termsToShow);
+        $data['startPosition'] = $this->getStartPosition($fields['map_start_values'] ?? []);
+
+        return $data;
+    }
+
+    private function createEndpoint($postTypeToShow, $termsToShow): string
+    {   
+        $endpoint = rest_url(OSM_ENDPOINT . $postTypeToShow . '?');
+
         $taxonomyToShow = [];
-        
         foreach ($termsToShow as $term) {
             $taxonomy = get_term($term)->taxonomy;
             $taxonomyToShow[$taxonomy][] = $term;
         }
-        $places = $this->getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow);
 
-        $data['isFullWidth'] = $fields['mod_osm_full_width'] ?? false;
-        $data['places'] = $places;
-        $data['mapStyle'] = $this->getMapStyle();
-        $data['perPage'] = !empty($fields['mod_osm_per_page']) ? $fields['mod_osm_per_page'] : 8;
+        foreach ($taxonomyToShow as $taxonomy => $terms) {
+            $endpoint .= '&' . $this->taxonomyEndpointKey . '[' . $taxonomy . ']=' . implode(',', $terms);
+        }
 
-        $mapStartValues = $fields['map_start_values'] ?? [];
-        $data['startPosition'] = [];
-        if (!empty($mapStartValues)) {
-            foreach ($mapStartValues as $key => $value) {
-                $data['startPosition'][$key] = $value;
-            }
-            $data['startPosition'] = $data['startPosition'];
-        } else {
-            $data['startPosition'] = [
+        return $endpoint;
+    }
+
+    private function getStartPosition(array $mapStartValues) 
+    {
+        if (empty($mapStartValues)) {
+            return [
                 'lat' => '56.046029',
                 'lng' => '12.693904',
                 'zoom' => '14'
             ];
         }
 
-        return $data;
+        return $mapStartValues;
     }
 
     private function getMapStyle()
@@ -91,38 +87,6 @@ class OpenStreetMap extends \Modularity\Module
         } else {
             return 'default';
         }
-    }
-
-    private function getPlacePosts($termsToShow, $taxonomyToShow, $postTypeToShow)
-    {
-        $args = [
-            'post_type' => $postTypeToShow,
-            'posts_per_page' => 999,
-            'tax_query' => [
-                'relation' => 'OR',
-            ]
-        ];
-
-        foreach ($taxonomyToShow as $taxonomy => $terms) {
-            $args['tax_query'][] = [
-                'taxonomy' => $taxonomy,
-                'field' => 'term_id',
-                'terms' => $terms
-            ];
-        }
-
-        $posts = get_posts($args);
-
-        return $this->buildPlacePosts($posts);
-    }
-
-    private function buildPlacePosts($posts)
-    {
-        foreach ($posts as &$post) {
-            $post = \Municipio\Helper\Post::preparePostObject($post);
-        }
-
-        return $posts;
     }
 
     public function template(): string

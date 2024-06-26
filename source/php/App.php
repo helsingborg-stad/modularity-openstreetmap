@@ -3,8 +3,7 @@
 namespace ModularityOpenStreetMap;
 
 use ModularityOpenStreetMap\Helper\Taxonomies as TaxonomiesHelper;
-use Municipio\Customizer as Customizer;
-use Kirki as Kirki;
+use Municipio\Api\RestApiEndpointsRegistry;
 
 class App
 {
@@ -19,6 +18,7 @@ class App
         add_filter('acf/prepare_field/name=mod_osm_terms_to_show', array($this, 'termsToShow'));
         add_filter('acf/prepare_field/name=mod_osm_full_width', array($this, 'handleFullWidthField'), 10, 2);
 
+        RestApiEndpointsRegistry::add(new \ModularityOpenStreetMap\Api\OsmEndpoint());
 
         $this->cacheBust = new \ModularityOpenStreetMap\Helper\CacheBust();
     }
@@ -27,9 +27,10 @@ class App
     {
         $postTypes = get_post_types();
         $arr = [];
+
         foreach ($postTypes as $postType) {
-            $schemaType = get_field('schema', $postType . '_options');
-            if ($schemaType === 'Place') {
+            $contentType = \Municipio\Helper\ContentType::getContentType($postType);
+            if (is_object($contentType) && $contentType->getKey() == 'place') {
                 $postTypeObject = get_post_type_object($postType);
                 $arr[$postTypeObject->name] = $postTypeObject->label;
             }
