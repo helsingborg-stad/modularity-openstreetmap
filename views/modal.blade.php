@@ -1,16 +1,23 @@
-@modal([
-    'closeButtonText' => 'Close',
-    'id' => 'osm-' . $place->id,
-    'isPanel' => true,
-    'padding' => 0,
+<div class="c-openstreetmap__post-full u-display--none" role="dialog" aria-hidden="true" aria-labelledby="osm-{{$place->id}}-title" data-js-osm-full-post="osm-{{$place->id}}">
+
+@icon([
+    'icon' => 'arrow_back',
+    'size' => 'md',
+    'color' => 'white',
+    'classList' => ['c-openstreetmap__button-back', 'c-openstreetmap__post-icon'],
+    'attributeList' => [
+        'tabindex' => '0',
+    ]
 ])
-    @if(!empty($place->images['thumbnail16:9']['src']))
-        @hero([
-                'image' => $place->featuredImage['src'],
-            ])
-        @endhero
-    @endif
-        <div class="o-container">
+@endicon
+
+@if(!empty($place->images['thumbnail16:9']['src']))
+    @hero([
+            'image' => $place->featuredImage['src'],
+        ])
+    @endhero
+@endif
+    <div class="o-container">
         @paper([
             'attributeList' => [
                 'style' => !empty($place->featuredImage['src']) ? 'transform:translateY(calc(max(-50%, -50px)))' : 'margin-top: 32px'
@@ -21,8 +28,9 @@
                 'justifyContent'=> 'space-between',
             ])
                 @typography([
-                    'element' => 'h1',
-                    'variant' => 'h1'
+                    'element' => 'h2',
+                    'variant' => 'h1',
+                    'id' => 'osm-' . $place->id . '-title',
                 ])
                     {!! $place->postTitleFiltered !!}
                 @endtypography
@@ -70,4 +78,4 @@
             </div>
         @endpaper
     </div>
-@endmodal
+</div>
