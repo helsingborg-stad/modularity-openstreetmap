@@ -4,7 +4,8 @@
     'bordered' => true,
     'attributeList' => [
         'data-js-map-location' => !empty($place->schemaData['place']['pin']) ? json_encode(array_merge($place->schemaData['place']['pin'], ['id' => 'osm-' . $place->id])) : "",
-        'data-open' => 'osm-' . $place->id,
+        'id' => 'osm-' . $place->id,
+        'tabindex' => '0'
     ]
 ])
 @if (!empty($place->callToActionItems['floating']))
