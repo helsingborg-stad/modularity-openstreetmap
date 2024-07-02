@@ -28,8 +28,8 @@ class App
         $postTypes = get_post_types();
         $arr = [];
         foreach ($postTypes as $postType) {
-            $contentType = \Municipio\Helper\ContentType::getContentType($postType);
-            if (is_object($contentType) && $contentType->getKey() == 'place') {
+            $schemaType = get_field('schema', $postType . '_options');
+            if ($schemaType === 'Place') {
                 $postTypeObject = get_post_type_object($postType);
                 $arr[$postTypeObject->name] = $postTypeObject->label;
             }
