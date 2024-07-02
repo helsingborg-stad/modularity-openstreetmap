@@ -47,6 +47,10 @@ class OpenStreetMap extends \Modularity\Module
         $data['endpoint'] = $this->createEndpoint($postTypeToShow, $termsToShow);
         $data['startPosition'] = $this->getStartPosition($fields['map_start_values'] ?? []);
 
+        $data['lang'] = [
+            'noPostsFound' => __('No posts were found.', 'modularity-open-street-map')
+        ];
+
         return $data;
     }
 

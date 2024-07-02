@@ -20,14 +20,41 @@
                 {!! $postTitle !!}
             @endtypography
         @endif
-      @collection([
-            'classList' => ['o-grid', 'o-grid--horizontal'],
+        @collection([
             'attributeList' => [
                 'data-js-osm-endpoint-posts' => '',
             ]
         ])
 
         @endcollection
-    @endslot
+
+        @loader([
+            'shape' => 'linear',
+            'size' => 'xs',
+            'classList' => [
+                'u-margin__top--8',
+                'u-margin__bottom--8'
+            ],
+            'attributeList' => [
+                'data-js-map-endpoint-spinner' => ''
+            ]
+        ])
+        @endloader
+
+        <template data-js-map-no-posts-found>
+            @notice([
+                'type' => 'info',
+                'message' => [
+                    'text' => $lang['noPostsFound']
+                ],
+                'icon' => [
+                    'name' => 'report',
+                    'size' => 'md',
+                    'color' => 'white'
+                ]
+            ])
+            @endnotice
+        </template>
     </div>
+    @endslot
 @endopenStreetMap
