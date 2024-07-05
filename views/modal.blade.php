@@ -1,15 +1,17 @@
-<div class="c-openstreetmap__post-full u-display--none" role="dialog" aria-hidden="true" aria-labelledby="osm-{{$place->id}}-title" data-js-osm-full-post="osm-{{$place->id}}">
+<div class="c-openstreetmap__post-full" role="dialog" aria-hidden="true" aria-labelledby="osm-{{$place->id}}-title" data-js-osm-full-post="osm-{{$place->id}}">
 
-@icon([
-    'icon' => 'arrow_back',
-    'size' => 'md',
-    'color' => 'white',
-    'classList' => ['c-openstreetmap__button-back', 'c-openstreetmap__post-icon'],
-    'attributeList' => [
-        'tabindex' => '0',
-    ]
-])
-@endicon
+<div class="c-openstreetmap__button-back-container">
+    @icon([
+        'icon' => 'arrow_back',
+        'size' => 'md',
+        'color' => 'white',
+        'classList' => ['c-openstreetmap__button-back', 'c-openstreetmap__post-icon'],
+        'attributeList' => [
+            'tabindex' => '0',
+        ]
+    ])
+    @endicon
+</div>
 
 @if(!empty($place->images['thumbnail16:9']['src']))
     @hero([
