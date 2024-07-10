@@ -1,7 +1,8 @@
+@includeWhen(!empty($filters), 'partials.filters')
 @openStreetMap([
     'startPosition' => $startPosition,
     'mapStyle' => $mapStyle,
-    'fullWidth' => (!empty($blockData['align']) && $blockData['align'] == 'full') || $isFullWidth ? true : false,
+    'fullWidth' => true,
     'containerAware' => true,
     'attributeList' => [
         'data-js-map-posts-endpoint' => $endpoint,

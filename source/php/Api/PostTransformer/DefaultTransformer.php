@@ -13,6 +13,8 @@ class DefaultTransformer implements PostTransformerInterface {
         $post = \Municipio\Helper\ContentType::complementPlacePost($post);
         $post = \Municipio\Helper\Post::preparePostObject($post);
 
+        echo '<pre>' . print_r( $post, true ) . '</pre>';die;
+
         return $post;
     }
 }
