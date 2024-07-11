@@ -2,7 +2,8 @@
 
 namespace ModularityOpenStreetMap\Module;
 
-use ModularityOpenStreetMap\Api\OsmTransformationHandler;
+use ModularityOpenStreetMap\Helper\GetTaxonomies as GetTaxonomies;
+use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
 
 class OpenStreetMap extends \Modularity\Module
 {
@@ -14,6 +15,8 @@ class OpenStreetMap extends \Modularity\Module
     );
 
     private string $taxonomyEndpointKey = 'taxonomies';
+    private GetTaxonomies $getTaxonomiesInstance;
+    private GetPlacePostType $getPlacePostTypeInstance;
 
     public function init()
     {
@@ -21,6 +24,9 @@ class OpenStreetMap extends \Modularity\Module
         $this->nameSingular = __("OpenStreetMap", 'modularity-open-street-map');
         $this->namePlural = __("OpenStreetMaps", 'modularity-open-street-map');
         $this->description = __("Outputs a map.", 'modularity-open-street-map');
+
+        $this->getPlacePostTypeInstance = new GetPlacePostType();
+        $this->getTaxonomiesInstance = new GetTaxonomies($this->getPlacePostTypeInstance);
 
         add_filter('Modularity/Block/Settings', function ($blockSettings, $slug) {
             if ($slug == $this->slug) {
@@ -84,21 +90,7 @@ class OpenStreetMap extends \Modularity\Module
 
     private function getTermsFromTaxonomy(string $taxonomy): array
     {
-        $filteredTerms = [];
-
-        $terms = get_terms([
-            'taxonomy' => $taxonomy,
-            'hide_empty' => true,
-        ]);
-
-        
-        if (!empty($terms)) {
-            foreach($terms as $term) {
-                $filteredTerms[$term->slug] = $term->name;
-            }
-        }
-
-        return $filteredTerms;
+        return $this->getTaxonomiesInstance->getAllTermsFromTaxonomy($taxonomy);
     }
 
     /**
@@ -109,13 +101,13 @@ class OpenStreetMap extends \Modularity\Module
      * @return string The generated endpoint URL.
      */
     private function createEndpoint($postTypeToShow, $termsToShow): string
-    {   
+    {
         $endpoint = rest_url(OSM_ENDPOINT . $postTypeToShow . '?');
 
         $taxonomyToShow = [];
-        foreach ($termsToShow as $term) {
-            $taxonomy = get_term($term)->taxonomy;
-            $taxonomyToShow[$taxonomy][] = $term;
+        foreach ($termsToShow as $termId) {
+            $taxonomy = get_term($termId)->taxonomy;
+            $taxonomyToShow[$taxonomy][] = $termId;
         }
 
         foreach ($taxonomyToShow as $taxonomy => $terms) {

@@ -21,17 +21,17 @@ class GetPlacePostType {
             return [];
         }
 
-        $arr = [];
+        $filteredPostTypes = [];
         foreach ($postTypes as $postType) {
             $contentType = \Municipio\Helper\ContentType::getContentType($postType);
             if (is_object($contentType) && $contentType->getKey() == 'place') {
                 $postTypeObject = get_post_type_object($postType);
-                $arr[$postTypeObject->name] = $postTypeObject->label;
+                $filteredPostTypes[$postTypeObject->name] = $postTypeObject->label;
             }
         }
 
-        $this->placePostTypes = $arr;
-        return $arr;
+        $this->placePostTypes = $filteredPostTypes;
+        return $filteredPostTypes;
     }
 
 }

@@ -2,7 +2,6 @@
 
 namespace ModularityOpenStreetMap;
 
-use ModularityOpenStreetMap\Helper\Taxonomies as TaxonomiesHelper;
 use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
 use ModularityOpenStreetMap\Helper\GetTaxonomies as GetTaxonomies;
 use ModularityOpenStreetMap\Helper\GetSelectedTaxonomies as GetSelectedTaxonomies;
@@ -24,7 +23,7 @@ class App
         add_filter('acf/prepare_field/name=mod_osm_terms_to_show', array($this, 'termsToShow'));
 
         $this->getPlacePostTypeInstance = new GetPlacePostType();
-        $this->getTaxonomiesInstance = new GetTaxonomies();
+        $this->getTaxonomiesInstance = new GetTaxonomies($this->getPlacePostTypeInstance);
         $this->getSelectedTaxonomiesInstance = new GetSelectedTaxonomies();
 
         
@@ -47,13 +46,19 @@ class App
     public function termsToShow($field)
     {
         $postType = get_field('mod_osm_post_type');
-        $arr = TaxonomiesHelper::getTerms($postType);
+        $taxonomies = $this->getTaxonomiesInstance->getTaxonomiesFromPostTypeArchive($postType);
 
-        if (empty($arr)) {
-            $arr = ['none' => 'No post found'];
+        if (empty($taxonomies)) {
+            $taxonomies = ['none' => 'No post found'];
         }
 
-        $field['choices'] = $arr;
+        $mergedTerms = [];
+        foreach ($taxonomies as $slug => $label) {
+            $mergedTerms += $this->getTaxonomiesInstance->getAllTermsFromTaxonomy($slug, 'id');
+            
+        }
+        
+        $field['choices'] = $mergedTerms;
 
         return $field;
     }

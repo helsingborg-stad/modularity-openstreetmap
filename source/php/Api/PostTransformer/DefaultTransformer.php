@@ -12,9 +12,26 @@ class DefaultTransformer implements PostTransformerInterface {
     {
         $post = \Municipio\Helper\ContentType::complementPlacePost($post);
         $post = \Municipio\Helper\Post::preparePostObject($post);
-
-        echo '<pre>' . print_r( $post, true ) . '</pre>';die;
+        $post->osmFilterValues = $this->addOsmFilteringCapabilities($post);
 
         return $post;
+    }
+
+    private function addOsmFilteringCapabilities($post): string
+    {
+        $filterTermsStructure = [];
+        $attributeString = "";
+        
+        if (!empty($post->termsUnlinked)) {
+            foreach ($post->termsUnlinked as $term) {
+                $filterTermsStructure[$term['taxonomy']][] = $term['slug'];
+            }
+
+            foreach ($filterTermsStructure as $taxonomy => $term) {
+                $attributeString .= ' data-js-osm-' . $taxonomy . '="' . implode(',', $term) . '"';
+            }
+        }
+
+        return $attributeString;
     }
 }

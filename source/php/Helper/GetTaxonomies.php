@@ -2,23 +2,29 @@
 
 namespace ModularityOpenStreetMap\Helper;
 
+use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
+
 class GetTaxonomies {
+    private $postTypesTaxonomies = [];
+
+    public function __construct(private GetPlacePostType $getPlacePostTypeInstance)
+    {}
+
     public function getAllTaxonomiesForAllPlacePostTypes(array $postTypes): array
     {
-        $taxonomies = [];
-
-        if (empty($postTypes)) {
-            return [];
+        if (empty($postTypes) || !empty($this->postTypesTaxonomies)) {
+            return $this->postTypesTaxonomies;
         }
 
         foreach ($postTypes as $slug => $label) {
-            $taxonomies[$slug] = $this->getTaxonomiesFromArchive($slug);
+            $this->postTypesTaxonomies[$slug] = $this->getTaxonomiesFromPostTypeArchive($slug);
+
         }
 
-        return $taxonomies;
+        return $this->postTypesTaxonomies;
     }
-    
-    public function getTaxonomiesFromArchive(string $postType): array
+
+    public function getTaxonomiesFromPostTypeArchive(string $postType): array
     {
         $activeTaxonomiesForPostType = get_theme_mod('archive_' . $postType . '_taxonomies_to_display', []);
         $taxonomies = $this->getTaxonomiesFromSlug($activeTaxonomiesForPostType);
@@ -39,6 +45,45 @@ class GetTaxonomies {
         }
 
         return $arr;
+    }
+
+    public function getAllTermsFromPostTypeArchiveTaxonomies(string $postType) 
+    {
+        $placePostTypesTaxonomies = $this->getAllTaxonomiesForAllPlacePostTypes($this->getPlacePostTypeInstance->getPlacePostTypes());
+
+        if (empty($placePostTypesTaxonomies[$postType])) {
+            return [];
+        }
+
+        $terms = [];
+        foreach ($placePostTypesTaxonomies[$postType] as $slug => $label) {
+            $terms[$slug] = $this->getAllTermsFromTaxonomy($slug);
+        }
+
+        return $terms;
+    }
+
+    public function getAllTermsFromTaxonomy(string $taxonomy, string $output = 'name'): array
+    {
+        $filteredTerms = [];
+
+        $terms = get_terms([
+            'taxonomy' => $taxonomy,
+            'hide_empty' => true,
+        ]);
+
+        
+        if (!empty($terms)) {
+            if ($output === 'object') { 
+                return $terms;
+            }
+
+            foreach($terms as $term) {
+                $filteredTerms[$output === 'id' ? $term->term_id : $term->slug] = $term->name;
+            }
+        }
+
+        return $filteredTerms;
     }
 
 }
