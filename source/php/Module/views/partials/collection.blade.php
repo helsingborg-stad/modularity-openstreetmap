@@ -1,6 +1,5 @@
 @collection__item([
     'classList' => ['c-openstreetmap__collection__item'],
-    'containerAware' => true,
     'bordered' => true,
     'attributeList' => [
         'data-js-map-location' => !empty($place->schemaData['place']['pin']) ? json_encode($place->schemaData['place']['pin']) : "", 
