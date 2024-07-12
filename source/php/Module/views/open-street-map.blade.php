@@ -24,7 +24,7 @@
         @collection([
             'attributeList' => [
                 'data-js-osm-endpoint-posts' => '',
-                'data-js-filter-container' => 'osm-filter-container-' . $ID
+                'data-js-filter-select-container' => 'osm-filter-container-' . $ID
             ]
         ])
 

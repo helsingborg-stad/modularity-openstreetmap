@@ -28,7 +28,7 @@ class DefaultTransformer implements PostTransformerInterface {
             }
 
             foreach ($filterTermsStructure as $taxonomy => $term) {
-                $attributeString .= ' data-js-osm-' . $taxonomy . '="' . implode(',', $term) . '"';
+                $attributeString .= ' osm-filter-item-' . $taxonomy . '=' . implode(',', $term);
             }
         }
 
