@@ -10,6 +10,7 @@
 
 ])
     @slot('sidebarContent')
+    @includeWhen($sort, 'partials.sort')
     <div>
         @if (!$hideTitle && !empty($postTitle))
             @typography([
@@ -22,10 +23,11 @@
             @endtypography
         @endif
         @collection([
+            'id' => 'osm-posts-container-' . $ID,
             'attributeList' => [
                 'data-js-osm-endpoint-posts' => '',
-                'data-js-filter-select-container' => 'osm-filter-container-' . $ID
-            ]
+                'data-js-filter-select-container' => 'osm-filter-container-' . $ID,
+            ],
         ])
 
         @endcollection

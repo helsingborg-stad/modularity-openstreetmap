@@ -2,7 +2,8 @@
     'flexGrow' => true,
     'classList' => [
         'o-container',
-        'o-grid'
+        'o-grid',
+        'u-margin__bottom--4'
     ]
 ])
     @foreach($filters as $filter)

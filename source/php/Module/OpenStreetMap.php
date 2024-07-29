@@ -47,7 +47,6 @@ class OpenStreetMap extends \Modularity\Module
         
         $termsToShow = $fields['mod_osm_terms_to_show'];
         $postTypeToShow = $fields['mod_osm_post_type'];
-        // $filters = $this->createFilters($fields);
 
         $data['mapStyle'] = $this->getMapStyle();
         $data['endpoint'] = $this->createEndpoint($postTypeToShow, $termsToShow);
@@ -55,10 +54,13 @@ class OpenStreetMap extends \Modularity\Module
         $data['lang'] = [
             'noPostsFound' => __('No posts were found.', 'modularity-open-street-map'),
             'filterBy' => __('Filter by', 'modularity-open-street-map'),
+            'descending' => __('Descending', 'modularity-open-street-map'),
+            'ascending' => __('Ascending', 'modularity-open-street-map'),
+            'randomized' => __('Randomized', 'modularity-open-street-map')
         ];
 
+        $data['sort'] = !empty($fields['mod_osm_sort']);
         $data['filters'] = $this->createFilters($fields, $data['lang']['filterBy']);
-
 
         return $data;
     }

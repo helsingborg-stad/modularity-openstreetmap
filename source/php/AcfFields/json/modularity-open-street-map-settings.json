@@ -77,6 +77,26 @@
             "height": ""
         },
         {
+            "key": "field_66a7398c8aa52",
+            "label": "Add sorting functionality",
+            "name": "mod_osm_sort",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Allows the user to sort the posts",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_668d19163553d",
             "label": "Filter",
             "name": "mod_osm_filters",
