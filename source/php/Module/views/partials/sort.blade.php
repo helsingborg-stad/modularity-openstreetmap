@@ -1,8 +1,9 @@
 @select([
+    'placeholder' => $lang['sort'],
     'options' => [
-        'asc' => __('Ascending', 'modularity-open-street-map'),
-        'desc' => __('Descending', 'modularity-open-street-map'),
-        'rand' => __('Random', 'modularity-open-street-map'),
+        'asc' => $lang['ascending'],
+        'desc' => $lang['descending'],
+        'rand' => $lang['randomized'],
     ],
     'selectAttributeList' => [
         'data-js-sort-select' => 'osm-posts-container-' . $ID,
