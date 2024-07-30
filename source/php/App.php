@@ -63,13 +63,6 @@ class App
         return $field;
     }
 
-
-
-
-
-
-
-
     public function enqueueBackend()
     {
         $placeTaxonomies = $this->getTaxonomiesInstance->getAllTaxonomiesForAllPlacePostTypes($this->getPlacePostTypeInstance->getPlacePostTypes());

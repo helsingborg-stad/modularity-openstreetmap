@@ -14,7 +14,9 @@ class OsmQueryArgsCreator
             'posts_per_page' => $this->settings->getPostsPerPage(), 
             'paged' => $this->settings->getPage(),
             'post_status' => 'publish',
-            'tax_query' => $this->createTaxQuery()
+            'tax_query' => $this->createTaxQuery(),
+            'orderby' => $this->settings->getOrderBy(),
+            'order' => $this->settings->getOrder()
         ];
     }
 

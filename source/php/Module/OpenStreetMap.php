@@ -4,6 +4,12 @@ namespace ModularityOpenStreetMap\Module;
 
 use ModularityOpenStreetMap\Helper\GetTaxonomies as GetTaxonomies;
 use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
+use ModularityOpenStreetMap\Decorator\EndpointDecoratorInterface as EndpointDecoratorInterface;
+use ModularityOpenStreetMap\Decorator\EndpointOrder as EndpointOrder;
+use ModularityOpenStreetMap\Decorator\EndpointPostType as EndpointPostType;
+use ModularityOpenStreetMap\Decorator\EndpointTaxonomies as EndpointTaxonomies;
+use ModularityOpenStreetMap\Decorator\EndpointOrderBy as EndpointOrderBy;
+use ModularityOpenStreetMap\Module\CreateFilters as CreateFilters;
 
 class OpenStreetMap extends \Modularity\Module
 {
@@ -14,9 +20,13 @@ class OpenStreetMap extends \Modularity\Module
         'mode' => false
     );
 
-    private string $taxonomyEndpointKey = 'taxonomies';
     private GetTaxonomies $getTaxonomiesInstance;
     private GetPlacePostType $getPlacePostTypeInstance;
+    private CreateFilters $createFiltersInstance;
+    private EndpointDecoratorInterface $endpointOrder;
+    private EndpointDecoratorInterface $endpointOrderBy;
+    private EndpointDecoratorInterface $endpointPostType;
+    private EndpointDecoratorInterface $endpointTaxonomies;
 
     public function init()
     {
@@ -26,7 +36,13 @@ class OpenStreetMap extends \Modularity\Module
         $this->description = __("Outputs a map.", 'modularity-open-street-map');
 
         $this->getPlacePostTypeInstance = new GetPlacePostType();
-        $this->getTaxonomiesInstance = new GetTaxonomies($this->getPlacePostTypeInstance);
+        $this->getTaxonomiesInstance    = new GetTaxonomies($this->getPlacePostTypeInstance);
+        $this->createFiltersInstance    = new CreateFilters($this->getTaxonomiesInstance);
+
+        $this->endpointOrder        = new EndpointOrder();
+        $this->endpointOrderBy      = new EndpointOrderBy();
+        $this->endpointPostType     = new EndpointPostType();
+        $this->endpointTaxonomies   = new EndpointTaxonomies();
 
         add_filter('Modularity/Block/Settings', function ($blockSettings, $slug) {
             if ($slug == $this->slug) {
@@ -44,12 +60,9 @@ class OpenStreetMap extends \Modularity\Module
     {
         $fields = get_fields($this->ID);
         $data['ID'] = !empty($this->ID) ? $this->ID : uniqid();
-        
-        $termsToShow = $fields['mod_osm_terms_to_show'];
-        $postTypeToShow = $fields['mod_osm_post_type'];
 
         $data['mapStyle'] = $this->getMapStyle();
-        $data['endpoint'] = $this->createEndpoint($postTypeToShow, $termsToShow);
+        $data['endpoint'] = $this->createEndpoint($fields);
         $data['startPosition'] = $this->getStartPosition($fields['map_start_values'] ?? []);
         $data['lang'] = [
             'noPostsFound' => __('No posts were found.', 'modularity-open-street-map'),
@@ -61,39 +74,9 @@ class OpenStreetMap extends \Modularity\Module
         ];
 
         $data['sort'] = !empty($fields['mod_osm_sort']);
-        $data['filters'] = $this->createFilters($fields, $data['lang']['filterBy']);
+        $data['filters'] = $this->createFiltersInstance->create($fields, $data['lang']['filterBy']);
 
         return $data;
-    }
-
-    private function createFilters($fields, string $filterByLang): array {
-        if (empty($fields['mod_osm_filters'])) {
-            return [];
-        }
-
-        $filters = [];
-        foreach ($fields['mod_osm_filters'] as $filter) {
-            if (empty($filter['mod_osm_filter_taxonomy']) && is_string($filter['mod_osm_filter_taxonomy'])) {
-                continue;
-            }
-
-            $terms = $this->getTermsFromTaxonomy($filter['mod_osm_filter_taxonomy']);
-
-            if ($terms) {
-                $filters[] = [
-                    'label' => $filter['mod_osm_filter_text'] ?? $filterByLang . $filter['mod_osm_filter_taxonomy'], 
-                    'taxonomy' => $filter['mod_osm_filter_taxonomy'],
-                    'terms' => $terms
-                ];
-            }
-        }
-
-        return $filters;
-    }
-
-    private function getTermsFromTaxonomy(string $taxonomy): array
-    {
-        return $this->getTaxonomiesInstance->getAllTermsFromTaxonomy($taxonomy);
     }
 
     /**
@@ -103,19 +86,13 @@ class OpenStreetMap extends \Modularity\Module
      * @param array $termsToShow An array of term IDs to filter the results by.
      * @return string The generated endpoint URL.
      */
-    private function createEndpoint($postTypeToShow, $termsToShow): string
+    private function createEndpoint($fields): string
     {
-        $endpoint = rest_url(OSM_ENDPOINT . $postTypeToShow . '?');
-
-        $taxonomyToShow = [];
-        foreach ($termsToShow as $termId) {
-            $taxonomy = get_term($termId)->taxonomy;
-            $taxonomyToShow[$taxonomy][] = $termId;
-        }
-
-        foreach ($taxonomyToShow as $taxonomy => $terms) {
-            $endpoint .= '&' . $this->taxonomyEndpointKey . '[' . $taxonomy . ']=' . implode(',', $terms);
-        }
+        $endpoint = rest_url(OSM_ENDPOINT);
+        $endpoint = $this->endpointPostType->decorate($endpoint, $fields);
+        $endpoint = $this->endpointTaxonomies->decorate($endpoint, $fields);
+        $endpoint = $this->endpointOrder->decorate($endpoint, $fields);
+        $endpoint = $this->endpointOrderBy->decorate($endpoint, $fields);
 
         return $endpoint;
     }

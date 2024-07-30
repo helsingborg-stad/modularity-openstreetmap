@@ -34,7 +34,7 @@ class OsmEndpoint extends RestApiEndpoint {
         }
 
         $argsInstance           = new OsmQueryArgsCreator($this->settings);
-        $posts                  = (new OsmGetPosts($argsInstance->CreateQueryArgs()))->getPosts();
+        $posts                  = (new OsmGetPosts($argsInstance->CreateQueryArgs(), $this->settings))->getPosts();
         $postsHandlerInstance   = new OsmTransformationHandler(
             $posts, 
             $this->settings,
