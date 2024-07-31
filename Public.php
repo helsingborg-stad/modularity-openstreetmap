@@ -7,6 +7,7 @@ use ComponentLibrary\Init as ComponentLibraryInit;
 if (!function_exists('open_street_map_render_blade_view')) {
     function open_street_map_render_blade_view($view, $data = [], $compress = true)
     {
+        $markup = '';
         $componentLibrary = new ComponentLibraryInit([]);
         $bladeEngine = $componentLibrary->getEngine();
         $data = array_merge($data, array('errorMessage' => false));

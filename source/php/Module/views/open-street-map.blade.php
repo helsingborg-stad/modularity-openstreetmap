@@ -1,12 +1,17 @@
+@includeWhen(!empty($filters), 'partials.filters')
 @openStreetMap([
     'startPosition' => $startPosition,
     'mapStyle' => $mapStyle,
-    'fullWidth' => (!empty($blockData['align']) && $blockData['align'] == 'full') || $isFullWidth ? true : false,
+    'fullWidth' => true,
     'containerAware' => true,
+    'attributeList' => [
+        'data-js-map-posts-endpoint' => $endpoint,
+    ]
 
 ])
-    @if($places)
     @slot('sidebarContent')
+    @includeWhen($sort, 'partials.sort')
+    <div>
         @if (!$hideTitle && !empty($postTitle))
             @typography([
                 'id' => 'mod-posts-' . $ID . '-label',
@@ -18,20 +23,42 @@
             @endtypography
         @endif
         @collection([
-            'classList' => ['o-grid', 'o-grid--horizontal'],
+            'id' => 'osm-posts-container-' . $ID,
             'attributeList' => [
-                'data-js-pagination-container' => '',
-            ]
+                'data-js-osm-endpoint-posts' => '',
+                'data-js-filter-select-container' => 'osm-filter-container-' . $ID,
+            ],
         ])
-            @foreach($places as $place)
-                <div class="c-openstreetmap__posts" data-js-pagination-item tabindex="0">
-                    @include('partials.collection')
-                    @include('partials.post')
-                </div>
-            @endforeach
+
         @endcollection
 
-        @include('partials.pagination')
+        @loader([
+            'shape' => 'linear',
+            'size' => 'xs',
+            'classList' => [
+                'u-margin__top--8',
+                'u-margin__bottom--8'
+            ],
+            'attributeList' => [
+                'data-js-map-endpoint-spinner' => ''
+            ]
+        ])
+        @endloader
+
+        <template data-js-map-no-posts-found>
+            @notice([
+                'type' => 'info',
+                'message' => [
+                    'text' => $lang['noPostsFound']
+                ],
+                'icon' => [
+                    'name' => 'report',
+                    'size' => 'md',
+                    'color' => 'white'
+                ]
+            ])
+            @endnotice
+        </template>
+    </div>
     @endslot
-    @endif
 @endopenStreetMap

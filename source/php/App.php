@@ -2,67 +2,88 @@
 
 namespace ModularityOpenStreetMap;
 
-use ModularityOpenStreetMap\Helper\Taxonomies as TaxonomiesHelper;
-use Municipio\Customizer as Customizer;
-use Kirki as Kirki;
+use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
+use ModularityOpenStreetMap\Helper\GetTaxonomies as GetTaxonomies;
+use ModularityOpenStreetMap\Helper\GetSelectedTaxonomies as GetSelectedTaxonomies;
+use Municipio\Api\RestApiEndpointsRegistry;
 
 class App
 {
     protected \ModularityOpenStreetMap\Helper\CacheBust $cacheBust;
-
+    private GetPlacePostType $getPlacePostTypeInstance;
+    private GetTaxonomies $getTaxonomiesInstance;
+    private GetSelectedTaxonomies $getSelectedTaxonomiesInstance;
     public function __construct()
     {
         add_action('wp_enqueue_scripts', array($this, 'enqueueFrontend'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueueBackend'));
         add_action('plugins_loaded', array($this, 'registerModule'));
 
         add_filter('acf/load_field/name=mod_osm_post_type', array($this, 'postTypes'));
         add_filter('acf/prepare_field/name=mod_osm_terms_to_show', array($this, 'termsToShow'));
-        add_filter('acf/prepare_field/name=mod_osm_full_width', array($this, 'handleFullWidthField'), 10, 2);
 
+        $this->getPlacePostTypeInstance = new GetPlacePostType();
+        $this->getTaxonomiesInstance = new GetTaxonomies($this->getPlacePostTypeInstance);
+        $this->getSelectedTaxonomiesInstance = new GetSelectedTaxonomies();
+
+        
+        RestApiEndpointsRegistry::add(new \ModularityOpenStreetMap\Api\OsmEndpoint());
 
         $this->cacheBust = new \ModularityOpenStreetMap\Helper\CacheBust();
     }
 
     public function postTypes($field)
     {
-        $postTypes = get_post_types();
-        $arr = [];
-        foreach ($postTypes as $postType) {
-            $contentType = \Municipio\Helper\ContentType::getContentType($postType);
-            if (is_object($contentType) && $contentType->getKey() == 'place') {
-                $postTypeObject = get_post_type_object($postType);
-                $arr[$postTypeObject->name] = $postTypeObject->label;
-            }
-        }
 
-        reset($arr);
-        $first_key = key($arr);
-        $field['default_value'] = $first_key;
+        $postTypes = $this->getPlacePostTypeInstance->getPlacePostTypes();
 
-        $field['choices'] = $arr;
+        $field['default_value'] = key($postTypes);
+        $field['choices'] = $postTypes;
+
         return $field;
     }
 
     public function termsToShow($field)
     {
         $postType = get_field('mod_osm_post_type');
-        $arr = TaxonomiesHelper::getTerms($postType);
+        $taxonomies = $this->getTaxonomiesInstance->getTaxonomiesFromPostTypeArchive($postType);
 
-        if (empty($arr)) {
-            $arr = ['none' => 'No post found'];
+        if (empty($taxonomies)) {
+            $taxonomies = ['none' => 'No post found'];
         }
 
-        $field['choices'] = $arr;
+        $mergedTerms = [];
+        foreach ($taxonomies as $slug => $label) {
+            $mergedTerms += $this->getTaxonomiesInstance->getAllTermsFromTaxonomy($slug, 'id');
+            
+        }
+        
+        $field['choices'] = $mergedTerms;
 
         return $field;
     }
 
-    public function handleFullWidthField($field)
+    public function enqueueBackend()
     {
-        if (get_post_type() == 'page') {
-            return false;
-        }
-        return $field;
+        $placeTaxonomies = $this->getTaxonomiesInstance->getAllTaxonomiesForAllPlacePostTypes($this->getPlacePostTypeInstance->getPlacePostTypes());
+
+        $selected = $this->getSelectedTaxonomiesInstance->getSelectedTaxonomies();
+
+        wp_register_script(
+            'modularity-open-street-map-js',
+            MODULARITYOPENSTREETMAP_URL . '/dist/' .
+            $this->cacheBust->name('js/modularity-open-street-map.js'),
+            ['jquery', 'acf-input']
+        );
+
+        wp_localize_script(
+            'modularity-open-street-map-js',
+            'osm',
+            json_encode(['taxonomies' => $placeTaxonomies, 'selected' => $selected])
+        );
+    
+
+        wp_enqueue_script('modularity-open-street-map-js');
     }
 
     /**
@@ -78,14 +99,6 @@ class App
         );
 
         wp_enqueue_style('modularity-open-street-map-css');
-
-        wp_register_script(
-            'modularity-open-street-map-js',
-            MODULARITYOPENSTREETMAP_URL . '/dist/' .
-            $this->cacheBust->name('js/modularity-open-street-map.js')
-        );
-
-        wp_enqueue_script('modularity-open-street-map-js');
     }
 
     /**
