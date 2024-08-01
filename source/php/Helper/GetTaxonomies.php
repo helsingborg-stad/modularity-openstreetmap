@@ -27,6 +27,11 @@ class GetTaxonomies {
     public function getTaxonomiesFromPostTypeArchive(string $postType): array
     {
         $activeTaxonomiesForPostType = get_theme_mod('archive_' . $postType . '_taxonomies_to_display', []);
+        
+        if (!is_array($activeTaxonomiesForPostType)) {
+            return [];
+        }
+
         $taxonomies = $this->getTaxonomiesFromSlug($activeTaxonomiesForPostType);
 
         return $taxonomies;
