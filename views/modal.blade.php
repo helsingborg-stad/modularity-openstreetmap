@@ -1,4 +1,4 @@
-<div class="c-openstreetmap__post-full" role="dialog" aria-hidden="true" aria-labelledby="osm-{{$place->id}}-title" data-js-osm-full-post="osm-{{$place->id}}">
+<div class="c-openstreetmap__post-full u-display--none" role="dialog" aria-hidden="true" aria-labelledby="osm-{{$place->id}}-title" data-js-osm-full-post="osm-{{$place->id}}">
 
 <div class="c-openstreetmap__button-back-container">
     @icon([
