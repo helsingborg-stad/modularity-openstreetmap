@@ -1,0 +1,151 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Modularity Open Street Map\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-28 05:55+0000\n"
+"PO-Revision-Date: 2024-08-05 13:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: Swedish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: modularity-open-street-mapX-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"Language: sv_SE\n"
+"X-Loco-Version: 2.6.6; wp-6.5.2"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:101
+msgid "1"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:102
+msgid "2"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:103
+msgid "3"
+msgstr ""
+
+#. Description of the plugin
+msgid "A map based of OSM."
+msgstr "En karta baserad på OSM."
+
+#: source/php/App.php:75
+msgid "Appearance"
+msgstr "Utseende"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:143
+msgid ""
+"Click on the map to place a marker for the default center of the map. Use "
+"the plus- and minus-signs (+/-) to set the default zoom level."
+msgstr ""
+"Clicka på kartan för att placera en markör. Markören kommer att vara "
+"utgångspunkten för kartan. Använd plus- och minustecknet (+/-) för att "
+"bestämma zoom."
+
+#: source/php/App.php:84
+msgid "Color"
+msgstr "Färg"
+
+#: source/php/App.php:83
+msgid "Dark"
+msgstr ""
+
+#: source/php/App.php:81
+msgid "Default"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:68
+msgid "Full width"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:105
+msgid "grid-md-12"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/NiclasNorin"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/NiclasNorin/modularity-open-street-map"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:26
+msgid "Infopoints"
+msgstr ""
+
+#. Name of the plugin
+msgid "Modularity Open Street Map"
+msgstr ""
+
+#. Author of the plugin
+msgid "Niclas Norin"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:53
+msgid "No post found"
+msgstr ""
+
+#: source/php/App.php:67 source/php/Module/OpenStreetMap.php:17
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:8
+msgid "OpenStreetMap"
+msgstr ""
+
+#: source/php/Module/OpenStreetMap.php:18
+msgid "OpenStreetMaps"
+msgstr ""
+
+#: source/php/Module/OpenStreetMap.php:19
+msgid "Outputs a map."
+msgstr ""
+
+#: source/php/App.php:82
+msgid "Pale"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:117
+msgid "Per page"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:28
+msgid "place"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:25
+msgid "Platser"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:88
+msgid "Post columns"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:12
+msgid "Post type"
+msgstr ""
+
+#: source/php/App.php:76
+msgid ""
+"Select if you want to use one of the predefined appearance, or customize "
+"freely."
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:40
+msgid "Select place categories to show"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:139
+msgid "Starting point and zoom level"
+msgstr ""
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:92
+msgid "This does not affect inner blocks"
+msgstr ""
+
+#: source/php/Module/OpenStreetMap.php:130
+msgid "Visit website"
+msgstr ""

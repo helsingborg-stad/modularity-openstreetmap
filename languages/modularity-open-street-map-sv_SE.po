@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Modularity Open Street Map\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-05 15:36+0200\n"
-"PO-Revision-Date: 2024-08-05 15:43+0200\n"
+"PO-Revision-Date: 2024-08-05 16:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -29,10 +29,8 @@ msgid "Post type"
 msgstr "Posttyper"
 
 #: source/php/AcfFields/php/modularity-open-street-map-settings.php:23
-#, fuzzy
-#| msgid "place"
 msgid "Places"
-msgstr "plats"
+msgstr "Platser"
 
 #: source/php/AcfFields/php/modularity-open-street-map-settings.php:24
 msgid "News"
