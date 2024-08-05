@@ -14,7 +14,7 @@ class Main {
 
         if (postTypeSelect) {
             if (postTypeSelect.value) {
-                this.taxonomySelectUpdaterInstance.updateExistsingRows(postTypeSelect.value);
+                this.taxonomySelectUpdaterInstance.updateExistsingRows(this.container, postTypeSelect.value);
             }
             
             this.listenForPostTypeChanges(postTypeSelect);
@@ -25,14 +25,14 @@ class Main {
     private listenForPostTypeChanges(postTypeSelect: HTMLSelectElement): void {
         postTypeSelect.addEventListener('change', (event) => {
             const selectedValue = (event.target as HTMLSelectElement).value;
-            this.taxonomySelectUpdaterInstance.updateExistsingRows(selectedValue);
+            this.taxonomySelectUpdaterInstance.updateExistsingRows(this.container, selectedValue);
         });
     }
 
     private listenForFilterRowsAdded(postTypeSelect: HTMLSelectElement): void
     {
         this.acf.addAction('append', ( jqueryEl: any ) => {
-            if (!jqueryEl.hasOwnProperty(0)) {
+            if (!jqueryEl.hasOwnProperty(0) || !jqueryEl[0].classList.contains('acf-row') || !this.container.contains(jqueryEl[0])) {
                 return;
             }
 

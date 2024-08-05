@@ -24,7 +24,7 @@ class Module {
         } catch (error) {
             console.error('Error parsing OSM data', error);
         }
-        
+
         return [
             parsedData.hasOwnProperty('taxonomies') ? parsedData.taxonomies : {}, 
             parsedData.hasOwnProperty('selected') ? parsedData.selected : {}
