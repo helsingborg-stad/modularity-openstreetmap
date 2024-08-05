@@ -63,7 +63,8 @@ class OpenStreetMap extends \Modularity\Module
 
         $data['mapStyle'] = $this->getMapStyle();
         $data['endpoint'] = $this->createEndpoint($fields);
-        $data['startPosition'] = $this->getStartPosition($fields['map_start_values'] ?? []);
+        $data['startPosition'] = !empty($fields['map_start_values']) && is_array($fields['map_start_values']) ? 
+        $fields['map_start_values'] : $this->getDefaultStartPosition();
         $data['lang'] = [
             'noPostsFound' => __('No posts were found.', 'modularity-open-street-map'),
             'filterBy' => __('Filter by', 'modularity-open-street-map'),
@@ -105,17 +106,13 @@ class OpenStreetMap extends \Modularity\Module
      * @param array $mapStartValues An array containing the latitude, longitude, and zoom level for the start position.
      * @return array The start position for the OpenStreetMap module.
      */
-    private function getStartPosition(array $mapStartValues) 
+    private function getDefaultStartPosition() 
     {
-        if (empty($mapStartValues)) {
-            return [
-                'lat' => '56.046029',
-                'lng' => '12.693904',
-                'zoom' => '14'
-            ];
-        }
-
-        return $mapStartValues;
+        return [
+            'lat' => '56.046029',
+            'lng' => '12.693904',
+            'zoom' => '14'
+        ];
     }
 
     private function getMapStyle()
