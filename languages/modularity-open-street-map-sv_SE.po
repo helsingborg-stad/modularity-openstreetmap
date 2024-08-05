@@ -1,155 +1,206 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Modularity Open Street Map\n"
-"POT-Creation-Date: 2022-03-28 16:14+0200\n"
-"PO-Revision-Date: 2023-04-28 05:55+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-05 15:36+0200\n"
+"PO-Revision-Date: 2024-08-05 15:43+0200\n"
 "Last-Translator: \n"
-"Language-Team: Svenska\n"
+"Language-Team: Swedish\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Domain: modularity-open-street-mapX-Poedit-KeywordsList: __\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-WPHeader: boilerplate.php\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.6.6; wp-6.5.2\n"
+"X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:101
-msgid "1"
-msgstr "1"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:6
+#: source/php/Module/OpenStreetMap.php:34
+msgid "OpenStreetMap"
+msgstr "OpenStreetMap"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:102
-msgid "2"
-msgstr "2"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:10
+msgid "Post type"
+msgstr "Posttyper"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:103
-msgid "3"
-msgstr "3"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:23
+#, fuzzy
+#| msgid "place"
+msgid "Places"
+msgstr "plats"
 
-#. Description of the plugin
-msgid "A map based of OSM."
-msgstr "En OpenStreetMap-karta."
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:24
+msgid "News"
+msgstr ""
 
-#: source/php/App.php:75
-msgid "Appearance"
-msgstr "Utseende"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:26
+msgid "place"
+msgstr "plats"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:143
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:38
+msgid "Select place categories to show"
+msgstr "Välj vilka platskatergorier att visa"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:51
+msgid "No post found"
+msgstr "Inga inlägg hittades"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:66
+msgid "Starting point and zoom level"
+msgstr "Startpunkt och nivå på zoom"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:70
 msgid ""
 "Click on the map to place a marker for the default center of the map. Use "
 "the plus- and minus-signs (+/-) to set the default zoom level."
 msgstr ""
-"Klicka på kartan för att placera en markör för kartans standardcentrering. "
-"Använd plus- och minustecknen (+/-) för att ställa in standard zoom-nivå."
+"Clicka på kartan för att placera en markör. Markören kommer att vara "
+"utgångspunkten för kartan. Använd plus- och minustecknet (+/-) för att "
+"bestämma zoom."
 
-#: source/php/App.php:84
-msgid "Color"
-msgstr "Färgglad"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:85
+msgid "Add sorting functionality"
+msgstr "Lägg till sorteringsfunktionalitet"
 
-#: source/php/App.php:83
-msgid "Dark"
-msgstr "Mörk"
-
-#: source/php/App.php:81
-msgid "Default"
-msgstr "Standard"
-
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:68
-msgid "Full width"
-msgstr "Fullbredd"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:89
+msgid "Allows the user to sort the posts"
+msgstr "Möjliggör det för användaren att sortera"
 
 #: source/php/AcfFields/php/modularity-open-street-map-settings.php:105
-msgid "grid-md-12"
-msgstr "grid-md-12"
+msgid "Order by"
+msgstr "Ordna efter"
 
-#. Author URI of the plugin
-msgid "https://github.com/NiclasNorin"
-msgstr "https://github.com/NiclasNorin"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:118
+msgid "Date"
+msgstr "Datum"
 
-#. URI of the plugin
-msgid "https://github.com/NiclasNorin/modularity-open-street-map"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:119
+msgid "Title"
+msgstr "Titel"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:120
+msgid "Random"
+msgstr "Slumpmässigt"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:122
+msgid "date"
+msgstr "datum"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:134
+msgid "Order"
+msgstr "Ordning"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:147
+#: source/php/Module/OpenStreetMap.php:72
+msgid "Ascending"
+msgstr "Stigande"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:148
+#: source/php/Module/OpenStreetMap.php:71
+msgid "Descending"
+msgstr "Fallande"
+
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:150
+msgid "DESC"
 msgstr ""
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:26
-msgid "Infopoints"
-msgstr "Infopoints"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:162
+msgid "Filter"
+msgstr "Filter"
 
-#. Name of the plugin
-msgid "Modularity Open Street Map"
-msgstr "Modularity Open Street Map"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:180
+msgid "Add Row"
+msgstr "Ny Rad"
 
-#. Author of the plugin
-msgid "Niclas Norin"
-msgstr "Niclas Norin"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:185
+msgid "Text"
+msgstr "Text"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:53
-msgid "No post found"
-msgstr "Inga inlägg hittades"
+#: source/php/AcfFields/php/modularity-open-street-map-settings.php:206
+msgid "select"
+msgstr "välj"
 
-#: source/php/App.php:67 source/php/Module/OpenStreetMap.php:17
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:8
-msgid "OpenStreetMap"
-msgstr "OpenStreetMap"
-
-#: source/php/Module/OpenStreetMap.php:18
+#: source/php/Module/OpenStreetMap.php:35
 msgid "OpenStreetMaps"
-msgstr "OpenStreetMa-kartor"
+msgstr "OpenStreetMaps"
 
-#: source/php/Module/OpenStreetMap.php:19
+#: source/php/Module/OpenStreetMap.php:36
 msgid "Outputs a map."
-msgstr "Visar innehåll på en OpenStreetMap-karta"
+msgstr "Visar en karta."
 
-#: source/php/App.php:82
-msgid "Pale"
-msgstr "Blek"
+#: source/php/Module/OpenStreetMap.php:69
+msgid "No posts were found."
+msgstr "Inga inlägg hittades."
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:117
-msgid "Per page"
-msgstr "Per sida"
+#: source/php/Module/OpenStreetMap.php:70
+msgid "Filter by"
+msgstr "Filtrera efter"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:28
-msgid "place"
-msgstr "place"
+#: source/php/Module/OpenStreetMap.php:73
+msgid "Randomized"
+msgstr "Slumpmässigt"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:25
-msgid "Platser"
-msgstr "Platser"
+#: source/php/Module/OpenStreetMap.php:74
+msgid "Sort"
+msgstr "Sortera"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:88
-msgid "Post columns"
-msgstr "Kolumner"
-
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:12
-msgid "Post type"
-msgstr "Posttyp"
-
-#: source/php/App.php:76
-msgid ""
-"Select if you want to use one of the predefined appearance, or customize "
-"freely."
+#: vendor/helsingborg-stad/wpservice/src/Implementations/FakeWpService.test.php:811
+msgid "testString"
 msgstr ""
-"Välj om du vill använda ett av de fördefinierade utseendena, eller anpassa "
-"fritt."
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:40
-msgid "Select place categories to show"
-msgstr "Välj ur vilka kategorier att visa. Om inget val görs så visas ur alla."
-
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:139
-msgid "Starting point and zoom level"
+#: vendor/helsingborg-stad/wpservice/src/Implementations/WpServiceWithTextDomain.test.php:21
+msgid "foo"
 msgstr ""
-"Startpunkt på kartan och zoomnivå (dubbelklicka för att placera en kartnål)"
 
-#: source/php/AcfFields/php/modularity-open-street-map-settings.php:92
-msgid "This does not affect inner blocks"
-msgstr "Detta påverkar inte inre block"
+#~ msgid "A map based of OSM."
+#~ msgstr "En karta baserad på OSM."
 
-#: source/php/Module/OpenStreetMap.php:130
-msgid "Visit website"
-msgstr "Besök hemsida"
+#~ msgid "Appearance"
+#~ msgstr "Utseende"
+
+#~ msgid "Color"
+#~ msgstr "Färg"
+
+#~ msgid "Dark"
+#~ msgstr "Mörk"
+
+#~ msgid "Default"
+#~ msgstr "Standard"
+
+#~ msgid "Full width"
+#~ msgstr "Fullbred"
+
+#~ msgid "Infopoints"
+#~ msgstr "Infoplatser"
+
+#~ msgid "Modularity Open Street Map"
+#~ msgstr "Modularity Open Street Map"
+
+#~ msgid "Pale"
+#~ msgstr "Blek"
+
+#~ msgid "Per page"
+#~ msgstr "Per sida"
+
+#~ msgid "Platser"
+#~ msgstr "Platser"
+
+#~ msgid "Post columns"
+#~ msgstr "Kolumner för inlägg"
+
+#~ msgid ""
+#~ "Select if you want to use one of the predefined appearance, or customize "
+#~ "freely."
+#~ msgstr ""
+#~ "Välj mellan att använda ett fördefinierat utseende eller stilsätta fritt."
+
+#~ msgid "This does not affect inner blocks"
+#~ msgstr "Detta påverkar inte inre block"
+
+#~ msgid "Visit website"
+#~ msgstr "Besök hemsidan"

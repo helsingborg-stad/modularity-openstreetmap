@@ -34,6 +34,8 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require __DIR__ . '/vendor/autoload.php';
 }
 
+load_plugin_textdomain('modularity-open-street-map', false, plugin_basename(dirname(__FILE__)) . '/languages');
+
 add_filter('/Modularity/externalViewPath', function ($arr) {
     $arr['mod-open-street-map'] = MODULARITYOPENSTREETMAP_MODULE_VIEW_PATH;
     return $arr;
@@ -52,5 +54,3 @@ add_action('acf/init', function () {
 
 // Start application
 new ModularityOpenStreetMap\App();
-
-load_plugin_textdomain('modularity-open-street-map', false, plugin_basename(dirname(__FILE__)) . '/languages');
