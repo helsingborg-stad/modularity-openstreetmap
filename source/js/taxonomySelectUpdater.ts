@@ -7,11 +7,11 @@ class TaxonomySelectUpdater {
 
     ) {}
 
-    public updateExistsingRows(postType: string): void {
+    public updateExistsingRows(container: HTMLElement, postType: string): void {
         const taxonomies = this.storage.getTaxonomies(postType);
         const selectedValues = this.storage.getSelected(postType);
 
-        [...document.querySelectorAll(`tr.acf-row:not(.acf-clone) [data-key="${this.selectFieldKey}"] select`)].forEach((selectField, index) => {
+        [...container.querySelectorAll(`tr.acf-row:not(.acf-clone) [data-key="${this.selectFieldKey}"] select`)].forEach((selectField, index) => {
             selectField.innerHTML = "";
             this.addSelectFieldOptions(selectField, index, taxonomies, selectedValues);
         });
