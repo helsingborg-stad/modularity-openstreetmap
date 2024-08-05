@@ -16,6 +16,7 @@ class Module {
         }
     }
 
+    // Gets the taxonomies and selected taxonomies from osm (added in PHP).
     getOsm() {
         let parsedData = {};
 

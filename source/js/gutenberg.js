@@ -8,6 +8,7 @@ class Gutenberg {
     constructor() {
         this.editor = wp.data.select('core/block-editor');
 
+        // Listens for blocks added to the editor.
         wp.data.subscribe(() => {
             const osmBlockIds = this.editor.getBlocksByName('acf/open-street-map');
             if (osmBlockIds.length > 0) {
@@ -20,6 +21,8 @@ class Gutenberg {
         });
     }
 
+    // Initialize the block. 
+    // Interval is added since the field is not the block fields have not been loaded right away.
     initializeBlock(block, osmBlockId) {
         const filterSelectFieldKey = 'field_668d1cc80d853';
         const postTypeSelectFieldKey = 'field_642a8818a908c';
@@ -44,6 +47,7 @@ class Gutenberg {
         }, 1000);
     }
 
+    // if the block is already initialized, skip it.
     tryInitializeBlock(osmBlockId) {
         const block = document.querySelector('#block-' + osmBlockId);
         if (block) {
@@ -52,6 +56,7 @@ class Gutenberg {
         }
     }
 
+    // Get the data (variable osm comes from PHP where all the taxonomies are already retrieved.)
     getOsm(osmBlockId) {
         let parsedData = {};
 
@@ -67,6 +72,7 @@ class Gutenberg {
         ];
     }
 
+    // Gets the selected values from the block attributes.
     getSelected(osmBlockId) {
         const blockData = this.editor.getBlockAttributes(osmBlockId);
         if (!blockData?.data?.mod_osm_post_type) {

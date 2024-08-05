@@ -7,6 +7,7 @@ class TaxonomySelectUpdater {
 
     ) {}
 
+    // Updates the existing rows.
     public updateExistsingRows(container: HTMLElement, postType: string): void {
         const taxonomies = this.storage.getTaxonomies(postType);
         const selectedValues = this.storage.getSelected(postType);
@@ -17,6 +18,7 @@ class TaxonomySelectUpdater {
         });
     }
 
+    // Adds the taxonomies as options to the select field.
     public addSelectFieldOptions(
         selectField: Element,
         index: number,

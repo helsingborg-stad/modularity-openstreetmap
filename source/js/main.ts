@@ -22,6 +22,7 @@ class Main {
         }
     }
 
+    // Listens for changes in the post type select field.
     private listenForPostTypeChanges(postTypeSelect: HTMLSelectElement): void {
         postTypeSelect.addEventListener('change', (event) => {
             const selectedValue = (event.target as HTMLSelectElement).value;
@@ -29,6 +30,8 @@ class Main {
         });
     }
 
+    // Listens for rows added in an ACF repeater field.
+    // Updates the matching block/modules select field that was appended.
     private listenForFilterRowsAdded(postTypeSelect: HTMLSelectElement): void
     {
         this.acf.addAction('append', ( jqueryEl: any ) => {
