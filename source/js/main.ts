@@ -3,13 +3,14 @@ import TaxonomySelectUpdater from "./taxonomySelectUpdater";
 
 class Main {
     constructor(
+        private container: HTMLElement,
         private acf: any, 
         private postTypeSelectFieldKey: string, 
         private filterSelectFieldKey: string, 
         private storageInstance: StorageInterface, 
         private taxonomySelectUpdaterInstance: TaxonomySelectUpdater
     ) {
-        const postTypeSelect = document.querySelector(`[data-key="${this.postTypeSelectFieldKey}"] select`) as HTMLSelectElement|undefined;
+        const postTypeSelect = this.container.querySelector(`[data-key="${this.postTypeSelectFieldKey}"] select`) as HTMLSelectElement|undefined;
 
         if (postTypeSelect) {
             if (postTypeSelect.value) {

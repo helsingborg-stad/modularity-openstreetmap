@@ -1,11 +1,9 @@
 import { StorageInterface } from "./storageInterface";
 class Storage implements StorageInterface {
     constructor(private taxonomies: { [key: string]: string[] }, private selected: { [key: string]: string[] }) {
-        console.log(this.selected);
     }
 
     public getSelected(postType: string): string[] {
-        console.log(this.selected);
         if (this.selected.hasOwnProperty(postType)) {
             return this.selected[postType];
         }
