@@ -8,7 +8,6 @@ class TaxonomySelectUpdater {
     ) {}
 
     public updateExistsingRows(container: HTMLElement, postType: string): void {
-        console.log(this.storage);
         const taxonomies = this.storage.getTaxonomies(postType);
         const selectedValues = this.storage.getSelected(postType);
 
