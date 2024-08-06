@@ -24,6 +24,7 @@
         @endif
         @collection([
             'id' => 'osm-posts-container-' . $ID,
+            'classList' => ['o-grid', 'o-grid--horizontal'],
             'attributeList' => [
                 'data-js-osm-endpoint-posts' => '',
                 'data-js-filter-select-container' => 'osm-filter-container-' . $ID,
