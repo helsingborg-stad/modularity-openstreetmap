@@ -10,7 +10,6 @@ class DefaultTransformer implements PostTransformerInterface {
 
     public function transform($post): mixed
     {
-        $post = \Municipio\Helper\ContentType::complementPlacePost($post);
         $post = \Municipio\Helper\Post::preparePostObject($post);
         $post->osmFilterValues = $this->addOsmFilteringCapabilities($post);
 
