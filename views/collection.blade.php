@@ -3,7 +3,7 @@
     'containerAware' => true,
     'bordered' => true,
     'attributeList' => [
-        'data-js-map-location' => !empty($place->schemaData['place']['pin']) ? json_encode(array_merge($place->schemaData['place']['pin'], ['id' => 'osm-' . $place->id])) : "",
+        'data-js-map-location' => !empty($place->openStreetMapData['pin']) ? json_encode($place->openStreetMapData['pin']) : "",
         'id' => 'osm-' . $place->id,
         'tabindex' => '0'
     ]

@@ -76,9 +76,8 @@ class GetTaxonomies {
             'taxonomy' => $taxonomy,
             'hide_empty' => true,
         ]);
-
         
-        if (!empty($terms)) {
+        if (!is_wp_error($terms) && !empty($terms)) {
             if ($output === 'object') { 
                 return $terms;
             }
