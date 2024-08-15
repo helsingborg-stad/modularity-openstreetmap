@@ -3,7 +3,7 @@
     'containerAware' => true,
     'bordered' => true,
     'attributeList' => [
-        'data-js-map-location' => !empty($place->openStreetMapData['pin']) ? json_encode($place->openStreetMapData['pin']) : "",
+        'data-js-map-location' => !empty($place->openStreetMapData['pin']) ? json_encode(array_merge($place->openStreetMapData['pin'], ['id' => 'osm-' . $place->id])) : "",
         'id' => 'osm-' . $place->id,
         'tabindex' => '0'
     ]
@@ -51,6 +51,7 @@
             'tags' => $place->termsUnlinked,
             'classList' => ['u-padding__y--2'],
             'format' => true,
+            'compress' => 3
         ])
         @endtags
     @endgroup
