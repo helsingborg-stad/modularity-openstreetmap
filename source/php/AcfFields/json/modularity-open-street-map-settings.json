@@ -16,11 +16,8 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "place": "Places",
-                "news": "News"
-            },
-            "default_value": "place",
+            "choices": [],
+            "default_value": null,
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -75,6 +72,26 @@
             "center_lng": "12.703459264197518",
             "zoom": "",
             "height": ""
+        },
+        {
+            "key": "field_66cc968d2d875",
+            "label": "Expand map",
+            "name": "mod_osm_expanded",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "If the map should be expanded as default.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "Yes",
+            "ui_off_text": "No",
+            "ui": 1
         },
         {
             "key": "field_66a7398c8aa52",

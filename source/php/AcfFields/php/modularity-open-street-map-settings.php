@@ -20,10 +20,8 @@
                 'id' => '',
             ),
             'choices' => array(
-                'place' => __('Places', 'modularity-open-street-map'),
-                'news' => __('News', 'modularity-open-street-map'),
             ),
-            'default_value' => __('place', 'modularity-open-street-map'),
+            'default_value' => NULL,
             'return_format' => 'value',
             'multiple' => 0,
             'allow_null' => 0,
@@ -81,6 +79,26 @@
             'height' => '',
         ),
         3 => array(
+            'key' => 'field_66cc968d2d875',
+            'label' => __('Expand map', 'modularity-open-street-map'),
+            'name' => 'mod_osm_expanded',
+            'aria-label' => '',
+            'type' => 'true_false',
+            'instructions' => __('If the map should be expanded as default.', 'modularity-open-street-map'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui_on_text' => __('Yes', 'modularity-open-street-map'),
+            'ui_off_text' => __('No', 'modularity-open-street-map'),
+            'ui' => 1,
+        ),
+        4 => array(
             'key' => 'field_66a7398c8aa52',
             'label' => __('Add sorting functionality', 'modularity-open-street-map'),
             'name' => 'mod_osm_sort',
@@ -100,7 +118,7 @@
             'ui_off_text' => '',
             'ui' => 1,
         ),
-        4 => array(
+        5 => array(
             'key' => 'field_66a8961b184bd',
             'label' => __('Order by', 'modularity-open-street-map'),
             'name' => 'mod_osm_order_by',
@@ -129,7 +147,7 @@
             'ajax' => 0,
             'placeholder' => '',
         ),
-        5 => array(
+        6 => array(
             'key' => 'field_66a896fa184be',
             'label' => __('Order', 'modularity-open-street-map'),
             'name' => 'mod_osm_order',
@@ -157,7 +175,7 @@
             'ajax' => 0,
             'placeholder' => '',
         ),
-        6 => array(
+        7 => array(
             'key' => 'field_668d19163553d',
             'label' => __('Filter', 'modularity-open-street-map'),
             'name' => 'mod_osm_filters',
