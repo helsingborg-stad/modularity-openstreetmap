@@ -75,11 +75,11 @@
         },
         {
             "key": "field_66cc968d2d875",
-            "label": "Expand map",
+            "label": "Expand sidebar",
             "name": "mod_osm_expanded",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "If the map should be expanded as default.",
+            "instructions": "If the sidebar should be expanded as default.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {

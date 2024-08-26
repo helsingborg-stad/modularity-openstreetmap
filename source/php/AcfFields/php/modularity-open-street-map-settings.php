@@ -80,11 +80,11 @@
         ),
         3 => array(
             'key' => 'field_66cc968d2d875',
-            'label' => __('Expand map', 'modularity-open-street-map'),
+            'label' => __('Expand sidebar', 'modularity-open-street-map'),
             'name' => 'mod_osm_expanded',
             'aria-label' => '',
             'type' => 'true_false',
-            'instructions' => __('If the map should be expanded as default.', 'modularity-open-street-map'),
+            'instructions' => __('If the sidebar should be expanded as default.', 'modularity-open-street-map'),
             'required' => 0,
             'conditional_logic' => 0,
             'wrapper' => array(
