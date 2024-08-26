@@ -42,12 +42,12 @@
                 @endif
             @endgroup
             <div class="o-grid u-padding__top--4">
-                <div class="o-grid-12@sm o-grid-9@md o-grid-9@lg o-grid-9@xl">
+                <div class="o-grid-12@sm o-grid-12@md o-grid-12@lg o-grid-9@xl">
                     @typography([])
                         {!! $place->postContentFiltered !!}
                     @endtypography
                 </div>
-                <div class="o-grid-12@sm o-grid-3@md o-grid-3@lg o-grid-3@xl">
+                <div class="o-grid-12@sm o-grid-12@md o-grid-12@lg o-grid-3@xl">
 
                     @if (!empty($place->placeInfo))
                         @listing([
