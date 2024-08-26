@@ -10,7 +10,7 @@ class EndpointTaxonomies implements EndpointDecoratorInterface
     public function decorate(string $endpoint, array $fields): string 
     {
         $termsToShow = $fields['mod_osm_terms_to_show'];
-        // echo '<pre>' . print_r( $termsToShow, true ) . '</pre>';die;
+        
         if (empty($termsToShow)) {
             return $endpoint;
         }
