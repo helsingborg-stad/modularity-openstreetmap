@@ -22,10 +22,13 @@ class CreateFilters {
             // Used to get a more specific filter.
             [$taxonomy, $termId] = $this->getHierarchicalTermFilter($filter['mod_osm_filter_taxonomy']);
             $terms = $this->getTermsFromTaxonomy($taxonomy, $termId);
-
+            $label = !empty($filter['mod_osm_filter_text']) ? 
+                $filter['mod_osm_filter_text'] : 
+                $filterByLang . ' ' . $taxonomy;
+                
             if ($terms) {
                 $filters[] = [
-                    'label' => $taxonomy ?? $filterByLang . $taxonomy, 
+                    'label' => $label, 
                     'taxonomy' => $taxonomy,
                     'terms' => $terms
                 ];
