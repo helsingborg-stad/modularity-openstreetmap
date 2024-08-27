@@ -76,6 +76,7 @@ class OpenStreetMap extends \Modularity\Module
 
         $data['sort'] = !empty($fields['mod_osm_sort']);
         $data['filters'] = $this->createFiltersInstance->create($fields, $data['lang']['filterBy']);
+        $data['expanded'] = !empty($fields['mod_osm_expanded']);
 
         return $data;
     }
