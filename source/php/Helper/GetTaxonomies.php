@@ -3,6 +3,7 @@
 namespace ModularityOpenStreetMap\Helper;
 
 use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
+use WP_Taxonomy;
 
 class GetTaxonomies {
     private $postTypesTaxonomies = [];
@@ -18,7 +19,6 @@ class GetTaxonomies {
 
         foreach ($postTypes as $slug => $label) {
             $this->postTypesTaxonomies[$slug] = $this->getTaxonomiesFromPostTypeArchive($slug);
-
         }
 
         return $this->postTypesTaxonomies;
@@ -26,30 +26,45 @@ class GetTaxonomies {
 
     public function getTaxonomiesFromPostTypeArchive(string $postType): array
     {
+        $filterableItems = [];
         $activeTaxonomiesForPostType = get_theme_mod('archive_' . $postType . '_taxonomies_to_display', []);
         
-        if (!is_array($activeTaxonomiesForPostType)) {
-            return [];
-        }
-
-        $taxonomies = $this->getTaxonomiesFromSlug($activeTaxonomiesForPostType);
-
-        return $taxonomies;
-    }
-
-    private function getTaxonomiesFromSlug(array $activeTaxonomiesForPostType): array
-    {
-        $arr = [];
-        if (empty($activeTaxonomiesForPostType)) {
-            return $arr;
+        if (empty($activeTaxonomiesForPostType) || !is_array($activeTaxonomiesForPostType)) {
+            return $filterableItems;
         }
 
         foreach ($activeTaxonomiesForPostType as $taxonomy) {
             $taxonomyObject = get_taxonomy($taxonomy);
-            $arr[$taxonomyObject->name] = $taxonomyObject->label;
+            if (empty($taxonomyObject)) {
+                continue;
+            }
+
+            $filterableItems[$taxonomyObject->name] = $taxonomyObject->label;
+            $filterableItems = array_merge($filterableItems, $this->addHierarchicalTerms($taxonomyObject->name));
         }
 
-        return $arr;
+        return $filterableItems;
+    }
+
+    private function addHierarchicalTerms(string $taxonomy): array
+    {
+        $hierarchicalTerms = [];
+
+        $terms = get_terms([
+            'taxonomy' => $taxonomy,
+            'hide_empty' => false,
+            'parent' => 0,
+        ]);
+
+        if (empty($terms)) {
+            return $hierarchicalTerms;
+        }
+
+        foreach ($terms as $term) {
+            $hierarchicalTerms['_' . $taxonomy . '_' . $term->term_id] = $term->name . ' (' .  $taxonomy . ')';
+        }
+        
+        return $hierarchicalTerms;
     }
 
     public function getAllTermsFromPostTypeArchiveTaxonomies(string $postType) 
@@ -68,11 +83,11 @@ class GetTaxonomies {
         return $terms;
     }
 
-    public function getAllTermsFromTaxonomy(string $taxonomy, string $output = 'name'): array
+    public function getAllTermsFromTaxonomy(string $taxonomy, string $output = 'name', array|null $args = null): array
     {
         $filteredTerms = [];
 
-        $terms = get_terms([
+        $terms = get_terms($args ?? [
             'taxonomy' => $taxonomy,
             'hide_empty' => true,
         ]);
