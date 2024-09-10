@@ -1,5 +1,5 @@
 {
-    "name": "helsingborg-stad/modularity-open-street-map",
+    "name": "helsingborg-stad/modularity-openstreetmap",
     "description": "Open Street Map integration",
     "type": "wordpress-plugin",
     "license": "MIT",
