@@ -16,16 +16,17 @@ class GetPlacePostType {
 
     private function filterPostTypes(): array 
     {
-        $postTypes = get_post_types();
-        if (empty($postTypes)) {
+        $filteredPostTypes = [];
+        $settings = get_field('post_type_schema_types', 'option');
+
+        if( empty($settings) ) {
             return [];
         }
 
-        $filteredPostTypes = [];
-        foreach ($postTypes as $postType) {
-            $schemaType = get_field('schema', $postType . '_options');
-            if ($schemaType === 'Place') {
-                $postTypeObject = get_post_type_object($postType);
+        foreach ($settings as $row) {
+            
+            if ($row['schema_type'] === 'Place') {
+                $postTypeObject = get_post_type_object($row['post_type']);
                 $filteredPostTypes[$postTypeObject->name] = $postTypeObject->label;
             }
         }
