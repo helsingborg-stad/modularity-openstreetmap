@@ -4,7 +4,7 @@
  * Plugin Name:       Modularity Open Street Map
  * Plugin URI:        https://github.com/NiclasNorin/modularity-open-street-map
  * Description:       A map based of OSM.
- * Version: 2.5.2
+ * Version: 2.6.0
  * Author:            Niclas Norin
  * Author URI:        https://github.com/NiclasNorin
  * License:           MIT
