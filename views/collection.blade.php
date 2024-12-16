@@ -8,9 +8,9 @@
         'tabindex' => '0'
     ]
 ])
-@if (!empty($place->callToActionItems['floating']))
+@if (!empty($place->callToActionItems['floating']['icon']))
     @slot('floating')
-        @icon($place->callToActionItems['floating'])
+        @icon($place->callToActionItems['floating']['icon'])
         @endicon
     @endslot
 @endif

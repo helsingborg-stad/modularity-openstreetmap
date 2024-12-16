@@ -36,8 +36,8 @@
                 ])
                     {!! $place->postTitleFiltered !!}
                 @endtypography
-                @if (!empty($place->callToActionItems['floating']))
-                    @icon($place->callToActionItems['floating'])
+                @if (!empty($place->callToActionItems['floating']['icon']))
+                    @icon($place->callToActionItems['floating']['icon'])
                     @endicon
                 @endif
             @endgroup
