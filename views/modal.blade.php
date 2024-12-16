@@ -36,9 +36,11 @@
                 ])
                     {!! $place->postTitleFiltered !!}
                 @endtypography
-                @if (!empty($place->callToActionItems['floating']))
-                    @icon($place->callToActionItems['floating'])
-                    @endicon
+                @if (!empty($place->callToActionItems['floating']['icon']) && !empty($place->callToActionItems['floating']['wrapper']))
+                    @element($place->callToActionItems['floating']['wrapper'] ?? [])
+                        @icon($place->callToActionItems['floating']['icon'])
+                        @endicon
+                    @endelement
                 @endif
             @endgroup
             <div class="o-grid u-padding__top--4">

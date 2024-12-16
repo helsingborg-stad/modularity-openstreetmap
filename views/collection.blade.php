@@ -8,12 +8,15 @@
         'tabindex' => '0'
     ]
 ])
-@if (!empty($place->callToActionItems['floating']))
+
     @slot('floating')
-        @icon($place->callToActionItems['floating'])
-        @endicon
+        @if (!empty($place->callToActionItems['floating']['icon']) && !empty($place->callToActionItems['floating']['wrapper']))
+            @element($place->callToActionItems['floating']['wrapper'] ?? [])
+                @icon($place->callToActionItems['floating']['icon'])
+                @endicon
+            @endelement
+        @endif
     @endslot
-@endif
 @slot('before')
     @if(!empty($place->images['thumbnail16:9']['src']))
         @image([
