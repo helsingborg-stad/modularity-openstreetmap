@@ -40,12 +40,16 @@
         ])
             {{$place->postTitle}}
         @endtypography
-        @if(!empty($place->termIcon['icon']))
+        @if(!empty($place->getIcon()))
             @inlineCssWrapper([
-                'styles' => ['background-color' => $place->termIcon['backgroundColor'], 'display' => 'flex'],
-                'classList' => [$place->termIcon['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
+                'styles' => ['background-color' => $place->getIcon()->getCustomColor(), 'display' => 'flex'],
+                'classList' => [$place->getIcon()->getCustomColor() ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
             ])
-                @icon($place->termIcon)
+                @icon([
+                    'icon' => $place->getIcon()->getIcon(),
+                    'color' => 'white',
+                    'backgroundColor' => $place->getIcon()->getCustomColor() ?? null,
+                ])
                 @endicon
             @endinlineCssWrapper
         @endif

@@ -3,6 +3,7 @@
 namespace ModularityOpenStreetMap\Api\PostTransformer;
 
 use ModularityOpenStreetMap\Api\SettingsInterface;
+use ModularityOpenStreetMap\ApplyOpenStreetMapDataToPostObject;
 
 class DefaultTransformer implements PostTransformerInterface {
     public function __construct(private SettingsInterface $settings)
@@ -11,6 +12,7 @@ class DefaultTransformer implements PostTransformerInterface {
     public function transform($post): mixed
     {
         $post = \Municipio\Helper\Post::preparePostObject($post);
+        $post = (new ApplyOpenStreetMapDataToPostObject($post))->apply();
         $post->osmFilterValues = $this->addOsmFilteringCapabilities($post);
 
         return $post;
