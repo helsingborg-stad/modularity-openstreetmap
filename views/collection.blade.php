@@ -41,17 +41,24 @@
             {{$place->postTitle}}
         @endtypography
         @if(!empty($place->getIcon()))
-            @inlineCssWrapper([
-                'styles' => ['background-color' => $place->getIcon()->getCustomColor(), 'display' => 'flex'],
-                'classList' => [$place->getIcon()->getCustomColor() ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
+            @element([
+                'attributeList' => [
+                    'style' => 'background-color: ' . $place->getIcon()->getCustomColor() ?? 'transparent' . ';',
+                ],
+                'classList' => [
+                    'u-display--flex',
+                    $place->getIcon()->getCustomColor() ? 'u-padding__x--1' : '',
+                    $place->getIcon()->getCustomColor() ? 'u-padding__y--1' : '',
+                    'u-rounded--full',
+                    'u-detail-shadow-3'
+                ]
             ])
                 @icon([
                     'icon' => $place->getIcon()->getIcon(),
                     'color' => 'white',
-                    'backgroundColor' => $place->getIcon()->getCustomColor() ?? null,
                 ])
                 @endicon
-            @endinlineCssWrapper
+            @endelement
         @endif
     @endgroup
         @tags([
