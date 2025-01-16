@@ -37,7 +37,7 @@ class ApplyOpenStreetMapDataToPostObject {
         return [
             'icon'    => $post->getIcon() ? [
                 'icon' => $post->getIcon()->getIcon(),
-                'backgroundColor' => $post->getIcon()->getCustomColor(),
+                'backgroundColor' => $post->getIcon() ? $post->getIcon()->getCustomColor() : null,
                 'color' => 'white',
                 'size' => 'md',
             ] : null,
