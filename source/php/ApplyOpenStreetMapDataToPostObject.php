@@ -7,16 +7,12 @@ class ApplyOpenStreetMapDataToPostObject {
     {}
     public function apply():\Municipio\PostObject\PostObjectInterface|null {
         
-        if (empty($this->post->schemaObject)) {
+        if (!($this->post->getSchemaProperty('geo') instanceof \Spatie\SchemaOrg\GeoCoordinates)) {
             return $this->post;
         }
 
-        if (empty($this->post->schemaObject['geo']) || !($this->post->schemaObject['geo'] instanceof \Spatie\SchemaOrg\GeoCoordinates)) {
-            return $this->post;
-        }
-
-        $lat            = $this->post->schemaObject['geo']['latitude'];
-        $lng            = $this->post->schemaObject['geo']['longitude'];
+        $lat            = $this->post->getSchemaProperty('geo')['latitude'] ?? null;
+        $lng            = $this->post->getSchemaProperty('geo')['longitude'] ?? null;
         $googleMapsLink = $this->getGoogleMapsLink($lat, $lng);
 
         $this->post->openStreetMapData = [
