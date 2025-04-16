@@ -7,7 +7,7 @@ class ApplyOpenStreetMapDataToPostObject {
     {}
     public function apply():\Municipio\PostObject\PostObjectInterface|null {
         
-        if (!($this->post->getSchemaProperty('geo') instanceof \Spatie\SchemaOrg\GeoCoordinates)) {
+        if (!($this->post->getSchemaProperty('geo') instanceof \Municipio\Schema\GeoCoordinates)) {
             return $this->post;
         }
 
