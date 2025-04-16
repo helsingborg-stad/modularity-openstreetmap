@@ -11,8 +11,14 @@ class ApplyOpenStreetMapDataToPostObject {
             return $this->post;
         }
 
-        $lat            = $this->post->getSchemaProperty('geo')['latitude'] ?? null;
-        $lng            = $this->post->getSchemaProperty('geo')['longitude'] ?? null;
+        //Hotfix
+        $data = get_post_meta($this->post->getId(), 'schema_geo', true);
+        $lat = $data['lat'] ?? null;
+        $lng = $data['lng'] ?? null;
+
+        //This returns the same cached? value each time
+        //$lat            = $this->post->getSchemaProperty('geo')['latitude'] ?? null;
+        //$lng            = $this->post->getSchemaProperty('geo')['longitude'] ?? null;
         $googleMapsLink = $this->getGoogleMapsLink($lat, $lng);
 
         $this->post->openStreetMapData = [
