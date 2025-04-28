@@ -6,13 +6,26 @@ class ApplyOpenStreetMapDataToPostObject {
     public function __construct(private \Municipio\PostObject\PostObjectInterface $post)
     {}
     public function apply():\Municipio\PostObject\PostObjectInterface|null {
-        
-        if (!($this->post->getSchemaProperty('geo') instanceof \Municipio\Schema\GeoCoordinates)) {
+        $geo = $this->post->getSchemaProperty('geo');
+
+        if (!$geo) {
             return $this->post;
         }
 
-        $lat            = $this->post->getSchemaProperty('geo')['latitude'] ?? null;
-        $lng            = $this->post->getSchemaProperty('geo')['longitude'] ?? null;
+        if (is_string($geo)) {
+            $geo = unserialize($geo);
+        }
+
+        if (isset($geo['lat'], $geo['lng'])) {
+            $lat = $geo['lat'];
+            $lng = $geo['lng'];
+        } else {
+            return $this->post;
+        }
+
+        //This returns the same cached? value each time
+        //$lat            = $this->post->getSchemaProperty('geo')['latitude'] ?? null;
+        //$lng            = $this->post->getSchemaProperty('geo')['longitude'] ?? null;
         $googleMapsLink = $this->getGoogleMapsLink($lat, $lng);
 
         $this->post->openStreetMapData = [
