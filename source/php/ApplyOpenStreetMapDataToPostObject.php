@@ -6,6 +6,12 @@ class ApplyOpenStreetMapDataToPostObject {
     public function __construct(private \Municipio\PostObject\PostObjectInterface $post)
     {}
     public function apply():\Municipio\PostObject\PostObjectInterface|null {
+        
+        /**
+         * Hotfix: Manually get lat/lng. 
+         * Should be removed when https://github.com/helsingborg-stad/Municipio/pull/1403 is merged.
+         */
+        
         $geo = $this->post->getSchemaProperty('geo');
 
         if (!$geo) {
@@ -23,9 +29,6 @@ class ApplyOpenStreetMapDataToPostObject {
             return $this->post;
         }
 
-        //This returns the same cached? value each time
-        //$lat            = $this->post->getSchemaProperty('geo')['latitude'] ?? null;
-        //$lng            = $this->post->getSchemaProperty('geo')['longitude'] ?? null;
         $googleMapsLink = $this->getGoogleMapsLink($lat, $lng);
 
         $this->post->openStreetMapData = [
