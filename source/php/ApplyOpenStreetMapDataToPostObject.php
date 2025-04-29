@@ -7,12 +7,28 @@ class ApplyOpenStreetMapDataToPostObject {
     {}
     public function apply():\Municipio\PostObject\PostObjectInterface|null {
         
-        if (!($this->post->getSchemaProperty('geo') instanceof \Municipio\Schema\GeoCoordinates)) {
+        /**
+         * Hotfix: Manually get lat/lng. 
+         * Should be removed when https://github.com/helsingborg-stad/Municipio/pull/1403 is merged.
+         */
+        
+        $geo = $this->post->getSchemaProperty('geo');
+
+        if (!$geo) {
             return $this->post;
         }
 
-        $lat            = $this->post->getSchemaProperty('geo')['latitude'] ?? null;
-        $lng            = $this->post->getSchemaProperty('geo')['longitude'] ?? null;
+        if (is_string($geo)) {
+            $geo = unserialize($geo);
+        }
+
+        if (isset($geo['lat'], $geo['lng'])) {
+            $lat = $geo['lat'];
+            $lng = $geo['lng'];
+        } else {
+            return $this->post;
+        }
+
         $googleMapsLink = $this->getGoogleMapsLink($lat, $lng);
 
         $this->post->openStreetMapData = [
