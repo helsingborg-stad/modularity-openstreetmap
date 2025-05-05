@@ -11,8 +11,13 @@ class ApplyOpenStreetMapDataToPostObject {
             return $this->post;
         }
 
-        $lat            = $this->post->getSchemaProperty('geo')['latitude'] ?? null;
-        $lng            = $this->post->getSchemaProperty('geo')['longitude'] ?? null;
+        $lat = $this->post->getSchemaProperty('geo')->getProperty('latitude');
+        $lng = $this->post->getSchemaProperty('geo')->getProperty('longitude');
+        
+        if ($lat === null || $lng === null) {
+            return $this->post;
+        }
+
         $googleMapsLink = $this->getGoogleMapsLink($lat, $lng);
 
         $this->post->openStreetMapData = [
