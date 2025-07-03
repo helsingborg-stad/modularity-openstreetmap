@@ -16,7 +16,7 @@ class DefaultTransformer implements PostTransformerInterface {
         $post->osmFilterValues = $this->addOsmFilteringCapabilities($post);
 
         $fields = get_fields($post->getId() ?? 0) ?? [];
-        $post->postInfo = $this->createPlaceInfoList($fields);
+        $post->placeInfo = $this->createPlaceInfoList($fields);
 
         return $post;
     }
