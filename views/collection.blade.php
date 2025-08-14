@@ -38,7 +38,7 @@
             'element' => 'h2',
             'variant' => 'h3',
         ])
-            {{$place->postTitle}}
+            {!! $place->postTitle !!}
         @endtypography
         @if(!empty($place->getIcon()))
             @element([
