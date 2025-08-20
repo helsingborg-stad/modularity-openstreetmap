@@ -9,15 +9,23 @@ class Gutenberg {
         this.editor = wp.data.select('core/block-editor');
 
         // Listens for blocks added to the editor.
+        let handleOsmBlocksDebounced = null;
+
         wp.data.subscribe(() => {
-            const osmBlockIds = this.editor.getBlocksByName('acf/open-street-map');
-            if (osmBlockIds.length > 0) {
+            if (handleOsmBlocksDebounced) clearTimeout(handleOsmBlocksDebounced);
+
+            handleOsmBlocksDebounced = setTimeout(() => {
+                const osmBlockIds = this.editor.getBlocksByName('acf/open-street-map');
+                if (osmBlockIds.length === 0) {
+                    return;
+                }
+
                 osmBlockIds.forEach((osmBlockId) => {
                     if (!this.initializedOsmBlocks.includes(osmBlockId)) {
                         this.tryInitializeBlock(osmBlockId);
                     }
                 });
-            }
+            }, 300);
         });
     }
 
