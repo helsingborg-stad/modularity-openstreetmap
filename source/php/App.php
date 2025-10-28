@@ -17,7 +17,7 @@ class App
     {
         add_action('wp_enqueue_scripts', array($this, 'enqueueFrontend'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueBackend'));
-        add_action('plugins_loaded', array($this, 'registerModule'));
+        add_action('init', array($this, 'registerModule'));
 
         add_filter('acf/load_field/name=mod_osm_post_type', array($this, 'postTypes'));
         add_filter('acf/prepare_field/name=mod_osm_terms_to_show', array($this, 'termsToShow'));
