@@ -71,8 +71,7 @@ class OpenStreetMap extends \Modularity\Module
             'descending' => __('Descending', 'modularity-open-street-map'),
             'ascending' => __('Ascending', 'modularity-open-street-map'),
             'randomized' => __('Randomized', 'modularity-open-street-map'),
-            'sort' => __('Sort', 'modularity-open-street-map'),
-            'bookHere' => __('Book here', 'modularity-open-street-map'),
+            'sort' => __('Sort', 'modularity-open-street-map')
         ];
 
         $data['sort'] = !empty($fields['mod_osm_sort']);
