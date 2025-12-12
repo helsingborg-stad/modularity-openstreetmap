@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace ModularityOpenStreetMap\Decorator;
 
 class EndpointOrder implements EndpointDecoratorInterface
 {
-    public function __construct()
-    {}
+    public function __construct() {}
 
-    public function decorate(string $endpoint, array $fields): string 
+    public function decorate(string $endpoint, array $fields): string
     {
         $orderBy = $fields['mod_osm_order_by'];
         $order = $fields['mod_osm_order'];

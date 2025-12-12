@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace ModularityOpenStreetMap\Api\PostTransformer;
 
 use ModularityOpenStreetMap\Api\SettingsInterface;
 use ModularityOpenStreetMap\ApplyOpenStreetMapDataToPostObject;
 
-class DefaultTransformer implements PostTransformerInterface {
-    public function __construct(private SettingsInterface $settings)
-    {}
+class DefaultTransformer implements PostTransformerInterface
+{
+    public function __construct(
+        private SettingsInterface $settings,
+    ) {}
 
     public function transform($post): mixed
     {
@@ -21,8 +26,8 @@ class DefaultTransformer implements PostTransformerInterface {
     private function addOsmFilteringCapabilities($post): string
     {
         $filterTermsStructure = [];
-        $attributeString = "";
-        
+        $attributeString = '';
+
         if (!empty($post->termsUnlinked)) {
             foreach ($post->termsUnlinked as $term) {
                 $filterTermsStructure[$term['taxonomy']][] = $term['slug'];

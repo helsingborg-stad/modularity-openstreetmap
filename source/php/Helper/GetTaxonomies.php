@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ModularityOpenStreetMap\Helper;
 
 use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
-use WP_Taxonomy;
 
-class GetTaxonomies {
+class GetTaxonomies
+{
     private $postTypesTaxonomies = [];
 
-    public function __construct(private GetPlacePostType $getPlacePostTypeInstance)
-    {}
+    public function __construct(
+        private GetPlacePostType $getPlacePostTypeInstance,
+    ) {}
 
     public function getAllTaxonomiesForAllPlacePostTypes(array $postTypes): array
     {
@@ -28,7 +31,7 @@ class GetTaxonomies {
     {
         $filterableItems = [];
         $activeTaxonomiesForPostType = get_theme_mod('archive_' . $postType . '_taxonomies_to_display', []);
-        
+
         if (empty($activeTaxonomiesForPostType) || !is_array($activeTaxonomiesForPostType)) {
             return $filterableItems;
         }
@@ -61,13 +64,13 @@ class GetTaxonomies {
         }
 
         foreach ($terms as $term) {
-            $hierarchicalTerms['_' . $taxonomy . '_' . $term->term_id] = $term->name . ' (' .  $taxonomy . ')';
+            $hierarchicalTerms['_' . $taxonomy . '_' . $term->term_id] = $term->name . ' (' . $taxonomy . ')';
         }
-        
+
         return $hierarchicalTerms;
     }
 
-    public function getAllTermsFromPostTypeArchiveTaxonomies(string $postType) 
+    public function getAllTermsFromPostTypeArchiveTaxonomies(string $postType)
     {
         $placePostTypesTaxonomies = $this->getAllTaxonomiesForAllPlacePostTypes($this->getPlacePostTypeInstance->getPlacePostTypes());
 
@@ -87,22 +90,23 @@ class GetTaxonomies {
     {
         $filteredTerms = [];
 
-        $terms = get_terms($args ?? [
-            'taxonomy' => $taxonomy,
-            'hide_empty' => true,
-        ]);
-        
+        $terms = get_terms(
+            $args ?? [
+                'taxonomy' => $taxonomy,
+                'hide_empty' => true,
+            ],
+        );
+
         if (!is_wp_error($terms) && !empty($terms)) {
-            if ($output === 'object') { 
+            if ($output === 'object') {
                 return $terms;
             }
 
-            foreach($terms as $term) {
+            foreach ($terms as $term) {
                 $filteredTerms[$output === 'id' ? $term->term_id : $term->slug] = $term->name;
             }
         }
 
         return $filteredTerms;
     }
-
 }

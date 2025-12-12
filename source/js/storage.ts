@@ -1,23 +1,25 @@
-import { StorageInterface } from "./storageInterface";
+import type { StorageInterface } from './storageInterface';
 class Storage implements StorageInterface {
-    constructor(private taxonomies: { [key: string]: string[] }, private selected: { [key: string]: string[] }) {
-    }
+	constructor(
+		private taxonomies: { [key: string]: string[] },
+		private selected: { [key: string]: string[] },
+	) {}
 
-    public getSelected(postType: string): string[] {
-        if (this.selected.hasOwnProperty(postType)) {
-            return this.selected[postType];
-        }
+	public getSelected(postType: string): string[] {
+		if (Object.hasOwn(this.selected, postType)) {
+			return this.selected[postType];
+		}
 
-        return [];
-    }
+		return [];
+	}
 
-    public getTaxonomies(postType: string): string[] {
-        if (this.taxonomies.hasOwnProperty(postType)) {
-            return this.taxonomies[postType];
-        }
+	public getTaxonomies(postType: string): string[] {
+		if (Object.hasOwn(this.taxonomies, postType)) {
+			return this.taxonomies[postType];
+		}
 
-        return [];
-    }
+		return [];
+	}
 }
 
 export default Storage;
