@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace ModularityOpenStreetMap\Helper;
 
 class CacheBust
@@ -11,9 +14,10 @@ class CacheBust
      */
     public function name($name)
     {
-        $jsonPath = MODULARITYOPENSTREETMAP_PATH . apply_filters(
+        $jsonPath = MODULARITYOPENSTREETMAP_PATH
+        . apply_filters(
             'ModularityOpenStreetMap/Helper/CacheBust/RevManifestPath',
-            'dist/manifest.json'
+            'dist/manifest.json',
         );
 
         $revManifest = [];

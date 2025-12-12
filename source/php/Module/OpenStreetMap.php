@@ -1,24 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ModularityOpenStreetMap\Module;
 
-use ModularityOpenStreetMap\Helper\GetTaxonomies as GetTaxonomies;
-use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
 use ModularityOpenStreetMap\Decorator\EndpointDecoratorInterface as EndpointDecoratorInterface;
 use ModularityOpenStreetMap\Decorator\EndpointOrder as EndpointOrder;
+use ModularityOpenStreetMap\Decorator\EndpointOrderBy as EndpointOrderBy;
 use ModularityOpenStreetMap\Decorator\EndpointPostType as EndpointPostType;
 use ModularityOpenStreetMap\Decorator\EndpointTaxonomies as EndpointTaxonomies;
-use ModularityOpenStreetMap\Decorator\EndpointOrderBy as EndpointOrderBy;
+use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
+use ModularityOpenStreetMap\Helper\GetTaxonomies as GetTaxonomies;
 use ModularityOpenStreetMap\Module\CreateFilters as CreateFilters;
 
 class OpenStreetMap extends \Modularity\Module
 {
     public $slug = 'open-street-map';
-    public $supports = array();
-    public $blockSupports = array(
+    public $supports = [];
+    public $blockSupports = [
         'align' => ['full'],
-        'mode' => false
-    );
+        'mode' => false,
+    ];
 
     private GetTaxonomies $getTaxonomiesInstance;
     private GetPlacePostType $getPlacePostTypeInstance;
@@ -31,28 +33,33 @@ class OpenStreetMap extends \Modularity\Module
     public function init()
     {
         //Define module
-        $this->nameSingular = __("OpenStreetMap", 'modularity-open-street-map');
-        $this->namePlural = __("OpenStreetMaps", 'modularity-open-street-map');
-        $this->description = __("Outputs a map.", 'modularity-open-street-map');
+        $this->nameSingular = __('OpenStreetMap', 'modularity-open-street-map');
+        $this->namePlural = __('OpenStreetMaps', 'modularity-open-street-map');
+        $this->description = __('Outputs a map.', 'modularity-open-street-map');
 
         $this->getPlacePostTypeInstance = new GetPlacePostType();
-        $this->getTaxonomiesInstance    = new GetTaxonomies($this->getPlacePostTypeInstance);
-        $this->createFiltersInstance    = new CreateFilters($this->getTaxonomiesInstance);
+        $this->getTaxonomiesInstance = new GetTaxonomies($this->getPlacePostTypeInstance);
+        $this->createFiltersInstance = new CreateFilters($this->getTaxonomiesInstance);
 
-        $this->endpointOrder        = new EndpointOrder();
-        $this->endpointOrderBy      = new EndpointOrderBy();
-        $this->endpointPostType     = new EndpointPostType();
-        $this->endpointTaxonomies   = new EndpointTaxonomies();
+        $this->endpointOrder = new EndpointOrder();
+        $this->endpointOrderBy = new EndpointOrderBy();
+        $this->endpointPostType = new EndpointPostType();
+        $this->endpointTaxonomies = new EndpointTaxonomies();
 
-        add_filter('Modularity/Block/Settings', function ($blockSettings, $slug) {
-            if ($slug == $this->slug) {
-                $blockSettings['mode'] = 'edit';
-            }
-            return $blockSettings;
-        }, 10, 2);
+        add_filter(
+            'Modularity/Block/Settings',
+            function ($blockSettings, $slug) {
+                if ($slug == $this->slug) {
+                    $blockSettings['mode'] = 'edit';
+                }
+                return $blockSettings;
+            },
+            10,
+            2,
+        );
     }
 
-     /**
+    /**
      * View data
      * @return array
      */
@@ -63,15 +70,14 @@ class OpenStreetMap extends \Modularity\Module
 
         $data['mapStyle'] = $this->getMapStyle();
         $data['endpoint'] = $this->createEndpoint($fields);
-        $data['startPosition'] = !empty($fields['map_start_values']) && is_array($fields['map_start_values']) ? 
-        $fields['map_start_values'] : $this->getDefaultStartPosition();
+        $data['startPosition'] = !empty($fields['map_start_values']) && is_array($fields['map_start_values']) ? $fields['map_start_values'] : $this->getDefaultStartPosition();
         $data['lang'] = [
             'noPostsFound' => __('No posts were found.', 'modularity-open-street-map'),
             'filterBy' => __('Filter by', 'modularity-open-street-map'),
             'descending' => __('Descending', 'modularity-open-street-map'),
             'ascending' => __('Ascending', 'modularity-open-street-map'),
             'randomized' => __('Randomized', 'modularity-open-street-map'),
-            'sort' => __('Sort', 'modularity-open-street-map')
+            'sort' => __('Sort', 'modularity-open-street-map'),
         ];
 
         $data['sort'] = !empty($fields['mod_osm_sort']);
@@ -107,12 +113,12 @@ class OpenStreetMap extends \Modularity\Module
      * @param array $mapStartValues An array containing the latitude, longitude, and zoom level for the start position.
      * @return array The start position for the OpenStreetMap module.
      */
-    private function getDefaultStartPosition() 
+    private function getDefaultStartPosition()
     {
         return [
             'lat' => '56.046029',
             'lng' => '12.693904',
-            'zoom' => '14'
+            'zoom' => '14',
         ];
     }
 
@@ -127,7 +133,7 @@ class OpenStreetMap extends \Modularity\Module
 
     public function template(): string
     {
-        return "open-street-map.blade.php";
+        return 'open-street-map.blade.php';
     }
 
     /**

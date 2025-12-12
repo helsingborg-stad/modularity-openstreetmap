@@ -1,277 +1,278 @@
-[{
-    "key": "group_64219abb0caec",
-    "title": "OpenStreetMap",
-    "fields": [
-        {
-            "key": "field_642a8818a908c",
-            "label": "Post type",
-            "name": "mod_osm_post_type",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": [],
-            "default_value": null,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "allow_custom": 0,
-            "search_placeholder": ""
-        },
-        {
-            "key": "field_6422b15cf1b12",
-            "label": "Select place categories to show",
-            "name": "mod_osm_terms_to_show",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "none": "No post found"
-            },
-            "default_value": [],
-            "return_format": "value",
-            "multiple": 1,
-            "allow_custom": 0,
-            "placeholder": "",
-            "allow_null": 0,
-            "ui": 1,
-            "ajax": 0,
-            "search_placeholder": ""
-        },
-        {
-            "key": "field_644b51b53a332",
-            "label": "Starting point and zoom level",
-            "name": "map_start_values",
-            "aria-label": "",
-            "type": "google_map",
-            "instructions": "Click on the map to place a marker for the default center of the map. Use the plus- and minus-signs (+\/-) to set the default zoom level.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "center_lat": "56.048767661222115",
-            "center_lng": "12.703459264197518",
-            "zoom": "",
-            "height": ""
-        },
-        {
-            "key": "field_66cc968d2d875",
-            "label": "Expand sidebar",
-            "name": "mod_osm_expanded",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "If the sidebar should be expanded as default.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "Yes",
-            "ui_off_text": "No",
-            "ui": 1
-        },
-        {
-            "key": "field_66a7398c8aa52",
-            "label": "Add sorting functionality",
-            "name": "mod_osm_sort",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "Allows the user to sort the posts",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
-        },
-        {
-            "key": "field_66a8961b184bd",
-            "label": "Order by",
-            "name": "mod_osm_order_by",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "date": "Date",
-                "title": "Title",
-                "random": "Random"
-            },
-            "default_value": "date",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_custom": 0,
-            "search_placeholder": "",
-            "allow_null": 0,
-            "ui": 1,
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_66a896fa184be",
-            "label": "Order",
-            "name": "mod_osm_order",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "ASC": "Ascending",
-                "DESC": "Descending"
-            },
-            "default_value": "DESC",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_custom": 0,
-            "search_placeholder": "",
-            "allow_null": 0,
-            "ui": 1,
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_668d19163553d",
-            "label": "Filter",
-            "name": "mod_osm_filters",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_repeater_stylised_button": 0,
-            "layout": "table",
-            "pagination": 0,
-            "min": 0,
-            "max": 0,
-            "collapsed": "",
-            "button_label": "Add Row",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_668d1cb10d852",
-                    "label": "Text",
-                    "name": "mod_osm_filter_text",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_668d19163553d"
-                },
-                {
-                    "key": "field_668d1cc80d853",
-                    "label": "select",
-                    "name": "mod_osm_filter_taxonomy",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": [],
-                    "default_value": false,
-                    "return_format": "value",
-                    "multiple": 0,
-                    "allow_null": 0,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": "",
-                    "allow_custom": 0,
-                    "search_placeholder": "",
-                    "parent_repeater": "field_668d19163553d"
-                }
-            ]
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "mod-open-street-map"
-            }
-        ],
-        [
-            {
-                "param": "block",
-                "operator": "==",
-                "value": "acf\/open-street-map"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "above_field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "show_in_rest": 0,
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": ""
-}]
-
+[
+	{
+		"key": "group_64219abb0caec",
+		"title": "OpenStreetMap",
+		"fields": [
+			{
+				"key": "field_642a8818a908c",
+				"label": "Post type",
+				"name": "mod_osm_post_type",
+				"aria-label": "",
+				"type": "select",
+				"instructions": "",
+				"required": 1,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"choices": [],
+				"default_value": null,
+				"return_format": "value",
+				"multiple": 0,
+				"allow_null": 0,
+				"ui": 0,
+				"ajax": 0,
+				"placeholder": "",
+				"allow_custom": 0,
+				"search_placeholder": ""
+			},
+			{
+				"key": "field_6422b15cf1b12",
+				"label": "Select place categories to show",
+				"name": "mod_osm_terms_to_show",
+				"aria-label": "",
+				"type": "select",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"choices": {
+					"none": "No post found"
+				},
+				"default_value": [],
+				"return_format": "value",
+				"multiple": 1,
+				"allow_custom": 0,
+				"placeholder": "",
+				"allow_null": 0,
+				"ui": 1,
+				"ajax": 0,
+				"search_placeholder": ""
+			},
+			{
+				"key": "field_644b51b53a332",
+				"label": "Starting point and zoom level",
+				"name": "map_start_values",
+				"aria-label": "",
+				"type": "google_map",
+				"instructions": "Click on the map to place a marker for the default center of the map. Use the plus- and minus-signs (+\/-) to set the default zoom level.",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"center_lat": "56.048767661222115",
+				"center_lng": "12.703459264197518",
+				"zoom": "",
+				"height": ""
+			},
+			{
+				"key": "field_66cc968d2d875",
+				"label": "Expand sidebar",
+				"name": "mod_osm_expanded",
+				"aria-label": "",
+				"type": "true_false",
+				"instructions": "If the sidebar should be expanded as default.",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"message": "",
+				"default_value": 0,
+				"ui_on_text": "Yes",
+				"ui_off_text": "No",
+				"ui": 1
+			},
+			{
+				"key": "field_66a7398c8aa52",
+				"label": "Add sorting functionality",
+				"name": "mod_osm_sort",
+				"aria-label": "",
+				"type": "true_false",
+				"instructions": "Allows the user to sort the posts",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"message": "",
+				"default_value": 0,
+				"ui_on_text": "",
+				"ui_off_text": "",
+				"ui": 1
+			},
+			{
+				"key": "field_66a8961b184bd",
+				"label": "Order by",
+				"name": "mod_osm_order_by",
+				"aria-label": "",
+				"type": "select",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "50",
+					"class": "",
+					"id": ""
+				},
+				"choices": {
+					"date": "Date",
+					"title": "Title",
+					"random": "Random"
+				},
+				"default_value": "date",
+				"return_format": "value",
+				"multiple": 0,
+				"allow_custom": 0,
+				"search_placeholder": "",
+				"allow_null": 0,
+				"ui": 1,
+				"ajax": 0,
+				"placeholder": ""
+			},
+			{
+				"key": "field_66a896fa184be",
+				"label": "Order",
+				"name": "mod_osm_order",
+				"aria-label": "",
+				"type": "select",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "50",
+					"class": "",
+					"id": ""
+				},
+				"choices": {
+					"ASC": "Ascending",
+					"DESC": "Descending"
+				},
+				"default_value": "DESC",
+				"return_format": "value",
+				"multiple": 0,
+				"allow_custom": 0,
+				"search_placeholder": "",
+				"allow_null": 0,
+				"ui": 1,
+				"ajax": 0,
+				"placeholder": ""
+			},
+			{
+				"key": "field_668d19163553d",
+				"label": "Filter",
+				"name": "mod_osm_filters",
+				"aria-label": "",
+				"type": "repeater",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"acfe_repeater_stylised_button": 0,
+				"layout": "table",
+				"pagination": 0,
+				"min": 0,
+				"max": 0,
+				"collapsed": "",
+				"button_label": "Add Row",
+				"rows_per_page": 20,
+				"sub_fields": [
+					{
+						"key": "field_668d1cb10d852",
+						"label": "Text",
+						"name": "mod_osm_filter_text",
+						"aria-label": "",
+						"type": "text",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"default_value": "",
+						"maxlength": "",
+						"placeholder": "",
+						"prepend": "",
+						"append": "",
+						"parent_repeater": "field_668d19163553d"
+					},
+					{
+						"key": "field_668d1cc80d853",
+						"label": "select",
+						"name": "mod_osm_filter_taxonomy",
+						"aria-label": "",
+						"type": "select",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": [],
+						"default_value": false,
+						"return_format": "value",
+						"multiple": 0,
+						"allow_null": 0,
+						"ui": 0,
+						"ajax": 0,
+						"placeholder": "",
+						"allow_custom": 0,
+						"search_placeholder": "",
+						"parent_repeater": "field_668d19163553d"
+					}
+				]
+			}
+		],
+		"location": [
+			[
+				{
+					"param": "post_type",
+					"operator": "==",
+					"value": "mod-open-street-map"
+				}
+			],
+			[
+				{
+					"param": "block",
+					"operator": "==",
+					"value": "acf\/open-street-map"
+				}
+			]
+		],
+		"menu_order": 0,
+		"position": "normal",
+		"style": "default",
+		"label_placement": "left",
+		"instruction_placement": "above_field",
+		"hide_on_screen": "",
+		"active": true,
+		"description": "",
+		"show_in_rest": 0,
+		"acfe_display_title": "",
+		"acfe_autosync": "",
+		"acfe_form": 0,
+		"acfe_meta": "",
+		"acfe_note": ""
+	}
+]

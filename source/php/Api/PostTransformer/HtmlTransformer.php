@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace ModularityOpenStreetMap\Api\PostTransformer;
 
 use ModularityOpenStreetMap\Api\SettingsInterface;
 
-class HtmlTransformer implements PostTransformerInterface {
-    public function __construct(private SettingsInterface $settings)
-    {}
+class HtmlTransformer implements PostTransformerInterface
+{
+    public function __construct(
+        private SettingsInterface $settings,
+    ) {}
 
     public function transform($post): mixed
     {
@@ -14,8 +19,11 @@ class HtmlTransformer implements PostTransformerInterface {
             return $post;
         }
 
-        return open_street_map_render_blade_view('html', ['place' => $post, 'lang' => [
-            'bookHere' => __('Book here', 'modularity-open-street-map'),
-        ]]);
+        return open_street_map_render_blade_view('html', [
+            'place' => $post,
+            'lang' => [
+                'bookHere' => __('Book here', 'modularity-open-street-map'),
+            ],
+        ]);
     }
 }

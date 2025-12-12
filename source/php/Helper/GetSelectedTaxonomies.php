@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ModularityOpenStreetMap\Helper;
 
-class GetSelectedTaxonomies {
+class GetSelectedTaxonomies
+{
     public function getSelectedTaxonomies(): array
     {
         $postType = get_field('mod_osm_post_type');
@@ -12,12 +15,14 @@ class GetSelectedTaxonomies {
         }
 
         $taxonomies = [];
-        foreach($filterRepeater as $row) {
-            if (!empty($row['mod_osm_filter_taxonomy'])) {
-                $taxonomies[$postType][] = $row['mod_osm_filter_taxonomy'];
+        foreach ($filterRepeater as $row) {
+            if (empty($row['mod_osm_filter_taxonomy'])) {
+                continue;
             }
+
+            $taxonomies[$postType][] = $row['mod_osm_filter_taxonomy'];
         }
-        
+
         return $taxonomies;
     }
 }
