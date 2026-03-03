@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ModularityOpenStreetMap;
 
 use ModularityOpenStreetMap\Helper\GetPlacePostType as GetPlacePostType;
-use ModularityOpenStreetMap\Helper\GetTaxonomies as GetTaxonomies;
 use ModularityOpenStreetMap\Helper\GetSelectedTaxonomies as GetSelectedTaxonomies;
+use ModularityOpenStreetMap\Helper\GetTaxonomies as GetTaxonomies;
 use Municipio\Api\RestApiEndpointsRegistry;
+use WpUtilService\Features\Enqueue\EnqueueManager;
 
 class App
 {
@@ -13,20 +16,21 @@ class App
     private GetPlacePostType $getPlacePostTypeInstance;
     private GetTaxonomies $getTaxonomiesInstance;
     private GetSelectedTaxonomies $getSelectedTaxonomiesInstance;
-    public function __construct()
-    {
-        add_action('wp_enqueue_scripts', array($this, 'enqueueFrontend'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueueBackend'));
-        add_action('init', array($this, 'registerModule'));
 
-        add_filter('acf/load_field/name=mod_osm_post_type', array($this, 'postTypes'));
-        add_filter('acf/prepare_field/name=mod_osm_terms_to_show', array($this, 'termsToShow'));
+    public function __construct(
+        private EnqueueManager $wpEnqueue,
+    ) {
+        add_action('wp_enqueue_scripts', [$this, 'enqueueFrontend']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueueBackend']);
+        add_action('init', [$this, 'registerModule']);
+
+        add_filter('acf/load_field/name=mod_osm_post_type', [$this, 'postTypes']);
+        add_filter('acf/prepare_field/name=mod_osm_terms_to_show', [$this, 'termsToShow']);
 
         $this->getPlacePostTypeInstance = new GetPlacePostType();
         $this->getTaxonomiesInstance = new GetTaxonomies($this->getPlacePostTypeInstance);
         $this->getSelectedTaxonomiesInstance = new GetSelectedTaxonomies();
 
-        
         RestApiEndpointsRegistry::add(new \ModularityOpenStreetMap\Api\OsmEndpoint());
 
         $this->cacheBust = new \ModularityOpenStreetMap\Helper\CacheBust();
@@ -34,7 +38,6 @@ class App
 
     public function postTypes($field)
     {
-
         $postTypes = $this->getPlacePostTypeInstance->getPlacePostTypes();
 
         $field['default_value'] = key($postTypes);
@@ -55,9 +58,8 @@ class App
         $mergedTerms = [];
         foreach ($taxonomies as $slug => $label) {
             $mergedTerms += $this->getTaxonomiesInstance->getAllTermsFromTaxonomy($slug, 'id');
-            
         }
-        
+
         $field['choices'] = $mergedTerms;
 
         return $field;
@@ -69,21 +71,10 @@ class App
 
         $selected = $this->getSelectedTaxonomiesInstance->getSelectedTaxonomies();
 
-        wp_register_script(
-            'modularity-open-street-map-js',
-            MODULARITYOPENSTREETMAP_URL . '/dist/' .
-            $this->cacheBust->name('js/modularity-open-street-map.js'),
-            ['jquery', 'acf-input']
-        );
-
-        wp_localize_script(
-            'modularity-open-street-map-js',
-            'osm',
-            json_encode(['taxonomies' => $placeTaxonomies, 'selected' => $selected])
-        );
-    
-
-        wp_enqueue_script('modularity-open-street-map-js');
+        $this->wpEnqueue
+            ->add('js/modularity-open-street-map.js', ['jquery', 'acf-input'])
+            ->with()
+            ->translation('osm', ['taxonomies' => $placeTaxonomies, 'selected' => $selected]);
     }
 
     /**
@@ -92,13 +83,7 @@ class App
      */
     public function enqueueFrontend()
     {
-        wp_register_style(
-            'modularity-open-street-map-css',
-            MODULARITYOPENSTREETMAP_URL . '/dist/' .
-            $this->cacheBust->name('css/modularity-open-street-map.css')
-        );
-
-        wp_enqueue_style('modularity-open-street-map-css');
+        $this->wpEnqueue->add('css/modularity-open-street-map.css');
     }
 
     /**
@@ -110,7 +95,7 @@ class App
         if (function_exists('modularity_register_module')) {
             modularity_register_module(
                 MODULARITYOPENSTREETMAP_PATH . 'source/php/Module/',
-                'OpenStreetMap'
+                'OpenStreetMap',
             );
         }
     }

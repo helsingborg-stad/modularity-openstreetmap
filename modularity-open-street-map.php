@@ -12,6 +12,8 @@
  * Text Domain:       modularity-open-street-map
  * Domain Path:       /languages
  */
+use WpService\Implementations\NativeWpService;
+use WpUtilService\WpUtilService;
 
  // Protect agains direct file access
 if (! defined('WPINC')) {
@@ -52,5 +54,8 @@ add_action('acf/init', function () {
     $acfExportManager->import();
 });
 
+$wpService = new NativeWpService();
+$wpUtilService = new WpUtilService($wpService);
+
 // Start application
-new ModularityOpenStreetMap\App();
+new ModularityOpenStreetMap\App($wpUtilService->enqueue(__DIR__));

@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace ModularityOpenStreetMap\Api;
 
-class OsmGetPosts {
-    public function __construct(private array $args, private SettingsInterface $settings)
-    {}
+class OsmGetPosts
+{
+    public function __construct(
+        private array $args,
+        private SettingsInterface $settings,
+    ) {}
 
     public function getPosts()
     {
@@ -14,7 +20,7 @@ class OsmGetPosts {
         if (!empty($posts) && $this->settings->getRandomize()) {
             shuffle($posts);
         }
-        
+
         return $posts;
     }
 }

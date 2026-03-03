@@ -13,6 +13,7 @@ node_modules/
 
 # ignore build directory
 /dist
+/assets/
 
 # ignore OS generated files
 ehthumbs.db
@@ -50,6 +51,9 @@ Thumbs.db
 dist/temp
 dist/.temp
 
+phpunit-log.xml
+phpunit-testdox.txt
+
 # -------------------------
 # BEGIN Whitelisted Files
 # -------------------------
@@ -58,3 +62,4 @@ dist/.temp
 !.gitignore
 !.editorconfig
 !.github
+!.vscode
