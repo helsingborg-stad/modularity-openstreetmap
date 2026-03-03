@@ -68,9 +68,14 @@ class OpenStreetMap extends \Modularity\Module
         $fields = get_fields($this->ID);
         $data['ID'] = !empty($this->ID) ? $this->ID : uniqid();
 
-        $data['mapStyle'] = $this->getMapStyle();
-        $data['endpoint'] = $this->createEndpoint($fields);
-        $data['startPosition'] = !empty($fields['map_start_values']) && is_array($fields['map_start_values']) ? $fields['map_start_values'] : $this->getDefaultStartPosition();
+        $data['attributeList'] = [
+            'data-js-map-start-position' => $this->getStartPosition($fields),
+            'data-js-map-style' => $this->getMapStyle(),
+            'data-js-map-id' => $data['ID'],
+            'data-js-map-posts-endpoint' => $this->createEndpoint($fields),
+            'data-js-modularity-openstreetmap' => true,
+            'data-observe-resizes' => 'modularity-openstreetmap',
+        ];
         $data['lang'] = [
             'noPostsFound' => __('No posts were found.', 'modularity-open-street-map'),
             'filterBy' => __('Filter by', 'modularity-open-street-map'),
@@ -80,11 +85,29 @@ class OpenStreetMap extends \Modularity\Module
             'sort' => __('Sort', 'modularity-open-street-map'),
         ];
 
+        $data['baseClass'] = 'modularity-openstreetmap';
+
         $data['sort'] = !empty($fields['mod_osm_sort']);
         $data['filters'] = $this->createFiltersInstance->create($fields, $data['lang']['filterBy']);
         $data['expanded'] = !empty($fields['mod_osm_expanded']);
+        $data['classList'] = [
+            'modularity-openstreetmap',
+            'modularity-openstreetmap--full-width',
+            'modularity-openstreetmap--sidebar',
+        ];
+
+        if (!empty($fields['mod_osm_expanded'])) {
+            $data['classList'][] = 'is-expanded';
+        }
 
         return $data;
+    }
+
+    private function getStartPosition(array $fields): string
+    {
+        $startPosition = !empty($fields['map_start_values']) && is_array($fields['map_start_values']) ? $fields['map_start_values'] : $this->getDefaultStartPosition();
+
+        return json_encode($startPosition);
     }
 
     /**

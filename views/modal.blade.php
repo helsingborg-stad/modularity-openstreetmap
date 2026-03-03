@@ -1,11 +1,11 @@
-<div class="c-openstreetmap__post-full u-display--none" role="dialog" aria-hidden="true" aria-labelledby="osm-{{$place->id}}-title" data-js-osm-full-post="osm-{{$place->id}}">
+<div class="modularity-openstreetmap__post-full u-display--none" role="dialog" aria-hidden="true" aria-labelledby="osm-{{$place->id}}-title" data-js-osm-full-post="osm-{{$place->id}}">
 
-<div class="c-openstreetmap__button-back-container">
+<div class="modularity-openstreetmap__button-back-container">
     @icon([
         'icon' => 'arrow_back',
         'size' => 'md',
         'color' => 'white',
-        'classList' => ['c-openstreetmap__button-back', 'c-openstreetmap__post-icon'],
+        'classList' => ['modularity-openstreetmap__button-back', 'modularity-openstreetmap__post-icon'],
         'attributeList' => [
             'tabindex' => '0',
         ]

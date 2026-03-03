@@ -72,7 +72,7 @@ class App
         $selected = $this->getSelectedTaxonomiesInstance->getSelectedTaxonomies();
 
         $this->wpEnqueue
-            ->add('js/modularity-open-street-map.js', ['jquery', 'acf-input'])
+            ->add('js/modularity-open-street-map-backend.js', ['jquery', 'acf-input'])
             ->with()
             ->translation('osm', ['taxonomies' => $placeTaxonomies, 'selected' => $selected]);
     }
@@ -83,6 +83,7 @@ class App
      */
     public function enqueueFrontend()
     {
+        $this->wpEnqueue->add('js/modularity-open-street-map-frontend.js', ['jquery']);
         $this->wpEnqueue->add('css/modularity-open-street-map.css');
     }
 
