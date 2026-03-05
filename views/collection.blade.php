@@ -1,5 +1,5 @@
 @collection__item([
-    'classList' => ['c-openstreetmap__collection__item'],
+    'classList' => ['modularity-openstreetmap__collection__item'],
     'containerAware' => true,
     'bordered' => true,
     'attributeList' => [

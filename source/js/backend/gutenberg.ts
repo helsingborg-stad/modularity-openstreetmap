@@ -1,9 +1,10 @@
-import TaxonomySelectUpdater from './taxonomySelectUpdater';
-import Storage from './storage';
 import Main from './main';
+import Storage from './storage';
+import TaxonomySelectUpdater from './taxonomySelectUpdater';
 
 class Gutenberg {
 	initializedOsmBlocks = [];
+	editor: any = null;
 
 	constructor() {
 		this.editor = wp.data.select('core/block-editor');
