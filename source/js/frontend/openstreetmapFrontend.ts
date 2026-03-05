@@ -76,7 +76,6 @@ class OpenStreetMap {
     }
 
     private getSettings() {
-        console.log(this.container.getAttribute('data-js-map-start-position'));
         return {
             endpoint: this.container.getAttribute('data-js-map-posts-endpoint') ?? '',
             startposition: this.container.getAttribute('data-js-map-start-position') ?? '',
