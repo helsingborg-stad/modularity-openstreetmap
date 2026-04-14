@@ -1,5 +1,6 @@
 @group([
     'flexGrow' => true,
+    'display' => 'flex',
     'classList' => [
         'o-container',
         'o-grid',
