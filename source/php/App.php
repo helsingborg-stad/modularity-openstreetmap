@@ -49,7 +49,8 @@ class App
     public function termsToShow($field)
     {
         $postType = get_field('mod_osm_post_type');
-        $taxonomies = $this->getTaxonomiesInstance->getTaxonomiesFromPostTypeArchive($postType);
+
+        $taxonomies = is_null($postType) ? [] : $this->getTaxonomiesInstance->getTaxonomiesFromPostTypeArchive($postType);
 
         if (empty($taxonomies)) {
             $taxonomies = ['none' => 'No post found'];
