@@ -28,7 +28,8 @@
     @endif
 @endslot
 @group([
-    'direction' => 'vertical'
+    'direction' => 'vertical',
+    'classList' => ['u-width--100']
 ])
     @group([
         'justifyContent' => 'space-between',
