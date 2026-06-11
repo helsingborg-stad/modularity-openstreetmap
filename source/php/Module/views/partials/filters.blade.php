@@ -4,7 +4,9 @@
     'classList' => [
         'o-container',
         'o-grid',
-        'u-margin__bottom--4'
+        'u-margin__bottom--4',
+        'u-position--relative',
+        'u-level-3'
     ]
 ])
     @foreach($filters as $filter)
