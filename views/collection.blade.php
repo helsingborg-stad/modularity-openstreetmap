@@ -34,6 +34,7 @@
     @group([
         'justifyContent' => 'space-between',
         'alignItems' => 'flex-start',
+        'normalizeChildren' => false
     ])
         @typography([
             'element' => 'h2',
