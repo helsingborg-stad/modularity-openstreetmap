@@ -4,10 +4,10 @@
     @icon([
         'icon' => 'arrow_back',
         'size' => 'md',
-        'color' => 'white',
         'classList' => ['modularity-openstreetmap__button-back', 'modularity-openstreetmap__post-icon'],
         'attributeList' => [
             'tabindex' => '0',
+            'style' => 'color: white;',
         ]
     ])
     @endicon

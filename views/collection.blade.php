@@ -57,7 +57,9 @@
             ])
                 @icon([
                     'icon' => $place->getIcon()->getIcon(),
-                    'color' => 'white',
+                    'attributeList' => [
+                        'style' => 'color: white;',
+                    ],
                 ])
                 @endicon
             @endelement
