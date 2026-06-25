@@ -7,6 +7,8 @@ namespace ModularityOpenStreetMap\Api;
 
 use ModularityOpenStreetMap\Api\PostTransformer\PostTransformerInterface;
 use ModularityOpenStreetMap\Api\SettingsInterface;
+use \Municipio\Controller\SingularPlace\GetPlaceInfoList;
+use Municipio\Controller\SingularPlace\GetPlaceActions;
 
 class OsmTransformationHandler
 {
@@ -30,11 +32,16 @@ class OsmTransformationHandler
         $transformedPosts = [];
         foreach ($this->posts as $post) {
             $id = $post->ID;
+
             wp_cache_flush();
             $cachedPost = wp_cache_get($id, $this->cacheKey);
 
             if (!$cachedPost) {
                 $post = $this->default->transform($post);
+
+                $post->placeInfo = GetPlaceInfoList::getPlaceInfoList($post);
+                $post->placeActions = GetPlaceActions::getPlaceActions($post);
+
                 $post = $this->html->transform($post);
 
                 wp_cache_set($id, $post, $this->cacheKey, 7 * \DAY_IN_SECONDS);
