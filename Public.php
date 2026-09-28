@@ -8,10 +8,12 @@ if (!function_exists('open_street_map_render_blade_view')) {
     function open_street_map_render_blade_view($view, $data = [], $compress = true)
     {
         $markup = '';
-        $componentLibrary = new ComponentLibraryInit([]);
-        $bladeEngine = $componentLibrary->getEngine();
-        $data = array_merge($data, array('errorMessage' => false));
         $viewPaths = [MODULARITYOPENSTREETMAP_VIEW_PATH, MODULARITYOPENSTREETMAP_MODULE_VIEW_PATH];
+        $bladeEngine = class_exists(\Municipio\Helper\ComponentBladeService::class)
+            ? \Municipio\Helper\ComponentBladeService::create($viewPaths)
+            : (new ComponentLibraryInit($viewPaths))->getEngine();
+
+        $data = array_merge($data, array('errorMessage' => false));
 
         try {
             $markup = $bladeEngine->makeView($view, $data, [], $viewPaths)->render();
