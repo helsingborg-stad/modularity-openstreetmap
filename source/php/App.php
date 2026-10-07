@@ -84,7 +84,7 @@ class App
      */
     public function enqueueFrontend()
     {
-        $this->wpEnqueue->add('js/modularity-open-street-map-frontend.js', ['jquery']);
+        $this->wpEnqueue->add('js/modularity-open-street-map-frontend.js');
         $this->wpEnqueue->add('css/modularity-open-street-map.css');
     }
 
