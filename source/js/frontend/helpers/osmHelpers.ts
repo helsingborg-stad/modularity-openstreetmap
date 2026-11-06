@@ -29,10 +29,9 @@ export function getMarkerDataFromElement(el: HTMLElement): Location[] {
             const lng = location.lng;
             const tooltip = location.tooltip ?? false;
             const url = location.url ?? false;
-            const icon = location.icon ?? false;
             const id = location.id ?? "";
     
-            locationsArray.push({lat: lat, lng: lng, tooltip: tooltip, url: url, element: el, icon: icon, id: id});
+            locationsArray.push({lat: lat, lng: lng, tooltip: tooltip, url: url, element: el, id: id});
         }
     });
 

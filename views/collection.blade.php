@@ -73,4 +73,22 @@
         ])
         @endtags
     @endgroup
+    @element([
+        'componentElement' => 'template',
+        'attributeList' => [
+            'data-js-map-item-template' => '1'
+        ]
+    ])
+        @icon([
+            'icon' => $place?->getIcon()?->getIcon() ?? 'location_on',
+            'size' => 'md',
+            'color' => 'white',
+            'attributeList' => [
+                'style' => 'color: white; background-color: ' . ($place?->getIcon()?->getCustomColor() ?? 'red') . ';',
+                'tabindex' => '-1'
+            ],
+            'classList' => ['modularity-openstreetmap__marker']
+        ])
+        @endicon
+    @endelement
 @endcollection__item
