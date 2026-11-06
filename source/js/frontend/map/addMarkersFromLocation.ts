@@ -1,5 +1,5 @@
 import L, { Map as LeafletMap, Marker } from 'leaflet';
-import { Location, Icon } from '../interface/interface';
+import { Location } from '../interface/interface';
 import CreateMarker from '../createMarker/createMarker';
 import CreateTooltip from '../createMarker/createTooltip';
 import PostMarkerPairs from '../post/postMarkerPairs';
@@ -21,9 +21,13 @@ class AddMarkersFromLocations
     public add(locations: Location[]) {
         locations.forEach((location: Location) => {
             if (location?.lat && location?.lng) {
-                let customIcon: Icon | undefined = location?.icon ? location.icon : undefined;
+                const icon = this.createMarker.create(location.element);
+                if (!icon) {
+                    return;
+                }
+
                 let marker = L.marker([location.lat, location.lng], {
-                    icon: this.createMarker.create(customIcon),
+                    icon,
                 });
                 if (location.tooltip) {
                     marker.bindPopup(this.createTooltip.create(location.tooltip, location.id ?? null), { maxWidth: 200 });

@@ -42,13 +42,6 @@ class ApplyOpenStreetMapDataToPostObject
     private function getPin(\Municipio\PostObject\PostObjectInterface $post, float $lat, float $lng, string $googleMapsLink): array
     {
         return [
-            'icon' => $post->getIcon()
-                ? [
-                    'icon' => $post->getIcon()->getIcon(),
-                    'backgroundColor' => $post->getIcon() ? $post->getIcon()->getCustomColor() : null,
-                    'color' => 'white',
-                    'size' => 'md',
-                ] : null,
             'lat' => $lat,
             'lng' => $lng,
             'tooltip' => [

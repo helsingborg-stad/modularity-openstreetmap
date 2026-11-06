@@ -17,11 +17,6 @@ interface PostMarkerPair {
     id?: string;
 }
 
-interface Icon {
-    icon: String;
-    backgroundColor: String;
-}
-
 interface Tooltip {
     directions: {
         label: String;
@@ -42,7 +37,6 @@ interface Location {
     lng?: number;
     tooltip?: Tooltip;
     url?: String;
-    icon?: Icon;
     id?: string;
 }
 
